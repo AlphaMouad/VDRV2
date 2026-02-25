@@ -82,7 +82,9 @@ function parseCSV(csv: string): RawAccount[] {
         avatarType:    parseAvatarType(fields[6] || ''),
       }
     })
-    .filter((a) => a.password && (a.email || a.investorId))
+    // Allow users even if password is empty (to recognize they exist in system logs)
+    // but still require (email || investorId) to be valid
+    .filter((a) => a.email || a.investorId)
 }
 
 // ─── In-memory cache (5-minute TTL) ──────────────────────────────────────────
