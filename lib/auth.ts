@@ -1,3 +1,5 @@
+'use server'
+
 export interface InvestorAccount {
   investorId: string
   fullName: string
@@ -7,17 +9,20 @@ export interface InvestorAccount {
   avatarType: 'REPE' | 'FamilyOffice' | 'UHNWI' | 'Other'
 }
 
-// Google Sheet published as CSV (File → Share → Publish to web → CSV)
+// Google Sheet ID: 19xhrYZ3x9YvPHCQq26TC9KQ1kuIQL0t7ocSOuig64A0
+// This URL fetches the CSV export of the sheet.
+const SHEET_URL =
+  'https://docs.google.com/spreadsheets/d/19xhrYZ3x9YvPHCQq26TC9KQ1kuIQL0t7ocSOuig64A0/gviz/tq?tqx=out:csv'
+
 // Column layout (0-indexed):
-//   [0] investorId   (e.g. "AMG-2026-0001")
+//   [0] investorId
 //   [1] fullName
 //   [2] companyName
 //   [3] email
-//   [4] password     (plain-text — VDR is private/internal)
+//   [4] password
 //   [5] numberOfVillas
-//   [6] avatarType   ("REPE" | "FamilyOffice" | "FO" | "UHNWI" | "Other")
-const SHEET_URL =
-  'https://docs.google.com/spreadsheets/d/19xhrYZ3x9YvPHCQq26TC9KQ1kuIQL0t7ocSOuig64A0/gviz/tq?tqx=out:csv'
+//   [6] avatarType (Investor Type)
+// Note: We check user credentials AND investor type from this sheet.
 
 // ─── CSV parser (handles quoted fields with embedded commas / quotes) ─────────
 
@@ -73,6 +78,7 @@ function parseCSV(csv: string): RawAccount[] {
         email:         fields[3] || '',
         password:      fields[4] || '',
         numberOfVillas: parseInt(fields[5], 10) || 20,
+        // Extract Investor Type (Avatar Type) from column 6
         avatarType:    parseAvatarType(fields[6] || ''),
       }
     })
@@ -99,6 +105,7 @@ async function fetchAccounts(): Promise<RawAccount[]> {
     cacheTimestamp = now
     return cachedAccounts
   } catch (error) {
+    console.error('Failed to fetch accounts from Google Sheet', error)
     // On network error fall back to cached data if available
     if (cachedAccounts) return cachedAccounts
     throw error
@@ -116,14 +123,18 @@ export async function authenticateFromSheet(
   const accounts = await fetchAccounts()
   const id = identifier.trim().toLowerCase()
 
+  // Find user by email or investorId and verify password
   const match = accounts.find(
     (a) =>
       (a.email.toLowerCase() === id || a.investorId.toLowerCase() === id) &&
       a.password === password
   )
 
-  if (!match) return null
+  if (!match) {
+    return null
+  }
 
+  // Return the account including the verified investor type (avatarType)
   return {
     investorId:    match.investorId,
     fullName:      match.fullName,
