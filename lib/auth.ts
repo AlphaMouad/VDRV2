@@ -41,13 +41,15 @@ function parseCSVRow(row: string): string[] {
         inQuotes = !inQuotes
       }
     } else if (char === ',' && !inQuotes) {
-      fields.push(current.trim())
+      // Don't trim here, preserve raw field content (including potential spaces in passwords)
+      fields.push(current)
       current = ''
     } else {
       current += char
     }
   }
-  fields.push(current.trim())
+  // Push the last field
+  fields.push(current)
   return fields
 }
 
@@ -64,20 +66,31 @@ function parseAvatarType(raw: string): 'REPE' | 'FamilyOffice' | 'UHNWI' | 'Othe
 }
 
 function parseCSV(csv: string): RawAccount[] {
-  const lines = csv.split('\n').filter((line) => line.trim())
+  // Normalize line endings to \n and split
+  // Filter out empty lines (whitespace only)
+  const lines = csv.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n').filter((line) => line.trim().length > 0)
+
   if (lines.length < 2) return []
 
   return lines
     .slice(1) // skip header row
     .map((line) => {
       const fields = parseCSVRow(line)
+      // Trim spaces from non-password fields for safety
+      // For password, we trim it too because typically users don't want leading/trailing spaces
+      // unless they are part of a very specific password policy (unlikely for sheet entry).
+      // However, to fix "complex password issues", maybe the sheet has hidden chars?
+      // We'll stick to trim() but log lengths for debugging if needed.
+      const rawPassword = fields[4] || ''
+      const trimmedPassword = rawPassword.trim()
+
       return {
-        investorId:    fields[0] || '',
-        fullName:      fields[1] || '',
-        companyName:   fields[2] || '',
-        email:         fields[3] || '',
-        password:      fields[4] || '',
-        numberOfVillas: parseInt(fields[5], 10) || 20,
+        investorId:    (fields[0] || '').trim(),
+        fullName:      (fields[1] || '').trim(),
+        companyName:   (fields[2] || '').trim(),
+        email:         (fields[3] || '').trim(),
+        password:      trimmedPassword,
+        numberOfVillas: parseInt((fields[5] || '').trim(), 10) || 20,
         // Extract Investor Type (Avatar Type) from column 6
         avatarType:    parseAvatarType(fields[6] || ''),
       }
@@ -130,28 +143,25 @@ export async function authenticateFromSheet(
 
   console.log(`Authenticating user: ${id}`)
 
-  // Find user by email or investorId and verify password
+  // Find user by email or investorId
   const match = accounts.find(
     (a) =>
-      (a.email.toLowerCase() === id || a.investorId.toLowerCase() === id) &&
-      a.password === password
+      (a.email.toLowerCase() === id || a.investorId.toLowerCase() === id)
   )
 
   if (!match) {
-    console.log(`Authentication failed for user: ${id}`)
-    // Debug: check if user exists but password mismatch
-    const userExists = accounts.find(
-       (a) => a.email.toLowerCase() === id || a.investorId.toLowerCase() === id
-    )
-    if (userExists) {
-      console.log('User exists but password mismatch.')
-      // Be careful not to log the actual password in production logs if possible,
-      // but for debugging this issue we might need to verify what's being compared.
-      // console.log(`Expected password length: ${userExists.password.length}, Received: ${password.length}`)
-    } else {
-      console.log('User not found in sheet.')
-      // Log available emails/IDs for debugging (safe if logs are private)
-      // console.log('Available users:', accounts.map(a => `${a.email} / ${a.investorId}`))
+    console.log(`Authentication failed: User not found: ${id}`)
+    return null
+  }
+
+  // Verify password
+  if (match.password !== password) {
+    console.log(`Authentication failed: Password mismatch for user ${id}`)
+    // Log helpful debug info (without revealing full password if possible)
+    console.log(`Stored password length: ${match.password.length}, Received length: ${password.length}`)
+    if (match.password.length > 0 && password.length > 0) {
+        console.log(`Stored start/end: "${match.password[0]}...${match.password[match.password.length-1]}"`)
+        console.log(`Received start/end: "${password[0]}...${password[password.length-1]}"`)
     }
     return null
   }
