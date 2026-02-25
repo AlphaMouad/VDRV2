@@ -146,7 +146,7 @@ export async function authenticateFromSheet(
 }
 
 // ─── Cache invalidation (call after admin edits the sheet) ───────────────────
-export function invalidateAuthCache(): void {
+export async function invalidateAuthCache(): Promise<void> {
   cachedAccounts = null
   cacheTimestamp = 0
 }
