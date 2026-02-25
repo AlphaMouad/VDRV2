@@ -98,11 +98,14 @@ async function fetchAccounts(): Promise<RawAccount[]> {
   }
 
   try {
+    console.log('Fetching accounts from Google Sheet...')
     const res = await fetch(SHEET_URL, { cache: 'no-store' })
     if (!res.ok) throw new Error(`Sheet fetch failed: ${res.status}`)
     const csv = await res.text()
+    // console.log('CSV fetched (length):', csv.length)
     cachedAccounts = parseCSV(csv)
     cacheTimestamp = now
+    console.log('Parsed accounts count:', cachedAccounts.length)
     return cachedAccounts
   } catch (error) {
     console.error('Failed to fetch accounts from Google Sheet', error)
@@ -123,6 +126,8 @@ export async function authenticateFromSheet(
   const accounts = await fetchAccounts()
   const id = identifier.trim().toLowerCase()
 
+  console.log(`Authenticating user: ${id}`)
+
   // Find user by email or investorId and verify password
   const match = accounts.find(
     (a) =>
@@ -131,8 +136,25 @@ export async function authenticateFromSheet(
   )
 
   if (!match) {
+    console.log(`Authentication failed for user: ${id}`)
+    // Debug: check if user exists but password mismatch
+    const userExists = accounts.find(
+       (a) => a.email.toLowerCase() === id || a.investorId.toLowerCase() === id
+    )
+    if (userExists) {
+      console.log('User exists but password mismatch.')
+      // Be careful not to log the actual password in production logs if possible,
+      // but for debugging this issue we might need to verify what's being compared.
+      // console.log(`Expected password length: ${userExists.password.length}, Received: ${password.length}`)
+    } else {
+      console.log('User not found in sheet.')
+      // Log available emails/IDs for debugging (safe if logs are private)
+      // console.log('Available users:', accounts.map(a => `${a.email} / ${a.investorId}`))
+    }
     return null
   }
+
+  console.log(`Authentication successful for user: ${id}`)
 
   // Return the account including the verified investor type (avatarType)
   return {
