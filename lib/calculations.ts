@@ -164,18 +164,22 @@ export function calcPeakEquity(macro: MacroState, vefaOffset: boolean): number {
 
   // Monthly construction outflows (S-curve)
   const monthlyOutflow: number[] = []
+  const constructionMonths = months - 6 - 10 + 1
+  const midpoint = constructionMonths / 2
+  let totalWeight = 0
+  if (constructionMonths > 0) {
+    for (let i = 0; i < constructionMonths; i++) {
+      totalWeight += Math.exp(-0.5 * Math.pow((i - midpoint) / (midpoint * 0.6), 2))
+    }
+  }
+
   for (let m = 1; m <= months; m++) {
     let outflow = 0
     if (m >= 1 && m <= 3) outflow += call1Amount / 3
     if (m >= 7 && m <= 9) outflow += call2Amount / 3
     if (m >= 10 && m <= months - 6) {
-      const constructionMonths = months - 6 - 10 + 1
-      const midpoint = constructionMonths / 2
       const pos = m - 10
       const weight = Math.exp(-0.5 * Math.pow((pos - midpoint) / (midpoint * 0.6), 2))
-      const totalWeight = Array.from({ length: constructionMonths }, (_, i) =>
-        Math.exp(-0.5 * Math.pow((i - midpoint) / (midpoint * 0.6), 2))
-      ).reduce((a, b) => a + b, 0)
       outflow += (remainingConstruction * weight) / totalWeight
     }
     monthlyOutflow.push(outflow)
