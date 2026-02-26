@@ -107,8 +107,8 @@ export function Fortress({ macro, t, locale }: FortressProps) {
 
       {/* Zero Debt Badge */}
       <Reveal delay={0.05}>
-        <div className="flex justify-center mb-6">
-          <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase px-4 py-2 rounded-full border border-[#C5A059] text-[#C5A059]">
+        <div className="flex justify-center mb-8">
+          <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase px-5 py-2.5 rounded-full border border-[#C5A059] text-[#C5A059] bg-[rgba(197,160,89,0.05)] shadow-[0_0_15px_rgba(197,160,89,0.15)]">
             <Lock className="w-3 h-3" />
             {fv.zeroDebtBadge}
           </span>
@@ -117,14 +117,14 @@ export function Fortress({ macro, t, locale }: FortressProps) {
 
       {/* Case Toggle */}
       <Reveal delay={0.1}>
-        <div className="glass-form p-4 mb-6">
-          <div className="flex items-center gap-4">
+        <div className="glass-form p-2 mb-8 mx-auto max-w-2xl rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.4)]">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setIsBearCase(false)}
               className={`flex-1 py-3 rounded-lg text-center text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
                 !isBearCase
-                  ? "bg-[rgba(197,160,89,0.15)] text-[#C5A059] border border-[#C5A059]"
-                  : "text-[#a3a3a3] border border-transparent hover:text-[#ffffff]"
+                  ? "bg-[rgba(197,160,89,0.15)] text-[#C5A059] border border-[#C5A059] shadow-[0_0_10px_rgba(197,160,89,0.2)]"
+                  : "text-[#a3a3a3] border border-transparent hover:text-[#ffffff] hover:bg-[rgba(255,255,255,0.03)]"
               }`}
             >
               <TrendingUp className="w-4 h-4 inline mr-2" />
@@ -134,8 +134,8 @@ export function Fortress({ macro, t, locale }: FortressProps) {
               onClick={() => setIsBearCase(true)}
               className={`flex-1 py-3 rounded-lg text-center text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
                 isBearCase
-                  ? "bg-[rgba(239,68,68,0.1)] text-[#EF4444] border border-[#EF4444]"
-                  : "text-[#a3a3a3] border border-transparent hover:text-[#ffffff]"
+                  ? "bg-[rgba(239,68,68,0.15)] text-[#EF4444] border border-[#EF4444] shadow-[0_0_10px_rgba(239,68,68,0.2)]"
+                  : "text-[#a3a3a3] border border-transparent hover:text-[#ffffff] hover:bg-[rgba(255,255,255,0.03)]"
               }`}
             >
               <Shield className="w-4 h-4 inline mr-2" />
@@ -148,45 +148,45 @@ export function Fortress({ macro, t, locale }: FortressProps) {
       {!isBearCase ? (
         /* Base Case */
         <Reveal delay={0.2}>
-          <div className="glass-form p-6">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="glass-form p-6 sm:p-8">
+            <div className="flex items-center gap-2 mb-6">
               <TrendingUp className="w-4 h-4 text-[#10B981]" />
-              <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+              <span className="text-[10px] tracking-[0.25em] uppercase text-[#a3a3a3] font-medium">
                 {fv.baseCaseLabel}
               </span>
             </div>
-            <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-6">
+            <h3 className="font-[var(--font-playfair)] text-2xl text-[#ffffff] mb-8">
               {fv.baseCaseTitle}
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="glass-form p-4">
-                <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="glass-form p-6 border border-[rgba(197,160,89,0.1)] bg-[rgba(197,160,89,0.03)]">
+                <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2 font-medium">
                   {fv.gdvLabel}
                 </p>
-                <p className="gold-text-gradient font-mono text-2xl font-bold">
+                <p className="gold-text-gradient font-mono text-3xl font-bold">
                   €{totalGDV.toLocaleString()}
                 </p>
               </div>
-              <div className="glass-form p-4">
-                <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
+              <div className="glass-form p-6 border border-[rgba(255,255,255,0.06)]">
+                <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2 font-medium">
                   {fv.gdcLabel}
                 </p>
-                <p className="font-mono text-2xl text-[#ffffff] font-bold">
+                <p className="font-mono text-3xl text-[#ffffff] font-bold">
                   €{totalGDC.toLocaleString()}
                 </p>
               </div>
-              <div className="glass-form p-4">
-                <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
+              <div className="glass-form p-6 border border-[rgba(16,185,129,0.15)] bg-[rgba(16,185,129,0.03)]">
+                <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2 font-medium">
                   {fv.grossProfitLabel}
                 </p>
-                <p className="text-[#10B981] font-mono text-2xl font-bold">
+                <p className="text-[#10B981] font-mono text-3xl font-bold drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]">
                   €{(totalGDV - totalGDC).toLocaleString()}
                 </p>
               </div>
             </div>
 
-            <p className="text-[#a3a3a3] text-sm leading-relaxed">
+            <p className="text-[#a3a3a3] text-sm leading-relaxed max-w-4xl mx-auto text-center font-light">
               {fv.baseCaseDesc
                 .replace('{totalVillas}', String(macro.totalVillas))
                 .replace('{avgVillaGDV}', `€${macro.avgVillaGDV.toLocaleString()}`)
@@ -199,40 +199,40 @@ export function Fortress({ macro, t, locale }: FortressProps) {
         /* Bear Case - Hospitality P&L */
         <>
           <Reveal delay={0.2}>
-            <div className="glass-form p-6 mb-6">
-              <div className="flex items-center gap-2 mb-1">
+            <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+              <div className="flex items-center gap-2 mb-2">
                 <Building2 className="w-4 h-4 text-[#EF4444]" />
-                <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+                <span className="text-[10px] tracking-[0.25em] uppercase text-[#a3a3a3] font-medium">
                   {fv.bearCaseLabel}
                 </span>
               </div>
-              <p className="text-xs text-[#a3a3a3] mb-6 leading-relaxed">
+              <p className="text-xs text-[#a3a3a3] mb-8 leading-relaxed max-w-3xl font-light">
                 {fv.bearCaseDesc.replace('{totalVillas}', String(macro.totalVillas))}
               </p>
 
               {/* Asset Basis */}
-              <div className="glass-form p-4 mb-6 flex items-center justify-between">
+              <div className="glass-form p-5 mb-8 flex items-center justify-between border border-[rgba(255,255,255,0.06)]">
                 <div>
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+                  <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] font-medium">
                     {fv.debtFreeAssetBasis}
                   </p>
-                  <p className="text-xs text-[#a3a3a3] mt-0.5">
+                  <p className="text-xs text-[#a3a3a3] mt-1 opacity-70">
                     {fv.debtFreeAssetBasisSub.replace('{totalVillas}', String(macro.totalVillas))}
                   </p>
                 </div>
-                <p className="gold-text-gradient font-mono text-2xl font-bold">
+                <p className="gold-text-gradient font-mono text-3xl font-bold">
                   €{totalGDC.toLocaleString()}
                 </p>
               </div>
 
               {/* Sliders */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] font-medium">
                       <Explain k="adr">{fv.adrLabel}</Explain>
                     </p>
-                    <p className="font-mono text-sm text-[#C5A059]">
+                    <p className="font-mono text-sm text-[#C5A059] font-bold">
                       €{adr}
                     </p>
                   </div>
@@ -245,17 +245,17 @@ export function Fortress({ macro, t, locale }: FortressProps) {
                     onChange={(e) => setAdr(Number(e.target.value))}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-1">
+                  <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-2">
                     <span>€150</span>
                     <span>€1,000</span>
                   </div>
                 </div>
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] font-medium">
                       <Explain k="occupancy-rate">{fv.occupancyLabel}</Explain>
                     </p>
-                    <p className="font-mono text-sm text-[#C5A059]">
+                    <p className="font-mono text-sm text-[#C5A059] font-bold">
                       {occupancy}%
                     </p>
                   </div>
@@ -268,7 +268,7 @@ export function Fortress({ macro, t, locale }: FortressProps) {
                     onChange={(e) => setOccupancy(Number(e.target.value))}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-1">
+                  <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-2">
                     <span>10%</span>
                     <span>80%</span>
                   </div>
@@ -276,49 +276,49 @@ export function Fortress({ macro, t, locale }: FortressProps) {
               </div>
 
               {/* Yield Result */}
-              <div className="glass-form p-6 text-center mb-6">
-                <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
+              <div className="glass-form p-8 text-center mb-8 border border-[rgba(16,185,129,0.15)] bg-[rgba(16,185,129,0.02)]">
+                <p className="text-[9px] tracking-[0.25em] uppercase text-[#a3a3a3] mb-4 font-medium">
                   <Explain k="ijarah">{fv.annualCashDividend}</Explain>
                 </p>
-                <p className={`font-mono text-5xl font-bold ${hospitality.yieldPct >= 7 ? "text-[#10B981]" : "text-[#C5A059]"}`}>
+                <p className={`font-mono text-6xl font-bold mb-4 drop-shadow-[0_0_20px_rgba(0,0,0,0.5)] ${hospitality.yieldPct >= 7 ? "text-[#10B981]" : "text-[#C5A059]"}`}>
                   {hospitality.yieldPct.toFixed(2)}%
                 </p>
-                <p className="text-[#a3a3a3] text-xs mt-2">
+                <p className="text-[#a3a3a3] text-sm font-light mb-2">
                   {fv.perpetualYield.replace('{lpYield}', hospitality.lpDividendYield.toFixed(2))}
                 </p>
-                <p className="text-[10px] text-[#a3a3a3] mt-1 font-mono">
+                <p className="text-[10px] text-[#a3a3a3] font-mono opacity-60">
                   {fv.grossRevenue}: {Math.round(hospitality.grossRevMAD).toLocaleString()} MAD/year
                 </p>
               </div>
 
               {/* Metrics Row */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div className="glass-form p-4">
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="glass-form p-5 border border-[rgba(255,255,255,0.06)]">
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2 font-medium">
                     {fv.grossAnnualRevenue}
                   </p>
                   <p className="font-mono text-lg text-[#ffffff] font-bold">
                     €{Math.round(hospitality.grossRev).toLocaleString()}
                   </p>
                 </div>
-                <div className="glass-form p-4">
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">
+                <div className="glass-form p-5 border border-[rgba(239,68,68,0.15)] bg-[rgba(239,68,68,0.02)]">
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2 font-medium">
                     {fv.opexLabel} ({macro.opexRatio}%)
                   </p>
                   <p className="font-mono text-lg text-[#EF4444] font-bold">
                     -€{Math.round(hospitality.grossRev * hospitality.opexRatio).toLocaleString()}
                   </p>
                 </div>
-                <div className="glass-form p-4">
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">
+                <div className="glass-form p-5 border border-[rgba(16,185,129,0.15)] bg-[rgba(16,185,129,0.02)]">
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2 font-medium">
                     <Explain k="noi">{fv.noiLabel}</Explain>
                   </p>
                   <p className="font-mono text-lg text-[#10B981] font-bold">
                     €{Math.round(hospitality.noi).toLocaleString()}
                   </p>
                 </div>
-                <div className="glass-form p-4">
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">
+                <div className="glass-form p-5 border border-[rgba(197,160,89,0.15)] bg-[rgba(197,160,89,0.02)]">
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2 font-medium">
                     {fv.lpAnnualDividend}
                   </p>
                   <p className="font-mono text-lg text-[#C5A059] font-bold">
@@ -331,19 +331,19 @@ export function Fortress({ macro, t, locale }: FortressProps) {
 
           {/* Revenue Breakdown Chart */}
           <Reveal delay={0.3}>
-            <div className="glass-form p-6 mb-6">
-              <h3 className="font-[var(--font-playfair)] text-lg text-[#ffffff] mb-4">
+            <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+              <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-6">
                 {fv.revenueBreakdown}
               </h3>
-              <div className="h-48 sm:h-56 md:h-60 lg:h-64">
+              <div className="h-56 sm:h-64 md:h-72 lg:h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={yieldBreakdownData} margin={{ left: 10, right: 10, top: 10, bottom: 10 }}>
                     <XAxis
                       dataKey="name"
                       stroke="#a3a3a3"
-                      tick={{ fontSize: 10 }}
+                      tick={{ fontSize: 10, fontFamily: "var(--font-inter)" }}
                       tickLine={false}
-                      axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                      axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
                     />
                     <YAxis
                       stroke="#a3a3a3"
@@ -354,22 +354,29 @@ export function Fortress({ macro, t, locale }: FortressProps) {
                           : `€${(v / 1000).toFixed(0)}k`
                       }
                       tickLine={false}
-                      axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                      axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
                     />
                     <Tooltip
                       contentStyle={{
-                        background: "rgba(10,10,10,0.95)",
-                        border: "1px solid rgba(255,255,255,0.12)",
+                        background: "rgba(8,8,8,0.95)",
+                        border: "1px solid rgba(255,255,255,0.08)",
                         borderRadius: 8,
                         color: "#fff",
                         fontFamily: "var(--font-jetbrains)",
                         fontSize: 11,
+                        boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
                       }}
                       formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]}
                     />
-                    <Bar dataKey="value" radius={[4, 4, 0, 0]} barSize={60} animationDuration={800} animationEasing="ease-out">
+                    <Bar
+                      dataKey="value"
+                      radius={[4, 4, 0, 0]}
+                      barSize={60}
+                      animationDuration={1000}
+                      animationEasing="cubic-bezier(0.16, 1, 0.3, 1)"
+                    >
                       {yieldBreakdownData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                        <Cell key={`cell-${index}`} fill={entry.fill} strokeWidth={0} />
                       ))}
                     </Bar>
                   </BarChart>
@@ -380,27 +387,31 @@ export function Fortress({ macro, t, locale }: FortressProps) {
 
           {/* 10-Year Projection */}
           <Reveal delay={0.4}>
-            <div className="glass-form p-6">
-              <h3 className="font-[var(--font-playfair)] text-lg text-[#ffffff] mb-1">
+            <div className="glass-form p-6 sm:p-8">
+              <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-2">
                 {fv.projectionTitle}
               </h3>
-              <p className="text-[10px] text-[#a3a3a3] mb-2">
-                <Explain k="palmeraie">Why Palmeraie luxury assets hold value →</Explain>
-                {" · "}
-                <Explain k="occupancy-rate">Occupancy rate benchmarks →</Explain>
+              <p className="text-[10px] text-[#a3a3a3] mb-4 flex flex-wrap gap-2">
+                <Explain k="palmeraie" className="px-2 py-1 rounded bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] hover:border-[#C5A059] transition-colors">
+                  Why Palmeraie luxury assets hold value →
+                </Explain>
+                <Explain k="occupancy-rate" className="px-2 py-1 rounded bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] hover:border-[#C5A059] transition-colors">
+                  Occupancy rate benchmarks →
+                </Explain>
               </p>
-              <p className="text-xs text-[#a3a3a3] mb-4 leading-relaxed">
+              <p className="text-xs text-[#a3a3a3] mb-8 leading-relaxed max-w-3xl font-light">
                 {fv.projectionDesc}
               </p>
-              <div className="h-52 sm:h-56 md:h-64 lg:h-72">
+              <div className="h-64 sm:h-72 md:h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={projectionData} margin={{ left: 10, right: 10, top: 10, bottom: 10 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
                     <XAxis
                       dataKey="year"
                       stroke="#a3a3a3"
-                      tick={{ fontSize: 10 }}
+                      tick={{ fontSize: 10, fontFamily: "var(--font-inter)" }}
                       tickLine={false}
+                      axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
                     />
                     <YAxis
                       yAxisId="noi"
@@ -409,6 +420,7 @@ export function Fortress({ macro, t, locale }: FortressProps) {
                       tickFormatter={(v) => `€${(v / 1000).toFixed(0)}k`}
                       tickLine={false}
                       orientation="left"
+                      axisLine={false}
                     />
                     <YAxis
                       yAxisId="yield"
@@ -417,34 +429,56 @@ export function Fortress({ macro, t, locale }: FortressProps) {
                       tickFormatter={(v) => `${v}%`}
                       tickLine={false}
                       orientation="right"
+                      axisLine={false}
                     />
                     <Tooltip
                       contentStyle={{
-                        background: "rgba(10,10,10,0.95)",
-                        border: "1px solid rgba(255,255,255,0.12)",
+                        background: "rgba(8,8,8,0.95)",
+                        border: "1px solid rgba(255,255,255,0.08)",
                         borderRadius: 8,
                         color: "#fff",
                         fontFamily: "var(--font-jetbrains)",
                         fontSize: 11,
+                        boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
                       }}
                       formatter={(value: number, name: string) => {
                         if (name === "noi") return [`€${value.toLocaleString()}`, fv.noiLegend]
                         return [`${value}%`, fv.yieldLegend]
                       }}
                     />
-                    <Line yAxisId="noi" type="monotone" dataKey="noi" stroke="#10B981" strokeWidth={2} dot={{ r: 3, fill: "#10B981" }} animationDuration={800} animationEasing="ease-out" />
-                    <Line yAxisId="yield" type="monotone" dataKey="yield" stroke="#C5A059" strokeWidth={2} dot={{ r: 3, fill: "#C5A059" }} animationDuration={800} animationEasing="ease-out" />
+                    <Line
+                      yAxisId="noi"
+                      type="monotone"
+                      dataKey="noi"
+                      stroke="#10B981"
+                      strokeWidth={2}
+                      dot={{ r: 4, fill: "#10B981", strokeWidth: 0 }}
+                      activeDot={{ r: 6, strokeWidth: 0 }}
+                      animationDuration={1000}
+                      animationEasing="cubic-bezier(0.16, 1, 0.3, 1)"
+                    />
+                    <Line
+                      yAxisId="yield"
+                      type="monotone"
+                      dataKey="yield"
+                      stroke="#C5A059"
+                      strokeWidth={2}
+                      dot={{ r: 4, fill: "#C5A059", strokeWidth: 0 }}
+                      activeDot={{ r: 6, strokeWidth: 0 }}
+                      animationDuration={1000}
+                      animationEasing="cubic-bezier(0.16, 1, 0.3, 1)"
+                    />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
-              <div className="flex items-center gap-6 mt-3 justify-center">
+              <div className="flex items-center gap-8 mt-6 justify-center">
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-0.5 bg-[#10B981]" />
-                  <span className="text-[10px] text-[#a3a3a3]">{fv.noiLegend}</span>
+                  <span className="w-3 h-3 rounded-full bg-[#10B981]" />
+                  <span className="text-[10px] text-[#a3a3a3] uppercase tracking-wide">{fv.noiLegend}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-0.5 bg-[#C5A059]" />
-                  <span className="text-[10px] text-[#a3a3a3]">{fv.yieldLegend}</span>
+                  <span className="w-3 h-3 rounded-full bg-[#C5A059]" />
+                  <span className="text-[10px] text-[#a3a3a3] uppercase tracking-wide">{fv.yieldLegend}</span>
                 </div>
               </div>
             </div>
