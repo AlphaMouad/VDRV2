@@ -220,40 +220,40 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
 
       {/* Probability-Weighted Expected Return */}
       <Reveal delay={0.05}>
-        <div className="glass-form p-6 mb-6 border border-[rgba(197,160,89,0.2)]">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10 border border-[rgba(197,160,89,0.2)]">
+          <div className="flex items-center gap-2 mb-6">
             <BarChart3 className="w-4 h-4 text-[#C5A059]" />
-            <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+            <span className="text-[10px] tracking-[0.25em] uppercase text-[#a3a3a3] font-medium">
               {t.common.expectedReturn}
             </span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
+            <div className="text-center p-4">
               <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
                 {t.common.weightedMoic}
               </p>
-              <p className="gold-text-gradient font-mono text-4xl font-bold">
+              <p className="gold-text-gradient font-mono text-4xl sm:text-5xl font-bold">
                 <AnimatedValue value={weighted.moic} format="multiplier" />x
               </p>
             </div>
-            <div className="text-center">
+            <div className="text-center p-4">
               <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
                 {t.common.weightedIrr}
               </p>
-              <p className="font-mono text-4xl font-bold text-[#10B981]">
+              <p className="font-mono text-4xl sm:text-5xl font-bold text-[#10B981] drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]">
                 <AnimatedValue value={weighted.irr} format="percent" decimals={0} />%
               </p>
             </div>
-            <div className="text-center">
+            <div className="text-center p-4">
               <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
                 {t.common.weightedProfit}
               </p>
-              <p className="font-mono text-4xl font-bold text-[#ffffff]">
+              <p className="font-mono text-4xl sm:text-5xl font-bold text-[#ffffff]">
                 €<AnimatedValue value={weighted.profit} format="currency" />
               </p>
             </div>
           </div>
-          <p className="text-[10px] text-[#a3a3a3] text-center mt-4">
+          <p className="text-[10px] text-[#a3a3a3] text-center mt-6 opacity-60">
             {t.common.basedOnScenarios}
           </p>
         </div>
@@ -261,22 +261,22 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
 
       {/* Scenario Overview Cards */}
       <Reveal delay={0.1}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 sm:mb-10">
           {results.map(({ meta, result }) => (
             <div
               key={meta.id}
-              className="glass-form glass-card-hover p-5 cursor-pointer transition-all duration-300"
+              className="glass-form glass-card-hover p-6 cursor-pointer transition-all duration-300"
               style={{ borderColor: expanded === meta.id ? meta.borderColor : undefined }}
               onClick={() => setExpanded(expanded === meta.id ? null : meta.id)}
             >
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <meta.icon className="w-4 h-4" style={{ color: meta.color }} />
                   <span className="text-[10px] tracking-[0.2em] uppercase font-bold" style={{ color: meta.color }}>
                     {scenarioNames[meta.id]}
                   </span>
                 </div>
-                <span className="text-[9px] text-[#a3a3a3] font-mono">
+                <span className="text-[9px] text-[#a3a3a3] font-mono bg-[rgba(255,255,255,0.05)] px-2 py-1 rounded">
                   P: {meta.probability}
                 </span>
               </div>
@@ -284,9 +284,9 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
               <p className="gold-text-gradient font-mono text-3xl font-bold mb-1">
                 {result.lpMOIC.toFixed(2)}x
               </p>
-              <p className="text-[10px] text-[#a3a3a3] mb-3">{sv.lpMoic}</p>
+              <p className="text-[10px] text-[#a3a3a3] mb-4">{sv.lpMoic}</p>
 
-              <div className="flex items-center justify-between text-[10px]">
+              <div className="flex items-center justify-between text-[10px] mb-2">
                 <span className="text-[#a3a3a3]">{sv.irr}</span>
                 <span className="font-mono" style={{ color: meta.color }}>
                   {result.irrLow > 0
@@ -297,20 +297,20 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
                   }
                 </span>
               </div>
-              <div className="flex items-center justify-between text-[10px] mt-1">
+              <div className="flex items-center justify-between text-[10px] mb-2">
                 <span className="text-[#a3a3a3]">{sv.lpProfit}</span>
                 <span className="font-mono text-[#ffffff]">
                   €{Math.round(result.lpProfit).toLocaleString()}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-[10px] mt-1">
+              <div className="flex items-center justify-between text-[10px]">
                 <span className="text-[#a3a3a3]">{sv.sellThrough}</span>
                 <span className="font-mono text-[#ffffff]">
                   {SCENARIO_PARAMS[meta.id].sellThrough}%
                 </span>
               </div>
 
-              <div className="mt-3 flex items-center justify-center">
+              <div className="mt-4 flex items-center justify-center pt-2 border-t border-[rgba(255,255,255,0.04)]">
                 {expanded === meta.id ? (
                   <ChevronUp className="w-4 h-4 text-[#a3a3a3]" />
                 ) : (
@@ -330,44 +330,44 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
             if (!match) return null
             const { meta, params, result } = match
             return (
-              <div className="glass-form p-6 mb-8" style={{ borderColor: meta.borderColor }}>
-                <div className="flex items-center gap-3 mb-4">
-                  <meta.icon className="w-5 h-5" style={{ color: meta.color }} />
-                  <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff]">
+              <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10" style={{ borderColor: meta.borderColor, background: `linear-gradient(180deg, ${meta.bgColor} 0%, rgba(10,10,10,0.8) 100%)` }}>
+                <div className="flex items-center gap-3 mb-6">
+                  <meta.icon className="w-6 h-6" style={{ color: meta.color }} />
+                  <h3 className="font-[var(--font-playfair)] text-2xl text-[#ffffff]">
                     {scenarioNames[meta.id]} — {sv.deepDive}
                   </h3>
                 </div>
 
-                <p className="view-intro mb-6">{scenarioNarratives[meta.id]}</p>
+                <p className="view-intro mb-8 text-sm text-[#d4d4d4] font-light leading-relaxed max-w-3xl">{scenarioNarratives[meta.id]}</p>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-6">
-                  <div className="glass-form p-3">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+                  <div className="glass-form p-4 bg-[rgba(0,0,0,0.3)]">
                     <p className="text-[9px] tracking-[0.15em] uppercase text-[#a3a3a3] mb-1">{sv.villasSold}</p>
                     <p className="font-mono text-lg font-bold text-[#ffffff]">{result.villasSold}</p>
                   </div>
-                  <div className="glass-form p-3">
+                  <div className="glass-form p-4 bg-[rgba(0,0,0,0.3)]">
                     <p className="text-[9px] tracking-[0.15em] uppercase text-[#a3a3a3] mb-1">{sv.villasRental}</p>
                     <p className="font-mono text-lg font-bold text-[#ffffff]">{result.villasRental}</p>
                   </div>
-                  <div className="glass-form p-3">
+                  <div className="glass-form p-4 bg-[rgba(0,0,0,0.3)]">
                     <p className="text-[9px] tracking-[0.15em] uppercase text-[#a3a3a3] mb-1">{sv.vefaRevenue}</p>
                     <p className="font-mono text-lg font-bold text-[#10B981]">
                       €{Math.round(result.vefaRevenue).toLocaleString()}
                     </p>
                   </div>
-                  <div className="glass-form p-3">
+                  <div className="glass-form p-4 bg-[rgba(0,0,0,0.3)]">
                     <p className="text-[9px] tracking-[0.15em] uppercase text-[#a3a3a3] mb-1">{sv.tpiTax}</p>
                     <p className="font-mono text-lg font-bold text-[#EF4444]">
                       -€{Math.round(result.tpiTax).toLocaleString()}
                     </p>
                   </div>
-                  <div className="glass-form p-3">
+                  <div className="glass-form p-4 bg-[rgba(0,0,0,0.3)]">
                     <p className="text-[9px] tracking-[0.15em] uppercase text-[#a3a3a3] mb-1">{sv.peakEquity}</p>
                     <p className="font-mono text-lg font-bold text-[#C5A059]">
                       €{Math.round(result.peakEquity).toLocaleString()}
                     </p>
                   </div>
-                  <div className="glass-form p-3">
+                  <div className="glass-form p-4 bg-[rgba(0,0,0,0.3)]">
                     <p className="text-[9px] tracking-[0.15em] uppercase text-[#a3a3a3] mb-1">{sv.netLpCash}</p>
                     <p className="font-mono text-lg font-bold" style={{ color: meta.color }}>
                       €{Math.round(result.lpShare).toLocaleString()}
@@ -376,21 +376,21 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
                 </div>
 
                 {result.villasRental > 0 && (
-                  <div className="glass-form p-4 border-l-2 border-[#C5A059] mb-4">
-                    <p className="text-xs font-semibold text-[#ffffff] mb-1">
-                      {sv.hospitalityPivot} — {result.villasRental} villas at €{params.rentalADR}/night, {params.rentalOccupancy}% occupancy
+                  <div className="glass-form p-5 border-l-4 border-[#C5A059] mb-6 bg-[rgba(197,160,89,0.03)]">
+                    <p className="text-xs font-semibold text-[#ffffff] mb-2 uppercase tracking-wide">
+                      {sv.hospitalityPivot} — <span className="text-[#C5A059]">{result.villasRental} villas</span> at €{params.rentalADR}/night, {params.rentalOccupancy}% occupancy
                     </p>
                     <p className="text-[10px] text-[#a3a3a3]">
-                      {sv.annualGrossRevenue}: €{Math.round(result.annualRentalGross).toLocaleString()} |{" "}
-                      {sv.annualNoi}: €{Math.round(result.annualRentalNOI).toLocaleString()} |{" "}
-                      {sv.lpDividendYield}: {result.annualYield.toFixed(1)}%
+                      {sv.annualGrossRevenue}: <span className="text-[#ffffff]">€{Math.round(result.annualRentalGross).toLocaleString()}</span> |{" "}
+                      {sv.annualNoi}: <span className="text-[#10B981]">€{Math.round(result.annualRentalNOI).toLocaleString()}</span> |{" "}
+                      {sv.lpDividendYield}: <span className="text-[#C5A059] font-bold">{result.annualYield.toFixed(1)}%</span>
                     </p>
                   </div>
                 )}
 
                 {/* Key Insight */}
-                <div className="glass-form p-4 border-l-2" style={{ borderColor: meta.color }}>
-                  <p className="text-sm italic text-[#a3a3a3] leading-relaxed">
+                <div className="glass-form p-5 border-l-4 bg-[rgba(255,255,255,0.02)]" style={{ borderColor: meta.color }}>
+                  <p className="text-sm italic text-[#d4d4d4] leading-relaxed">
                     {scenarioInsights[meta.id]}
                   </p>
                 </div>
@@ -402,53 +402,60 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
 
       {/* MOIC Comparison Chart */}
       <Reveal delay={0.2}>
-        <div className="glass-form p-6 mb-6">
-          <h3 className="font-[var(--font-playfair)] text-lg text-[#ffffff] mb-2">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+          <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-3">
             {sv.comparisonTitle}
           </h3>
-          <p className="text-xs text-[#a3a3a3] mb-6 leading-relaxed">
+          <p className="text-xs text-[#a3a3a3] mb-8 leading-relaxed max-w-3xl">
             {sv.comparisonSubtitle}
           </p>
-          <div className="h-56 sm:h-64 md:h-72 lg:h-80">
+          <div className="h-64 sm:h-80 md:h-96">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={comparisonData} margin={{ left: 10, right: 10, top: 10, bottom: 10 }}>
                 <XAxis
                   dataKey="name"
-                  stroke="#a3a3a3"
-                  tick={{ fontSize: 10 }}
+                  stroke="#666"
+                  tick={{ fontSize: 10, fontFamily: "var(--font-inter)", fill: "#666" }}
                   tickLine={false}
-                  axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                  axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
                 />
                 <YAxis
-                  stroke="#a3a3a3"
-                  tick={{ fontSize: 10, fontFamily: "var(--font-jetbrains)" }}
+                  stroke="#666"
+                  tick={{ fontSize: 10, fontFamily: "var(--font-jetbrains)", fill: "#666" }}
                   tickLine={false}
-                  axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                  axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
                   label={{
                     value: sv.lpMoic,
                     angle: -90,
                     position: "insideLeft",
                     offset: 0,
-                    style: { fill: "#a3a3a3", fontSize: 10 },
+                    style: { fill: "#666", fontSize: 10 },
                   }}
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "rgba(10,10,10,0.95)",
-                    border: "1px solid rgba(255,255,255,0.12)",
+                    background: "rgba(8,8,8,0.95)",
+                    border: "1px solid rgba(255,255,255,0.08)",
                     borderRadius: 8,
                     color: "#fff",
                     fontFamily: "var(--font-jetbrains)",
                     fontSize: 11,
+                    boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
                   }}
                   formatter={(value: number, name: string) => {
                     if (name === "moic") return [`${value}x`, sv.lpMoic]
                     return [value, name]
                   }}
                 />
-                <Bar dataKey="moic" radius={[4, 4, 0, 0]} barSize={50} animationDuration={800} animationEasing="ease-out">
+                <Bar
+                  dataKey="moic"
+                  radius={[4, 4, 0, 0]}
+                  barSize={60}
+                  animationDuration={1000}
+                  animationEasing="cubic-bezier(0.16, 1, 0.3, 1)"
+                >
                   {comparisonData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                    <Cell key={`cell-${index}`} fill={entry.fill} strokeWidth={0} />
                   ))}
                 </Bar>
               </BarChart>
@@ -459,30 +466,31 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
 
       {/* Risk Profile Radar */}
       <Reveal delay={0.3}>
-        <div className="glass-form p-6 mb-6">
-          <h3 className="font-[var(--font-playfair)] text-lg text-[#ffffff] mb-2">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+          <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-3">
             {sv.radarTitle}
           </h3>
-          <p className="text-xs text-[#a3a3a3] mb-6 leading-relaxed">
+          <p className="text-xs text-[#a3a3a3] mb-8 leading-relaxed max-w-3xl">
             {sv.radarSubtitle}
           </p>
-          <div className="h-64 sm:h-72 md:h-80">
+          <div className="h-72 sm:h-80 md:h-96">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={radarData}>
-                <PolarGrid stroke="rgba(255,255,255,0.08)" />
+                <PolarGrid stroke="rgba(255,255,255,0.04)" />
                 <PolarAngleAxis
                   dataKey="metric"
-                  tick={{ fill: "#a3a3a3", fontSize: 10 }}
+                  tick={{ fill: "#a3a3a3", fontSize: 11, fontFamily: "var(--font-inter)" }}
                 />
                 <PolarRadiusAxis
-                  tick={{ fill: "#a3a3a3", fontSize: 9 }}
+                  tick={{ fill: "#666", fontSize: 9 }}
                   domain={[0, 2.5]}
+                  axisLine={false}
                 />
-                <Radar name={sv.bullName} dataKey="bull" stroke="#10B981" fill="#10B981" fillOpacity={0.1} strokeWidth={2} animationDuration={800} animationEasing="ease-out" />
-                <Radar name={sv.baseName} dataKey="base" stroke="#C5A059" fill="#C5A059" fillOpacity={0.08} strokeWidth={2} animationDuration={800} animationEasing="ease-out" />
-                <Radar name={sv.bearName} dataKey="bear" stroke="#F59E0B" fill="#F59E0B" fillOpacity={0.06} strokeWidth={1.5} animationDuration={800} animationEasing="ease-out" />
-                <Radar name={sv.catastrophicName} dataKey="catastrophic" stroke="#EF4444" fill="#EF4444" fillOpacity={0.04} strokeWidth={1.5} animationDuration={800} animationEasing="ease-out" />
-                <Legend wrapperStyle={{ fontSize: 10, color: "#a3a3a3" }} />
+                <Radar name={sv.bullName} dataKey="bull" stroke="#10B981" fill="#10B981" fillOpacity={0.15} strokeWidth={2} animationDuration={1000} animationEasing="ease-out" />
+                <Radar name={sv.baseName} dataKey="base" stroke="#C5A059" fill="#C5A059" fillOpacity={0.15} strokeWidth={2} animationDuration={1000} animationEasing="ease-out" />
+                <Radar name={sv.bearName} dataKey="bear" stroke="#F59E0B" fill="#F59E0B" fillOpacity={0.1} strokeWidth={1.5} animationDuration={1000} animationEasing="ease-out" />
+                <Radar name={sv.catastrophicName} dataKey="catastrophic" stroke="#EF4444" fill="#EF4444" fillOpacity={0.1} strokeWidth={1.5} animationDuration={1000} animationEasing="ease-out" />
+                <Legend wrapperStyle={{ paddingTop: "20px", fontSize: 11, color: "#a3a3a3" }} />
               </RadarChart>
             </ResponsiveContainer>
           </div>
@@ -491,20 +499,20 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
 
       {/* Custom Scenario Builder */}
       <Reveal delay={0.4}>
-        <div className="glass-form p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+          <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-[#8B5CF6]" />
-              <h3 className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+              <h3 className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] font-medium">
                 {sv.customTitle}
               </h3>
             </div>
             <button
               onClick={() => setShowCustom(!showCustom)}
-              className={`text-xs font-semibold px-4 py-2 rounded-lg transition-all duration-300 ${
+              className={`text-xs font-semibold px-5 py-2.5 rounded-lg transition-all duration-300 uppercase tracking-wide ${
                 showCustom
                   ? "bg-[rgba(139,92,246,0.15)] text-[#8B5CF6] border border-[#8B5CF6]"
-                  : "text-[#a3a3a3] border border-[rgba(255,255,255,0.12)] hover:text-[#ffffff]"
+                  : "text-[#a3a3a3] border border-[rgba(255,255,255,0.1)] hover:text-[#ffffff] hover:border-[rgba(255,255,255,0.2)]"
               }`}
             >
               {showCustom ? sv.hideStressTest : sv.openStressTest}
@@ -513,17 +521,17 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
 
           {showCustom && (
             <div>
-              <p className="text-xs text-[#a3a3a3] mb-6 leading-relaxed">
+              <p className="text-xs text-[#a3a3a3] mb-8 leading-relaxed max-w-2xl">
                 {sv.customDesc}
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div>
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-3">
                     <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
                       {sv.sellThroughRate}
                     </p>
-                    <p className="font-mono text-sm text-[#8B5CF6]">{customSellThrough}%</p>
+                    <p className="font-mono text-sm text-[#8B5CF6] font-bold">{customSellThrough}%</p>
                   </div>
                   <input
                     type="range"
@@ -534,17 +542,17 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
                     onChange={(e) => setCustomSellThrough(Number(e.target.value))}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-1">
+                  <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-2">
                     <span>0%</span>
                     <span>100%</span>
                   </div>
                 </div>
                 <div>
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-3">
                     <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
                       {sv.priceAdjustment}
                     </p>
-                    <p className="font-mono text-sm text-[#8B5CF6]">
+                    <p className="font-mono text-sm text-[#8B5CF6] font-bold">
                       {customPriceAdj >= 0 ? "+" : ""}{customPriceAdj}%
                     </p>
                   </div>
@@ -557,7 +565,7 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
                     onChange={(e) => setCustomPriceAdj(Number(e.target.value))}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-1">
+                  <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-2">
                     <span>-30%</span>
                     <span>+30%</span>
                   </div>
@@ -566,30 +574,30 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
 
               {/* Custom Results */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="glass-form p-4 text-center">
-                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">{sv.lpMoic}</p>
-                  <p className={`font-mono text-2xl font-bold ${customResult.lpMOIC >= 1 ? "text-[#10B981]" : "text-[#EF4444]"}`}>
+                <div className="glass-form p-5 text-center border border-[rgba(255,255,255,0.06)]">
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">{sv.lpMoic}</p>
+                  <p className={`font-mono text-2xl sm:text-3xl font-bold ${customResult.lpMOIC >= 1 ? "text-[#10B981]" : "text-[#EF4444]"}`}>
                     {customResult.lpMOIC.toFixed(2)}x
                   </p>
                 </div>
-                <div className="glass-form p-4 text-center">
-                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">{sv.estIrr}</p>
-                  <p className="font-mono text-2xl font-bold text-[#8B5CF6]">
+                <div className="glass-form p-5 text-center border border-[rgba(139,92,246,0.2)] bg-[rgba(139,92,246,0.03)]">
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">{sv.estIrr}</p>
+                  <p className="font-mono text-2xl sm:text-3xl font-bold text-[#8B5CF6]">
                     {customResult.irrLow > 0
                       ? `${((customResult.irrLow + customResult.irrHigh) / 2).toFixed(0)}%`
                       : `${customResult.annualYield.toFixed(1)}% ${sv.yield}`
                     }
                   </p>
                 </div>
-                <div className="glass-form p-4 text-center">
-                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">{sv.lpProfit}</p>
-                  <p className="font-mono text-2xl font-bold text-[#ffffff]">
+                <div className="glass-form p-5 text-center border border-[rgba(255,255,255,0.06)]">
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">{sv.lpProfit}</p>
+                  <p className="font-mono text-2xl sm:text-3xl font-bold text-[#ffffff]">
                     €{Math.round(customResult.lpProfit).toLocaleString()}
                   </p>
                 </div>
-                <div className="glass-form p-4 text-center">
-                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">{sv.peakEquity}</p>
-                  <p className="gold-text-gradient font-mono text-2xl font-bold">
+                <div className="glass-form p-5 text-center border border-[rgba(255,255,255,0.06)]">
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">{sv.peakEquity}</p>
+                  <p className="gold-text-gradient font-mono text-2xl sm:text-3xl font-bold">
                     €{Math.round(customResult.peakEquity).toLocaleString()}
                   </p>
                 </div>
@@ -601,19 +609,19 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
 
       {/* Comprehensive Summary Table */}
       <Reveal delay={0.5}>
-        <div className="glass-form p-6 mb-6">
-          <h3 className="font-[var(--font-playfair)] text-lg text-[#ffffff] mb-4">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+          <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-6">
             {sv.summaryTitle}
           </h3>
           <div className="overflow-x-auto -mx-2 px-2">
-            <table className="w-full min-w-[600px] text-left">
+            <table className="w-full min-w-[600px] text-left border-collapse">
               <thead>
                 <tr className="border-b border-[rgba(255,255,255,0.08)]">
-                  <th className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] py-3 px-3">{sv.metric}</th>
+                  <th className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] py-4 px-4 font-medium">{sv.metric}</th>
                   {results.map(({ meta }) => (
                     <th
                       key={meta.id}
-                      className="text-[9px] tracking-[0.2em] uppercase py-3 px-3 text-right font-bold"
+                      className="text-[9px] tracking-[0.2em] uppercase py-4 px-4 text-right font-bold"
                       style={{ color: meta.color }}
                     >
                       {scenarioNames[meta.id]}
@@ -622,26 +630,26 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-[rgba(255,255,255,0.04)]">
-                  <td className="text-xs text-[#a3a3a3] py-3 px-3">{sv.sellThrough}</td>
+                <tr className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.02)]">
+                  <td className="text-xs text-[#a3a3a3] py-4 px-4 font-medium">{sv.sellThrough}</td>
                   {results.map(({ meta }) => (
-                    <td key={meta.id} className="font-mono text-xs text-[#ffffff] py-3 px-3 text-right">
+                    <td key={meta.id} className="font-mono text-xs text-[#ffffff] py-4 px-4 text-right">
                       {SCENARIO_PARAMS[meta.id].sellThrough}%
                     </td>
                   ))}
                 </tr>
-                <tr className="border-b border-[rgba(255,255,255,0.04)]">
-                  <td className="text-xs text-[#a3a3a3] py-3 px-3">{sv.vefaRevenue}</td>
+                <tr className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.02)]">
+                  <td className="text-xs text-[#a3a3a3] py-4 px-4 font-medium">{sv.vefaRevenue}</td>
                   {results.map(({ meta, result }) => (
-                    <td key={meta.id} className="font-mono text-xs text-[#10B981] py-3 px-3 text-right">
+                    <td key={meta.id} className="font-mono text-xs text-[#10B981] py-4 px-4 text-right">
                       €{Math.round(result.vefaRevenue).toLocaleString()}
                     </td>
                   ))}
                 </tr>
-                <tr className="border-b border-[rgba(255,255,255,0.04)]">
-                  <td className="text-xs text-[#a3a3a3] py-3 px-3">{sv.rentalNoi}</td>
+                <tr className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.02)]">
+                  <td className="text-xs text-[#a3a3a3] py-4 px-4 font-medium">{sv.rentalNoi}</td>
                   {results.map(({ meta, result }) => (
-                    <td key={meta.id} className="font-mono text-xs text-[#ffffff] py-3 px-3 text-right">
+                    <td key={meta.id} className="font-mono text-xs text-[#ffffff] py-4 px-4 text-right">
                       {result.annualRentalNOI > 0
                         ? `€${Math.round(result.annualRentalNOI).toLocaleString()}`
                         : "\u2014"
@@ -649,26 +657,26 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
                     </td>
                   ))}
                 </tr>
-                <tr className="border-b border-[rgba(255,255,255,0.04)]">
-                  <td className="text-xs text-[#a3a3a3] py-3 px-3">{sv.tpiTax}</td>
+                <tr className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.02)]">
+                  <td className="text-xs text-[#a3a3a3] py-4 px-4 font-medium">{sv.tpiTax}</td>
                   {results.map(({ meta, result }) => (
-                    <td key={meta.id} className="font-mono text-xs text-[#EF4444] py-3 px-3 text-right">
+                    <td key={meta.id} className="font-mono text-xs text-[#EF4444] py-4 px-4 text-right">
                       -€{Math.round(result.tpiTax).toLocaleString()}
                     </td>
                   ))}
                 </tr>
-                <tr className="border-b border-[rgba(255,255,255,0.04)]">
-                  <td className="text-xs text-[#a3a3a3] py-3 px-3">{sv.lpMoic}</td>
+                <tr className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.02)]">
+                  <td className="text-xs text-[#a3a3a3] py-4 px-4 font-medium">{sv.lpMoic}</td>
                   {results.map(({ meta, result }) => (
-                    <td key={meta.id} className="font-mono text-xs font-bold py-3 px-3 text-right" style={{ color: meta.color }}>
+                    <td key={meta.id} className="font-mono text-xs font-bold py-4 px-4 text-right" style={{ color: meta.color }}>
                       {result.lpMOIC.toFixed(2)}x
                     </td>
                   ))}
                 </tr>
-                <tr className="border-b border-[rgba(255,255,255,0.04)]">
-                  <td className="text-xs text-[#a3a3a3] py-3 px-3">{sv.estIrr}</td>
+                <tr className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.02)]">
+                  <td className="text-xs text-[#a3a3a3] py-4 px-4 font-medium">{sv.estIrr}</td>
                   {results.map(({ meta, result }) => (
-                    <td key={meta.id} className="font-mono text-xs py-3 px-3 text-right" style={{ color: meta.color }}>
+                    <td key={meta.id} className="font-mono text-xs py-4 px-4 text-right" style={{ color: meta.color }}>
                       {result.irrLow > 0
                         ? `${result.irrLow.toFixed(0)}%–${result.irrHigh.toFixed(0)}%`
                         : result.annualYield > 0
@@ -678,18 +686,18 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
                     </td>
                   ))}
                 </tr>
-                <tr className="border-b border-[rgba(255,255,255,0.04)]">
-                  <td className="text-xs text-[#a3a3a3] py-3 px-3">{sv.lpProfit}</td>
+                <tr className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.02)]">
+                  <td className="text-xs text-[#a3a3a3] py-4 px-4 font-medium">{sv.lpProfit}</td>
                   {results.map(({ meta, result }) => (
-                    <td key={meta.id} className="font-mono text-xs font-bold py-3 px-3 text-right" style={{ color: result.lpProfit > 0 ? "#10B981" : "#EF4444" }}>
+                    <td key={meta.id} className="font-mono text-xs font-bold py-4 px-4 text-right" style={{ color: result.lpProfit > 0 ? "#10B981" : "#EF4444" }}>
                       €{Math.round(result.lpProfit).toLocaleString()}
                     </td>
                   ))}
                 </tr>
-                <tr className="border-t border-[rgba(255,255,255,0.12)]">
-                  <td className="text-xs font-bold text-[#C5A059] py-3 px-3">{sv.probability}</td>
+                <tr className="border-t border-[rgba(255,255,255,0.1)]">
+                  <td className="text-xs font-bold text-[#C5A059] py-4 px-4 font-mono">{sv.probability}</td>
                   {results.map(({ meta }) => (
-                    <td key={meta.id} className="font-mono text-xs text-[#a3a3a3] py-3 px-3 text-right">
+                    <td key={meta.id} className="font-mono text-xs text-[#a3a3a3] py-4 px-4 text-right">
                       {meta.probability}
                     </td>
                   ))}
@@ -702,28 +710,28 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
 
       {/* The Unlevered Advantage */}
       <Reveal delay={0.6}>
-        <div className="glass-form p-6 border-l-2 border-[#C5A059]">
-          <h3 className="font-[var(--font-playfair)] text-lg text-[#ffffff] mb-3">
+        <div className="glass-form p-6 sm:p-8 border-l-4 border-[#C5A059]">
+          <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-4">
             {sv.advantageTitle}
           </h3>
-          <p className="view-intro mb-4">
+          <p className="view-intro mb-6 text-sm text-[#d4d4d4] font-light">
             {sv.advantageDesc}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="glass-form p-4">
-              <p className="text-xs font-bold text-[#EF4444] mb-2">{sv.conventionalLabel}</p>
-              <ul className="text-[11px] text-[#a3a3a3] space-y-1.5 leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="glass-form p-5 border border-[rgba(239,68,68,0.1)] bg-[rgba(239,68,68,0.02)]">
+              <p className="text-xs font-bold text-[#EF4444] mb-3 uppercase tracking-wide">{sv.conventionalLabel}</p>
+              <ul className="text-[11px] text-[#a3a3a3] space-y-2 leading-relaxed list-disc pl-4">
                 {sv.convPoints.map((point, i) => (
                   <li key={i}>{point}</li>
                 ))}
               </ul>
             </div>
             <div className="flex items-center justify-center">
-              <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">{t.common.vs}</span>
+              <span className="text-[10px] tracking-[0.3em] uppercase text-[#a3a3a3] font-medium opacity-70">{t.common.vs}</span>
             </div>
-            <div className="glass-form p-4 border border-[rgba(16,185,129,0.3)]">
-              <p className="text-xs font-bold text-[#10B981] mb-2">{sv.ambassadeurLabel}</p>
-              <ul className="text-[11px] text-[#a3a3a3] space-y-1.5 leading-relaxed">
+            <div className="glass-form p-5 border border-[rgba(16,185,129,0.2)] bg-[rgba(16,185,129,0.02)]">
+              <p className="text-xs font-bold text-[#10B981] mb-3 uppercase tracking-wide">{sv.ambassadeurLabel}</p>
+              <ul className="text-[11px] text-[#e0e0e0] space-y-2 leading-relaxed list-disc pl-4">
                 {sv.ambPoints.map((point, i) => (
                   <li key={i}>{point}</li>
                 ))}

@@ -174,178 +174,168 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
       />
 
       {/* ═══════════════════════════════════════════════════════
-          INVESTOR PROFILE — ALWAYS FIRST, PROMINENTLY HIGHLIGHTED
+          INVESTOR PROFILE — PREMIUM CARD TREATMENT
           ═══════════════════════════════════════════════════════ */}
       <Reveal delay={0.05}>
-        <div
-          className="p-5 sm:p-6 mb-6 sm:mb-8 rounded-xl"
-          style={{
-            border: "1px solid rgba(197,160,89,0.22)",
-            background: "rgba(255,255,255,0.015)",
-          }}
-        >
-          <div className="flex items-center gap-2 mb-4 sm:mb-5">
-            <Users2 className="w-4 h-4 text-[#C5A059]" />
-            <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
-              {locale === "fr" ? "Profil Investisseur" : "Investor Profile Alignment"}
-            </span>
-          </div>
+        <div className="card-premium p-6 sm:p-8 mb-8 sm:mb-10 relative overflow-hidden group">
+          {/* Subtle animated sheen */}
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.03)] to-transparent -translate-x-[200%] group-hover:animate-[shimmer_2s_infinite]" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
-            {sortedAvatarCards.map((card) => {
-              const isMatch = card.type === account.avatarType
-              return isMatch ? (
-                /* ── YOUR PROFILE — gold glow treatment ── */
-                <div
-                  key={card.type}
-                  className="relative overflow-hidden rounded-xl p-4 sm:p-5"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(197,160,89,0.11) 0%, rgba(8,8,8,0.97) 100%)",
-                    border: "2px solid rgba(197,160,89,0.62)",
-                    boxShadow:
-                      "0 0 42px rgba(197,160,89,0.17), 0 0 0 1px rgba(197,160,89,0.08) inset",
-                  }}
-                >
-                  {/* Gold shimmer top edge */}
-                  <div
-                    className="absolute top-0 left-0 right-0 h-px"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, transparent 0%, rgba(197,160,89,0.75) 50%, transparent 100%)",
-                    }}
-                  />
+          <div className="relative z-10">
+            <div className="flex items-center gap-2 mb-6">
+              <Users2 className="w-4 h-4 text-[#C5A059]" />
+              <span className="text-[10px] tracking-[0.25em] uppercase text-[#a3a3a3] font-medium">
+                {locale === "fr" ? "Profil Investisseur" : "Investor Profile Alignment"}
+              </span>
+            </div>
 
-                  {/* YOUR PROFILE badge */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+              {sortedAvatarCards.map((card) => {
+                const isMatch = card.type === account.avatarType
+                return isMatch ? (
+                  /* ── YOUR PROFILE — Main Highlight ── */
                   <div
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-3 sm:mb-4 w-fit"
+                    key={card.type}
+                    className="relative overflow-hidden rounded-xl p-5 sm:p-6 transition-all duration-500"
                     style={{
-                      background: "rgba(197,160,89,0.16)",
-                      border: "1px solid rgba(197,160,89,0.45)",
+                      background: "linear-gradient(145deg, rgba(197,160,89,0.08) 0%, rgba(0,0,0,0.4) 100%)",
+                      border: "1px solid rgba(197,160,89,0.3)",
+                      boxShadow: "0 10px 30px -5px rgba(197,160,89,0.15)",
                     }}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse" />
-                    <span className="text-[8px] font-mono font-bold text-[#C5A059] tracking-[0.22em] uppercase">
-                      {sv.yourProfileBadge}
-                    </span>
-                  </div>
+                    {/* Active Indicator Dot */}
+                    <div className="absolute top-4 right-4 flex items-center gap-1.5">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C5A059] opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C5A059]"></span>
+                      </span>
+                      <span className="text-[8px] font-mono font-bold text-[#C5A059] tracking-[0.2em] uppercase">
+                        {sv.yourProfileBadge}
+                      </span>
+                    </div>
 
-                  <div className="flex items-center gap-3 mb-3">
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                      style={{
-                        background: card.iconBg,
-                        border: "1px solid rgba(197,160,89,0.25)",
-                      }}
-                    >
-                      <card.Icon className="w-5 h-5" style={{ color: card.accentColor }} />
+                    <div className="flex items-center gap-4 mb-4">
+                      <div
+                        className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(197,160,89,0.2)]"
+                        style={{
+                          background: card.iconBg,
+                          border: "1px solid rgba(197,160,89,0.3)",
+                        }}
+                      >
+                        <card.Icon className="w-6 h-6" style={{ color: card.accentColor }} />
+                      </div>
+                      <div>
+                        <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">
+                          {card.name}
+                        </p>
+                        <h3 className="gold-text-gradient font-[var(--font-playfair)] text-lg sm:text-xl font-bold leading-tight">
+                          {card.title}
+                        </h3>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-[9px] tracking-[0.18em] uppercase text-[#a3a3a3]">
-                        {card.name}
-                      </p>
-                      <h3 className="gold-text-gradient font-[var(--font-playfair)] text-[15px] sm:text-base font-semibold leading-tight">
-                        {card.title}
-                      </h3>
-                    </div>
+                    <p className="text-xs text-[#d0d0d0] leading-relaxed font-light">
+                      {card.desc}
+                    </p>
                   </div>
-                  <p className="text-[11px] sm:text-xs text-[#c0c0c0] leading-relaxed">
-                    {card.desc}
-                  </p>
-                </div>
-              ) : (
-                /* ── OTHER PROFILES — dimmed ── */
-                <div
-                  key={card.type}
-                  className="glass-form rounded-xl p-4 sm:p-5 transition-opacity duration-300 hover:opacity-90"
-                  style={{
-                    border: "1px solid rgba(255,255,255,0.05)",
-                    opacity: 0.55,
-                  }}
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                      style={{ background: card.iconBg }}
-                    >
-                      <card.Icon className="w-4 h-4" style={{ color: card.accentColor }} />
+                ) : (
+                  /* ── OTHER PROFILES — Dimmed ── */
+                  <div
+                    key={card.type}
+                    className="glass-form rounded-xl p-5 sm:p-6 transition-all duration-300 hover:opacity-80 opacity-40 grayscale hover:grayscale-0"
+                    style={{ border: "1px solid rgba(255,255,255,0.04)" }}
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div
+                        className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                        style={{ background: "rgba(255,255,255,0.03)" }}
+                      >
+                        <card.Icon className="w-5 h-5 text-[#a3a3a3]" />
+                      </div>
+                      <div>
+                        <p className="text-[9px] tracking-[0.15em] uppercase text-[#666]">
+                          {card.name}
+                        </p>
+                        <h3 className="text-sm font-semibold text-[#a3a3a3] font-[var(--font-playfair)]">
+                          {card.title}
+                        </h3>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-[9px] tracking-[0.18em] uppercase text-[#a3a3a3]">
-                        {card.name}
-                      </p>
-                      <h3 className="text-sm font-semibold text-[#e0e0e0] font-[var(--font-playfair)]">
-                        {card.title}
-                      </h3>
-                    </div>
+                    <p className="text-[10px] text-[#666] leading-relaxed">{card.desc}</p>
                   </div>
-                  <p className="text-[11px] text-[#a3a3a3] leading-relaxed">{card.desc}</p>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
         </div>
       </Reveal>
 
       {/* ═══════════════════════════════════════════════════════
-          HERO METRICS — 2-col on mobile
+          HERO METRICS — CRYSTAL CARDS
           ═══════════════════════════════════════════════════════ */}
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
         {heroMetrics.map((metric, i) => (
           <Reveal key={metric.label} delay={0.1 + 0.07 * i}>
-            <div className="glass-form glass-card-hover p-4 sm:p-6 h-full">
-              <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
-                <metric.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C5A059] shrink-0" />
-                <span className="text-[9px] sm:text-[10px] tracking-[0.1em] sm:tracking-[0.2em] uppercase text-[#a3a3a3] leading-tight">
-                  {metric.termKey ? (
-                    <Explain k={metric.termKey}>{metric.label}</Explain>
-                  ) : (
-                    metric.label
-                  )}
-                </span>
+            <div className="glass-form glass-card-hover p-5 sm:p-7 h-full flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <metric.icon className="w-4 h-4 text-[#C5A059] shrink-0 transition-transform group-hover:scale-110" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] font-medium leading-tight">
+                    {metric.termKey ? (
+                      <Explain k={metric.termKey}>{metric.label}</Explain>
+                    ) : (
+                      metric.label
+                    )}
+                  </span>
+                </div>
+                <div className="gold-text-gradient font-mono text-2xl sm:text-4xl font-bold leading-none tracking-tight mb-2">
+                  {metric.format === "irr" ? (
+                    <>
+                      <AnimatedValue value={baseIrr - 2} format="percent" decimals={0} />
+                      {"% – "}
+                      <AnimatedValue value={baseIrr + 2} format="percent" decimals={0} />%
+                    </>
+                  ) : metric.format === "moic" ? (
+                    <>
+                      <AnimatedValue value={waterfall.lpMOIC} format="multiplier" />x
+                    </>
+                  ) : metric.format === "dollar" ? (
+                    <>
+                      €<AnimatedValue value={metric.numValue} format="currency" />
+                    </>
+                  ) : metric.format === "bearYield" ? (
+                    <>
+                      <AnimatedValue value={bearYield.lpDividendYield - 2} format="percent" decimals={0} />
+                      {"% – "}
+                      <AnimatedValue value={bearYield.lpDividendYield + 3} format="percent" decimals={0} />%
+                    </>
+                  ) : null}
+                </div>
               </div>
-              <p className="gold-text-gradient font-mono text-xl sm:text-3xl font-bold leading-none">
-                {metric.format === "irr" ? (
-                  <>
-                    <AnimatedValue value={baseIrr - 2} format="percent" decimals={0} />
-                    {"% – "}
-                    <AnimatedValue value={baseIrr + 2} format="percent" decimals={0} />%
-                  </>
-                ) : metric.format === "moic" ? (
-                  <>
-                    <AnimatedValue value={waterfall.lpMOIC} format="multiplier" />x
-                  </>
-                ) : metric.format === "dollar" ? (
-                  <>
-                    €<AnimatedValue value={metric.numValue} format="currency" />
-                  </>
-                ) : metric.format === "bearYield" ? (
-                  <>
-                    <AnimatedValue value={bearYield.lpDividendYield - 2} format="percent" decimals={0} />
-                    {"% – "}
-                    <AnimatedValue value={bearYield.lpDividendYield + 3} format="percent" decimals={0} />%
-                  </>
-                ) : null}
-              </p>
-              {"subtitle" in metric && metric.subtitle && (
-                <p className="text-[#a3a3a3] text-[9px] sm:text-xs mt-1">{metric.subtitle}</p>
-              )}
-              {"sublabel" in metric && metric.sublabel && (
-                <p className="text-[#a3a3a3] text-[9px] sm:text-xs mt-1 leading-snug">{metric.sublabel}</p>
-              )}
-              {"badge" in metric && metric.badge && (
-                <span
-                  className="elite-badge mt-2 sm:mt-3"
-                  style={{ borderColor: metric.badgeColor, color: metric.badgeColor }}
-                >
-                  {metric.badge}
-                </span>
-              )}
-              {"highlight" in metric && metric.highlight && (
-                <p className="text-[#10B981] text-[9px] sm:text-xs mt-1.5 font-semibold tracking-wide">
-                  {metric.highlight}
-                </p>
-              )}
+
+              <div>
+                {"subtitle" in metric && metric.subtitle && (
+                  <p className="text-[#a3a3a3] text-[10px] sm:text-xs font-light">{metric.subtitle}</p>
+                )}
+                {"sublabel" in metric && metric.sublabel && (
+                  <p className="text-[#a3a3a3] text-[10px] sm:text-xs font-light leading-snug">{metric.sublabel}</p>
+                )}
+                {"badge" in metric && metric.badge && (
+                  <span
+                    className="elite-badge mt-3 border-opacity-50"
+                    style={{ borderColor: metric.badgeColor, color: metric.badgeColor }}
+                  >
+                    {metric.badge}
+                  </span>
+                )}
+                {"highlight" in metric && metric.highlight && (
+                  <div className="flex items-center gap-1.5 mt-2">
+                    <span className="w-1 h-1 rounded-full bg-[#10B981] animate-pulse" />
+                    <p className="text-[#10B981] text-[10px] sm:text-xs font-semibold tracking-wide uppercase">
+                      {metric.highlight}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </Reveal>
         ))}
@@ -353,40 +343,44 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
 
       {/* ── Probability-Weighted Expected Return ── */}
       <Reveal delay={0.5}>
-        <div className="glass-form p-5 sm:p-6 mb-6 sm:mb-8 border border-[rgba(197,160,89,0.2)]">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10 relative overflow-hidden">
+          {/* Background Gradient Spot */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle_at_top_right,_var(--gold),_transparent_70%)] opacity-10 pointer-events-none" />
+
+          <div className="flex items-center gap-2 mb-6 relative z-10">
             <BarChart3 className="w-4 h-4 text-[#C5A059]" />
-            <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+            <span className="text-[10px] tracking-[0.25em] uppercase text-[#a3a3a3] font-medium">
               {t.common.expectedReturn}
             </span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-            <div className="text-center">
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 relative z-10">
+            <div className="text-center p-4 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)]">
               <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
                 {t.common.weightedMoic}
               </p>
-              <p className="gold-text-gradient font-mono text-3xl sm:text-4xl font-bold">
+              <p className="gold-text-gradient font-mono text-3xl sm:text-5xl font-bold">
                 <AnimatedValue value={weighted.moic} format="multiplier" />x
               </p>
             </div>
-            <div className="text-center">
+            <div className="text-center p-4 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)]">
               <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
                 {t.common.weightedIrr}
               </p>
-              <p className="font-mono text-3xl sm:text-4xl font-bold text-[#10B981]">
+              <p className="font-mono text-3xl sm:text-5xl font-bold text-[#10B981] drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]">
                 <AnimatedValue value={weighted.irr} format="percent" decimals={0} />%
               </p>
             </div>
-            <div className="text-center">
+            <div className="text-center p-4 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)]">
               <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
                 {t.common.weightedProfit}
               </p>
-              <p className="font-mono text-3xl sm:text-4xl font-bold text-[#ffffff]">
+              <p className="font-mono text-3xl sm:text-5xl font-bold text-[#ffffff]">
                 €<AnimatedValue value={weighted.profit} format="currency" />
               </p>
             </div>
           </div>
-          <p className="text-[10px] text-[#a3a3a3] text-center mt-4">
+          <p className="text-[10px] text-[#a3a3a3] text-center mt-6 opacity-60 font-light tracking-wide">
             {t.common.basedOnScenarios}
           </p>
         </div>
@@ -394,16 +388,16 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
 
       {/* ── Alpha Wedge ── */}
       <Reveal delay={0.55}>
-        <div className="glass-form p-5 sm:p-6 mb-6 sm:mb-8">
-          <div className="flex items-center gap-2 mb-1">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+          <div className="flex items-center gap-2 mb-2">
             <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
               <Explain k="alpha-wedge">{t.dashboard.alphaWedgeLabel}</Explain>
             </span>
           </div>
-          <h3 className="font-[var(--font-playfair)] text-base sm:text-lg text-[#ffffff] mb-2">
+          <h3 className="font-[var(--font-playfair)] text-xl sm:text-2xl text-[#ffffff] mb-3">
             {t.dashboard.alphaWedgeTitle}
           </h3>
-          <p className="view-intro mb-5 sm:mb-6">
+          <p className="view-intro mb-8 text-sm text-[#a3a3a3] font-light max-w-2xl">
             {t.dashboard.alphaWedgeIntro
               .split("{gdcPerVilla}")
               .join(`€${macro.gdcPerVilla.toLocaleString()}`)
@@ -413,70 +407,78 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
               .join(`${grossMarginPct}`)}
           </p>
 
-          <div className="flex flex-col lg:flex-row gap-6 items-center">
-            <div className="w-full lg:w-2/3 h-44 sm:h-56 lg:h-64">
+          <div className="flex flex-col lg:flex-row gap-8 items-center">
+            <div className="w-full lg:w-2/3 h-48 sm:h-64 lg:h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={alphaWedgeData}
                   layout="vertical"
-                  margin={{ left: 8, right: 36, top: 8, bottom: 8 }}
+                  margin={{ left: 0, right: 36, top: 0, bottom: 0 }}
                 >
                   <XAxis
                     type="number"
                     tickFormatter={(v) => `€${(v / 1000).toFixed(0)}k`}
                     stroke="#a3a3a3"
-                    tick={{ fontSize: 10, fontFamily: "var(--font-jetbrains)" }}
-                    axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                    tick={{ fontSize: 10, fontFamily: "var(--font-jetbrains)", fill: "#666" }}
+                    axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
                     tickLine={false}
                   />
                   <YAxis
                     type="category"
                     dataKey="name"
                     stroke="#a3a3a3"
-                    tick={{ fontSize: 10 }}
+                    tick={{ fontSize: 11, fill: "#a3a3a3", fontWeight: 500 }}
                     axisLine={false}
                     tickLine={false}
-                    width={115}
+                    width={130}
                   />
                   <Tooltip
                     formatter={(value: number) => `€${value.toLocaleString()}`}
+                    cursor={{ fill: "rgba(255,255,255,0.03)" }}
                     contentStyle={{
-                      background: "rgba(10,10,10,0.9)",
-                      border: "1px solid rgba(255,255,255,0.12)",
+                      background: "#0a0a0a",
+                      border: "1px solid rgba(255,255,255,0.1)",
                       borderRadius: 8,
                       color: "#fff",
                       fontFamily: "var(--font-jetbrains)",
                       fontSize: 12,
+                      boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
                     }}
                   />
                   <Bar
                     dataKey="value"
                     radius={[0, 4, 4, 0]}
-                    barSize={36}
-                    animationDuration={800}
-                    animationEasing="ease-out"
+                    barSize={48}
+                    animationDuration={1000}
+                    animationEasing="cubic-bezier(0.16, 1, 0.3, 1)"
                   >
                     {alphaWedgeData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
+                      <Cell key={`cell-${index}`} fill={entry.fill} strokeWidth={0} />
                     ))}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
-            <div className="flex-1 text-center lg:text-left w-full">
+            <div className="flex-1 text-center lg:text-left w-full lg:pl-8 lg:border-l border-[rgba(255,255,255,0.06)]">
               <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">
                 {t.dashboard.alphaWedgeArbitrageLabel}
               </p>
-              <p className="gold-text-gradient font-mono text-4xl sm:text-5xl font-bold">
+              <p className="gold-text-gradient font-mono text-5xl sm:text-6xl font-bold mb-4">
                 <AnimatedValue value={grossMarginPct} format="integer" />%
               </p>
-              <p className="text-[#a3a3a3] text-xs sm:text-sm mt-3 leading-relaxed max-w-xs mx-auto lg:mx-0">
+              <p className="text-[#a3a3a3] text-xs leading-relaxed max-w-xs mx-auto lg:mx-0 font-light">
                 {t.dashboard.alphaWedgeExplainer}
               </p>
-              <div className="mt-4 flex flex-col gap-1.5">
-                <Explain k="vefa">How VEFA pre-sales recycle capital →</Explain>
-                <Explain k="spv">SPV ring-fence & liability structure →</Explain>
+              <div className="mt-6 flex flex-col gap-2">
+                <Explain k="vefa" className="text-xs text-[#C5A059] hover:text-[#fff] transition-colors flex items-center justify-center lg:justify-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  How VEFA pre-sales recycle capital
+                </Explain>
+                <Explain k="spv" className="text-xs text-[#C5A059] hover:text-[#fff] transition-colors flex items-center justify-center lg:justify-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  SPV ring-fence & liability structure
+                </Explain>
               </div>
             </div>
           </div>
@@ -485,25 +487,25 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
 
       {/* ── Unlevered vs Levered Comparison ── */}
       <Reveal delay={0.6}>
-        <div className="glass-form p-5 sm:p-6 mb-6 sm:mb-8">
-          <h3 className="font-[var(--font-playfair)] text-base sm:text-lg text-[#ffffff] mb-2">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+          <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-3">
             {t.dashboard.comparisonTitle}
           </h3>
-          <p className="text-xs text-[#a3a3a3] mb-5 leading-relaxed">
+          <p className="text-xs text-[#a3a3a3] mb-8 leading-relaxed max-w-3xl">
             {t.dashboard.comparisonSubtitle}{" "}
-            <Explain k="unlevered">What "unlevered" means for your downside →</Explain>
+            <Explain k="unlevered" className="text-[#C5A059] hover:underline">What "unlevered" means for your downside</Explain>
           </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 mb-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
             {/* Conventional */}
-            <div className="glass-form p-4 sm:p-5 border border-[rgba(239,68,68,0.2)]">
-              <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                <span className="w-2 h-2 rounded-full bg-[#EF4444]" />
-                <span className="text-[10px] tracking-[0.2em] uppercase text-[#EF4444] font-bold">
+            <div className="glass-form p-6 border border-[rgba(239,68,68,0.2)] bg-[rgba(239,68,68,0.03)]">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444] shadow-[0_0_10px_#EF4444]" />
+                <span className="text-[11px] tracking-[0.2em] uppercase text-[#EF4444] font-bold">
                   {t.dashboard.conventionalLabel}
                 </span>
               </div>
-              <div className="space-y-2.5">
+              <div className="space-y-3">
                 {[
                   { label: t.dashboard.convBankDebt, value: t.dashboard.convBankDebtVal },
                   { label: t.dashboard.convInterest, value: t.dashboard.convInterestVal },
@@ -513,10 +515,10 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
                 ].map((row) => (
                   <div
                     key={row.label}
-                    className="flex items-start justify-between gap-2 py-1.5 border-b border-[rgba(255,255,255,0.04)]"
+                    className="flex items-start justify-between gap-4 py-2 border-b border-[rgba(239,68,68,0.1)] last:border-0"
                   >
-                    <span className="text-[10px] text-[#a3a3a3] leading-tight">{row.label}</span>
-                    <span className="font-mono text-[10px] font-semibold text-[#EF4444] text-right shrink-0">
+                    <span className="text-[11px] text-[#a3a3a3]">{row.label}</span>
+                    <span className="font-mono text-[11px] font-semibold text-[#EF4444] text-right shrink-0">
                       {row.value}
                     </span>
                   </div>
@@ -525,14 +527,16 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
             </div>
 
             {/* Ambassadeur */}
-            <div className="glass-form p-4 sm:p-5 border border-[rgba(16,185,129,0.3)]">
-              <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-                <span className="text-[10px] tracking-[0.2em] uppercase text-[#10B981] font-bold">
+            <div className="glass-form p-6 border border-[rgba(16,185,129,0.3)] bg-[rgba(16,185,129,0.03)] relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#10B981] opacity-5 blur-[50px] pointer-events-none" />
+
+              <div className="flex items-center gap-3 mb-5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] shadow-[0_0_10px_#10B981]" />
+                <span className="text-[11px] tracking-[0.2em] uppercase text-[#10B981] font-bold">
                   {t.dashboard.ambassadeurLabel}
                 </span>
               </div>
-              <div className="space-y-2.5">
+              <div className="space-y-3 relative z-10">
                 {[
                   { label: t.dashboard.ambBankDebt, value: t.dashboard.ambBankDebtVal },
                   { label: t.dashboard.ambInterest, value: t.dashboard.ambInterestVal },
@@ -542,10 +546,10 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
                 ].map((row) => (
                   <div
                     key={row.label}
-                    className="flex items-start justify-between gap-2 py-1.5 border-b border-[rgba(255,255,255,0.04)]"
+                    className="flex items-start justify-between gap-4 py-2 border-b border-[rgba(16,185,129,0.15)] last:border-0"
                   >
-                    <span className="text-[10px] text-[#a3a3a3] leading-tight">{row.label}</span>
-                    <span className="font-mono text-[10px] font-semibold text-[#10B981] text-right shrink-0">
+                    <span className="text-[11px] text-[#e0e0e0]">{row.label}</span>
+                    <span className="font-mono text-[11px] font-semibold text-[#10B981] text-right shrink-0 shadow-none">
                       {row.value}
                     </span>
                   </div>
@@ -554,8 +558,8 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
             </div>
           </div>
 
-          <div className="text-center">
-            <p className="text-[10px] tracking-[0.2em] uppercase text-[#C5A059]">
+          <div className="text-center mt-6">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[#C5A059] font-medium opacity-80">
               {t.dashboard.comparisonTagline}
             </p>
           </div>
@@ -564,11 +568,13 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
 
       {/* ── Investment Thesis ── */}
       <Reveal delay={0.7}>
-        <div className="glass-form p-5 sm:p-6 border-l-2 border-[#C5A059]">
-          <h3 className="font-[var(--font-playfair)] text-base sm:text-lg text-[#ffffff] mb-3">
+        <div className="glass-form p-6 sm:p-8 border-l-4 border-[#C5A059]">
+          <h3 className="font-[var(--font-playfair)] text-xl sm:text-2xl text-[#ffffff] mb-4">
             {t.dashboard.thesisTitle}
           </h3>
-          <p className="view-intro">{t.dashboard.thesisParagraph}</p>
+          <p className="view-intro text-sm sm:text-base leading-relaxed text-[#d4d4d4]">
+            {t.dashboard.thesisParagraph}
+          </p>
         </div>
       </Reveal>
     </div>

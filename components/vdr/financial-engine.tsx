@@ -156,46 +156,46 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
 
       {/* Capital Call Schedule */}
       <Reveal delay={0.1}>
-        <div className="glass-form p-6 mb-6">
-          <div className="flex items-center gap-2 mb-1">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+          <div className="flex items-center gap-2 mb-2">
             <ArrowDown className="w-4 h-4 text-[#C5A059]" />
             <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
               <Explain k="capital-call">{t.engine.capitalCallLabel}</Explain>
             </span>
           </div>
-          <p className="text-xs text-[#a3a3a3] mb-4 leading-relaxed">
+          <p className="text-xs text-[#a3a3a3] mb-6 leading-relaxed">
             {t.engine.committedCapital}: <span className="text-[#ffffff] font-mono">€{committedCapital.toLocaleString()}</span>
             {" "}| {t.engine.drawnAsNeeded}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {capitalCalls.map((call) => (
-              <div key={call.label} className="glass-form p-4 border-l-2 border-[#C5A059]">
-                <p className="text-xs font-semibold text-[#ffffff] mb-1">
+              <div key={call.label} className="glass-form p-5 border-l-4 border-[#C5A059] bg-[rgba(197,160,89,0.03)]">
+                <p className="text-xs font-bold text-[#ffffff] mb-1 uppercase tracking-wider">
                   {call.label}
                 </p>
                 <p className="text-[10px] text-[#a3a3a3]">
                   {t.engine.call1Months.replace('{start}', String(call.startMonth)).replace('{end}', String(call.endMonth))}
                 </p>
-                <p className="font-mono text-lg text-[#C5A059] font-bold mt-2">
-                  {call.amount}% of GDC
+                <p className="font-mono text-xl text-[#C5A059] font-bold mt-3">
+                  {call.amount}% <span className="text-sm font-normal text-[#a3a3a3]">of GDC</span>
                 </p>
-                <p className="font-mono text-xs text-[#a3a3a3]">
+                <p className="font-mono text-sm text-[#a3a3a3] mt-1">
                   €{Math.round(totalGDC * (call.amount / 100)).toLocaleString()}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="glass-form p-4 mt-4 border-l-2 border-[#10B981]">
-            <p className="text-xs font-semibold text-[#10B981] mb-1">
+          <div className="glass-form p-5 mt-4 sm:mt-6 border-l-4 border-[#10B981] bg-[rgba(16,185,129,0.03)]">
+            <p className="text-xs font-bold text-[#10B981] mb-1 uppercase tracking-wider">
               {t.engine.remainingLabel}
             </p>
             <p className="text-[10px] text-[#a3a3a3]">
               {t.engine.remainingDesc}
             </p>
-            <p className="font-mono text-lg text-[#10B981] font-bold mt-2">
-              €{Math.round(totalGDC * 0.35).toLocaleString()} {t.engine.offset}
+            <p className="font-mono text-xl text-[#10B981] font-bold mt-3">
+              €{Math.round(totalGDC * 0.35).toLocaleString()} <span className="text-sm font-normal text-[#a3a3a3]">{t.engine.offset}</span>
             </p>
           </div>
         </div>
@@ -203,7 +203,7 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
 
       {/* Toggle */}
       <Reveal delay={0.15}>
-        <div className="glass-form p-4 mb-6 flex items-center justify-between">
+        <div className="glass-form p-5 mb-8 sm:mb-10 flex items-center justify-between">
           <div>
             <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">
               <Explain k="vefa">{t.engine.vefaOffsetLabel}</Explain>
@@ -214,51 +214,51 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
           </div>
           <button
             onClick={() => setVefaOffset(!vefaOffset)}
-            className="flex items-center gap-2 transition-colors duration-200"
+            className="flex items-center gap-3 transition-colors duration-200 group"
           >
-            {vefaOffset ? (
-              <ToggleRight className="w-10 h-10 text-[#10B981]" />
-            ) : (
-              <ToggleLeft className="w-10 h-10 text-[#a3a3a3]" />
-            )}
             <span
-              className={`text-xs font-semibold ${vefaOffset ? "text-[#10B981]" : "text-[#a3a3a3]"}`}
+              className={`text-[10px] tracking-wider uppercase font-bold transition-colors ${vefaOffset ? "text-[#10B981]" : "text-[#a3a3a3] group-hover:text-white"}`}
             >
               {vefaOffset ? t.engine.on : t.engine.off}
             </span>
+            {vefaOffset ? (
+              <ToggleRight className="w-10 h-10 text-[#10B981] drop-shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
+            ) : (
+              <ToggleLeft className="w-10 h-10 text-[#a3a3a3] group-hover:text-white transition-colors" />
+            )}
           </button>
         </div>
       </Reveal>
 
       {/* Key Metrics */}
       <Reveal delay={0.2}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="glass-form p-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
+          <div className="glass-form p-6 text-center md:text-left">
             <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
               <Explain k="peak-equity">{t.engine.peakEquityDrawn}</Explain>
             </span>
-            <p className="gold-text-gradient font-mono text-2xl font-bold mt-1">
+            <p className="gold-text-gradient font-mono text-3xl font-bold mt-2">
               €{peakEquity.toLocaleString()}
             </p>
           </div>
-          <div className="glass-form p-4">
+          <div className="glass-form p-6 text-center md:text-left">
             <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
               {t.engine.committedCapitalLabel}
             </span>
-            <p className="font-mono text-2xl font-bold text-[#ffffff] mt-1">
+            <p className="font-mono text-3xl font-bold text-[#ffffff] mt-2">
               €{committedCapital.toLocaleString()}
             </p>
           </div>
-          <div className="glass-form p-4">
+          <div className="glass-form p-6 text-center md:text-left">
             <span className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
               {t.engine.estimatedIrr}
             </span>
-            <p className={`font-mono text-2xl font-bold mt-1 ${vefaOffset ? "text-[#10B981]" : "text-[#C5A059]"}`}>
+            <p className={`font-mono text-3xl font-bold mt-2 ${vefaOffset ? "text-[#10B981]" : "text-[#C5A059]"}`}>
               {irrRange}
             </p>
             {vefaOffset && (
-              <p className="text-[10px] text-[#10B981] mt-0.5">
-                <Zap className="w-3 h-3 inline" /> {t.engine.leveragedTier}
+              <p className="text-[10px] text-[#10B981] mt-1 flex items-center justify-center md:justify-start gap-1">
+                <Zap className="w-3 h-3" /> {t.engine.leveragedTier}
               </p>
             )}
           </div>
@@ -267,36 +267,38 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
 
       {/* Chart */}
       <Reveal delay={0.3}>
-        <div className="glass-form p-6 mb-6">
-          <h3 className="font-[var(--font-playfair)] text-lg text-[#ffffff] mb-4">
+        <div className="glass-form p-6 sm:p-8 mb-8 sm:mb-10">
+          <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-6">
             {t.engine.chartTitle.replace('{months}', String(macro.projectMonths))}
           </h3>
-          <div className="h-56 md:h-72 lg:h-80">
+          <div className="h-64 sm:h-80 md:h-96">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={chartData} margin={{ left: 10, right: 10, top: 10, bottom: 10 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
                 <XAxis
                   dataKey="month"
-                  stroke="#a3a3a3"
-                  tick={{ fontSize: 10, fontFamily: "var(--font-jetbrains)" }}
+                  stroke="#666"
+                  tick={{ fontSize: 10, fontFamily: "var(--font-jetbrains)", fill: "#666" }}
                   tickLine={false}
-                  label={{ value: t.engine.monthLabel, position: "insideBottom", offset: -5, fill: "#a3a3a3", fontSize: 10 }}
+                  axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
+                  label={{ value: t.engine.monthLabel, position: "insideBottom", offset: -5, fill: "#666", fontSize: 10 }}
                 />
                 <YAxis
-                  stroke="#a3a3a3"
-                  tick={{ fontSize: 10, fontFamily: "var(--font-jetbrains)" }}
+                  stroke="#666"
+                  tick={{ fontSize: 10, fontFamily: "var(--font-jetbrains)", fill: "#666" }}
                   tickFormatter={(v) => `€${(v / 1000000).toFixed(1)}M`}
                   tickLine={false}
-                  axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                  axisLine={false}
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "rgba(10,10,10,0.95)",
-                    border: "1px solid rgba(255,255,255,0.12)",
+                    background: "rgba(8,8,8,0.95)",
+                    border: "1px solid rgba(255,255,255,0.08)",
                     borderRadius: 8,
                     color: "#fff",
                     fontFamily: "var(--font-jetbrains)",
                     fontSize: 11,
+                    boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
                   }}
                   formatter={(value: number, name: string) => {
                     const labels: Record<string, string> = {
@@ -310,7 +312,7 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
                   labelFormatter={(label) => `${t.engine.monthLabel} ${label}`}
                 />
                 <Legend
-                  wrapperStyle={{ fontSize: 10, color: "#a3a3a3" }}
+                  wrapperStyle={{ paddingTop: "20px", fontSize: 11, color: "#a3a3a3", fontFamily: "var(--font-inter)" }}
                   formatter={(value) => {
                     const labels: Record<string, string> = {
                       cumulativeOutflow: t.engine.istisnaOutflow,
@@ -320,25 +322,39 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
                     return labels[value] || value
                   }}
                 />
-                <ReferenceLine y={0} stroke="rgba(255,255,255,0.2)" />
+                <ReferenceLine y={0} stroke="rgba(255,255,255,0.15)" />
                 <Area
                   type="monotone"
                   dataKey="cumulativeOutflow"
-                  fill="rgba(239,68,68,0.12)"
+                  fill="url(#outflowGradient)"
                   stroke="#EF4444"
                   strokeWidth={2}
+                  animationDuration={1000}
+                  animationEasing="cubic-bezier(0.16, 1, 0.3, 1)"
+                />
+                <defs>
+                  <linearGradient id="outflowGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#EF4444" stopOpacity={0.2}/>
+                    <stop offset="95%" stopColor="#EF4444" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <Bar
+                  dataKey="vefaInflow"
+                  fill="#10B981"
+                  radius={[2, 2, 0, 0]}
+                  barSize={8}
                   animationDuration={800}
                   animationEasing="ease-out"
                 />
-                <Bar dataKey="vefaInflow" fill="#10B981" radius={[3, 3, 0, 0]} barSize={10} animationDuration={800} animationEasing="ease-out" />
                 <Line
                   type="monotone"
                   dataKey="netBalance"
                   stroke="#C5A059"
-                  strokeWidth={2.5}
+                  strokeWidth={3}
                   dot={false}
-                  animationDuration={800}
-                  animationEasing="ease-out"
+                  animationDuration={1200}
+                  animationEasing="cubic-bezier(0.16, 1, 0.3, 1)"
+                  filter="drop-shadow(0 0 6px rgba(197,160,89,0.3))"
                 />
               </ComposedChart>
             </ResponsiveContainer>
@@ -348,65 +364,68 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
 
       {/* VEFA Milestones Table */}
       <Reveal delay={0.4}>
-        <div className="glass-form p-6">
-          <h3 className="font-[var(--font-playfair)] text-lg text-[#ffffff] mb-4">
+        <div className="glass-form p-6 sm:p-8">
+          <h3 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mb-4">
             <Explain k="vefa">{t.engine.vefaTableTitle}</Explain>
           </h3>
-          <p className="text-xs text-[#a3a3a3] mb-3 leading-relaxed">
+          <p className="text-xs text-[#a3a3a3] mb-4 leading-relaxed max-w-3xl">
             {t.engine.vefaTableDesc}
           </p>
-          <p className="text-[10px] text-[#a3a3a3] mb-4">
-            <Explain k="notary-escrow">Buyer deposits held in Notary Escrow →</Explain>
-            {" · "}
-            <Explain k="istisna">Istisna construction contract structure →</Explain>
+          <p className="text-[10px] text-[#a3a3a3] mb-6 flex flex-wrap gap-2">
+            <Explain k="notary-escrow" className="px-2 py-1 rounded bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] hover:border-[#C5A059] transition-colors">
+              Buyer deposits held in Notary Escrow →
+            </Explain>
+            <Explain k="istisna" className="px-2 py-1 rounded bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] hover:border-[#C5A059] transition-colors">
+              Istisna construction contract structure →
+            </Explain>
           </p>
           <div className="overflow-x-auto -mx-2 px-2">
-            <table className="w-full min-w-[500px] text-left">
+            <table className="w-full min-w-[500px] text-left border-collapse">
               <thead>
                 <tr className="border-b border-[rgba(255,255,255,0.08)]">
-                  <th className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] py-3 px-3">
+                  <th className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] py-4 px-4 font-medium">
                     {t.engine.thMonth}
                   </th>
-                  <th className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] py-3 px-3">
+                  <th className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] py-4 px-4 font-medium">
                     {t.engine.thMilestone}
                   </th>
-                  <th className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] py-3 px-3 text-right">
+                  <th className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] py-4 px-4 text-right font-medium">
                     {t.engine.thPctGdv}
                   </th>
-                  <th className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] py-3 px-3 text-right">
+                  <th className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3] py-4 px-4 text-right font-medium">
                     {t.engine.thAmount}
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {vefaMilestoneMonths.map((ms) => (
+                {vefaMilestoneMonths.map((ms, idx) => (
                   <tr
                     key={ms.label}
-                    className="border-b border-[rgba(255,255,255,0.04)] hover:bg-[rgba(197,160,89,0.04)] transition-colors"
+                    className="border-b border-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.02)] transition-colors group"
                   >
-                    <td className="font-mono text-sm text-[#ffffff] py-3 px-3">
+                    <td className="font-mono text-sm text-[#ffffff] py-4 px-4 opacity-70 group-hover:opacity-100 transition-opacity">
                       {ms.month}
                     </td>
-                    <td className="text-sm text-[#ffffff] py-3 px-3">
+                    <td className="text-sm text-[#ffffff] py-4 px-4 font-medium">
                       {ms.label}
                     </td>
-                    <td className="font-mono text-sm text-[#10B981] py-3 px-3 text-right">
+                    <td className="font-mono text-sm text-[#10B981] py-4 px-4 text-right">
                       {ms.pct}%
                     </td>
-                    <td className="font-mono text-sm text-[#ffffff] py-3 px-3 text-right">
+                    <td className="font-mono text-sm text-[#e0e0e0] py-4 px-4 text-right">
                       €{Math.round((ms.pct / 100) * totalGDV).toLocaleString()}
                     </td>
                   </tr>
                 ))}
-                <tr className="border-t border-[rgba(255,255,255,0.12)]">
-                  <td className="py-3 px-3" />
-                  <td className="text-sm font-semibold text-[#C5A059] py-3 px-3">
+                <tr className="border-t border-[rgba(255,255,255,0.1)] bg-[rgba(197,160,89,0.02)]">
+                  <td className="py-4 px-4" />
+                  <td className="text-sm font-bold text-[#C5A059] py-4 px-4 uppercase tracking-wider text-[11px]">
                     {t.engine.totalVefaRevenue}
                   </td>
-                  <td className="font-mono text-sm font-bold text-[#10B981] py-3 px-3 text-right">
+                  <td className="font-mono text-sm font-bold text-[#10B981] py-4 px-4 text-right">
                     100%
                   </td>
-                  <td className="font-mono text-sm font-bold text-[#C5A059] py-3 px-3 text-right">
+                  <td className="font-mono text-sm font-bold text-[#C5A059] py-4 px-4 text-right">
                     €{totalGDV.toLocaleString()}
                   </td>
                 </tr>
