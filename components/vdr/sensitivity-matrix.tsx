@@ -513,7 +513,7 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
                 className="text-xs font-bold px-4 py-2 rounded-lg bg-[rgba(239,68,68,0.15)] text-[#EF4444] border border-[#EF4444] hover:bg-[rgba(239,68,68,0.25)] transition-all uppercase tracking-wider"
               >
                 <AlertTriangle className="w-3 h-3 inline mr-2" />
-                Stress Test: Solve 1.0x
+                {sv.stressTest}
               </button>
               <button
                 onClick={() => setShowCustom(!showCustom)}

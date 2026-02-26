@@ -24,12 +24,12 @@ export function CapitalStackProgress({ t, userTicket = 0 }: CapitalStackProgress
           <div className="flex items-center gap-2">
             <Users2 className="w-3 h-3 text-[#10B981]" />
             <span>
-              {t.common?.softCircled || "Soft-Circled"}: €{(softCircled / 1000000).toFixed(1)}M
+              {t.common.softCircled}: €{(softCircled / 1000000).toFixed(1)}M
               {userTicket > 0 && <span className="text-[#C5A059] ml-1"> + You</span>}
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="hidden sm:inline">{t.common?.allocationRemaining || "Allocation Remaining"}:</span>
+            <span className="hidden sm:inline">{t.common.allocationRemaining}:</span>
             <span className={remaining === 0 ? "text-[#EF4444]" : "text-[#C5A059]"}>
               €{(remaining / 1000000).toFixed(2)}M
             </span>
@@ -52,7 +52,7 @@ export function CapitalStackProgress({ t, userTicket = 0 }: CapitalStackProgress
              className="absolute top-full left-0 w-full bg-[#EF4444] text-white text-center py-1 text-[10px] uppercase tracking-widest font-bold"
            >
              <Lock className="w-3 h-3 inline mr-2" />
-             {t.common?.dealClosed || "Allocation Maximum Reached. Deal Closed to New LPs."}
+             {t.common.dealClosed}
            </motion.div>
         )}
       </div>

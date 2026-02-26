@@ -133,10 +133,10 @@ export function Fortress({ macro, t, locale }: FortressProps) {
             <div className="flex-1 w-full">
               <div className="flex items-center justify-between mb-2">
                 <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
-                  Personal Utilization
+                  {fv.personalUtilization}
                 </p>
                 <p className="font-mono text-sm text-[#C5A059]">
-                  {personalWeeks} Weeks
+                  {personalWeeks} {fv.weeks}
                 </p>
               </div>
               <input
@@ -149,19 +149,19 @@ export function Fortress({ macro, t, locale }: FortressProps) {
                 className="w-full"
               />
               <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-1">
-                <span>0 Weeks</span>
-                <span>4 Weeks</span>
+                <span>0 {fv.weeks}</span>
+                <span>4 {fv.weeks}</span>
               </div>
             </div>
             <div className="flex-1 w-full glass-form p-4 border border-[rgba(197,160,89,0.2)]">
               <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">
-                Total Lifestyle Yield
+                {fv.totalLifestyleYield}
               </p>
               <p className="gold-text-gradient font-mono text-2xl font-bold">
                 €{lifestyleValue.toLocaleString()}
               </p>
               <p className="text-[9px] text-[#a3a3a3] mt-1">
-                Value of comparable 5-star stay
+                {fv.valueComparable}
               </p>
             </div>
           </div>

@@ -160,11 +160,11 @@ export function Repatriation({ macro, t, locale }: RepatriationProps) {
           <div className="flex items-center gap-2 mb-4">
             <Receipt className="w-4 h-4 text-[#C5A059]" />
             <h3 className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
-              Euro-Pegged Capital Liquidity
+              {rv.euroPeggedLiquidity}
             </h3>
           </div>
           <p className="text-[10px] text-[#a3a3a3] mb-4">
-             Your money enters in Euros and leaves in Euros. Period.
+             {rv.moneyEntersLeaves}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">

@@ -212,7 +212,7 @@ export function Syndication({ macro, t, locale, onTicketChange }: SyndicationPro
                 <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.05)] animate-in fade-in zoom-in duration-300">
                   <Star className="w-3 h-3 text-[#C0C0C0]" />
                   <span className="text-[9px] font-mono font-bold text-[#C0C0C0] tracking-widest uppercase">
-                    Major Principal
+                    {sv.majorPrincipalBadge}
                   </span>
                 </div>
               )}
@@ -220,7 +220,7 @@ export function Syndication({ macro, t, locale, onTicketChange }: SyndicationPro
                 <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#C5A059] bg-[rgba(197,160,89,0.1)] animate-in fade-in zoom-in duration-500">
                   <Crown className="w-3 h-3 text-[#C5A059]" />
                   <span className="text-[9px] font-mono font-bold text-[#C5A059] tracking-widest uppercase">
-                    Single Family Office
+                    {sv.singleFamilyOfficeBadge}
                   </span>
                 </div>
               )}

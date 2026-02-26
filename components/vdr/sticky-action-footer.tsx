@@ -39,21 +39,21 @@ export function StickyActionFooter({ irr, moic, lpProfit, t }: StickyActionFoote
             {/* Project Metrics */}
             <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
               <div className="flex items-center gap-2">
-                <span className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3]">Proj. IRR</span>
+                <span className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3]">{t.common.projIrr}</span>
                 <span className="font-mono text-xl font-bold text-[#10B981]">
                   <AnimatedValue value={irr} format="percent" decimals={1} />%
                 </span>
               </div>
 
               <div className="hidden sm:flex items-center gap-2 border-l border-[rgba(255,255,255,0.1)] pl-4">
-                <span className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3]">MOIC</span>
+                <span className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3]">{t.glossary.moic.term}</span>
                 <span className="font-mono text-xl font-bold gold-text-gradient">
                   <AnimatedValue value={moic} format="multiplier" />x
                 </span>
               </div>
 
               <div className="hidden md:flex items-center gap-2 border-l border-[rgba(255,255,255,0.1)] pl-4">
-                <span className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3]">Base Profit</span>
+                <span className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3]">{t.common.baseProfit}</span>
                 <span className="font-mono text-xl font-bold text-[#ffffff]">
                   €<AnimatedValue value={lpProfit} format="currency" />
                 </span>
@@ -76,12 +76,12 @@ export function StickyActionFooter({ irr, moic, lpProfit, t }: StickyActionFoote
             {locked ? (
               <>
                 <Lock className="w-4 h-4" />
-                <span>Allocation Soft-Circled</span>
+                <span>{t.common.allocationSoftCircled}</span>
               </>
             ) : (
               <>
                 <Zap className="w-4 h-4 fill-current" />
-                <span>Lock Allocation (Soft-Circle)</span>
+                <span>{t.common.lockAllocation}</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
               </>
             )}
