@@ -18,7 +18,7 @@ import {
   Line,
   CartesianGrid,
 } from "recharts"
-import { Shield, Building2, TrendingUp, Lock } from "lucide-react"
+import { Shield, Building2, TrendingUp, Lock, Sun } from "lucide-react"
 import { Explain } from "./elite-explainer"
 
 /**
@@ -43,9 +43,11 @@ export function Fortress({ macro, t, locale }: FortressProps) {
   // ADR €350–500/night; sustainable annual occupancy 60–70% for luxury STR
   const [adr, setAdr] = useState(400)
   const [occupancy, setOccupancy] = useState(65)
+  const [personalWeeks, setPersonalWeeks] = useState(2)
 
   const totalGDC = macro.totalVillas * macro.gdcPerVilla
   const totalGDV = macro.totalVillas * macro.avgVillaGDV
+  const lifestyleValue = personalWeeks * 7 * 1500 // €1,500/night comparable value
 
   const hospitality = useMemo(() => {
     const assetBasis = totalGDC
@@ -107,16 +109,67 @@ export function Fortress({ macro, t, locale }: FortressProps) {
 
       {/* Zero Debt Badge */}
       <Reveal delay={0.05}>
-        <div className="flex justify-center mb-6">
-          <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase px-4 py-2 rounded-full border border-[#C5A059] text-[#C5A059]">
+        <div className="flex flex-col items-center justify-center mb-6">
+          <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase px-4 py-2 rounded-full border border-[#C5A059] text-[#C5A059] mb-2">
             <Lock className="w-3 h-3" />
             {fv.zeroDebtBadge}
           </span>
+          <p className="text-[10px] text-[#a3a3a3] uppercase tracking-widest font-semibold">
+            0% Foreclosure Risk
+          </p>
+        </div>
+      </Reveal>
+
+      {/* Lifestyle Arbitrage (Shadow Yield) */}
+      <Reveal delay={0.1}>
+        <div className="glass-form p-6 mb-6 border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]">
+          <div className="flex items-center gap-2 mb-4">
+            <Sun className="w-4 h-4 text-[#C5A059]" />
+            <h3 className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+              Lifestyle Arbitrage
+            </h3>
+          </div>
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="flex-1 w-full">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+                  Personal Utilization
+                </p>
+                <p className="font-mono text-sm text-[#C5A059]">
+                  {personalWeeks} Weeks
+                </p>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={4}
+                step={1}
+                value={personalWeeks}
+                onChange={(e) => setPersonalWeeks(Number(e.target.value))}
+                className="w-full"
+              />
+              <div className="flex justify-between text-[10px] text-[#a3a3a3] font-mono mt-1">
+                <span>0 Weeks</span>
+                <span>4 Weeks</span>
+              </div>
+            </div>
+            <div className="flex-1 w-full glass-form p-4 border border-[rgba(197,160,89,0.2)]">
+              <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-1">
+                Total Lifestyle Yield
+              </p>
+              <p className="gold-text-gradient font-mono text-2xl font-bold">
+                €{lifestyleValue.toLocaleString()}
+              </p>
+              <p className="text-[9px] text-[#a3a3a3] mt-1">
+                Value of comparable 5-star stay
+              </p>
+            </div>
+          </div>
         </div>
       </Reveal>
 
       {/* Case Toggle */}
-      <Reveal delay={0.1}>
+      <Reveal delay={0.15}>
         <div className="glass-form p-4 mb-6">
           <div className="flex items-center gap-4">
             <button

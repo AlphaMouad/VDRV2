@@ -16,6 +16,9 @@ import {
   CheckCircle2,
   ShieldCheck,
   Globe,
+  Lock,
+  Building2,
+  ArrowDown,
 } from "lucide-react"
 import { Explain } from "./elite-explainer"
 
@@ -157,9 +160,12 @@ export function Repatriation({ macro, t, locale }: RepatriationProps) {
           <div className="flex items-center gap-2 mb-4">
             <Receipt className="w-4 h-4 text-[#C5A059]" />
             <h3 className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
-              <Explain k="tpi">{rv.tpiEngineLabel}</Explain>
+              Euro-Pegged Capital Liquidity
             </h3>
           </div>
+          <p className="text-[10px] text-[#a3a3a3] mb-4">
+             Your money enters in Euros and leaves in Euros. Period.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <div className="glass-form p-4">
@@ -227,6 +233,37 @@ export function Repatriation({ macro, t, locale }: RepatriationProps) {
               </div>
             ))}
           </div>
+        </div>
+      </Reveal>
+
+      {/* Visual Flowchart */}
+      <Reveal delay={0.15}>
+        <div className="glass-form p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center">
+           <div className="flex flex-col items-center gap-2">
+             <div className="w-12 h-12 rounded-full bg-[rgba(16,185,129,0.1)] flex items-center justify-center border border-[#10B981] text-[#10B981] font-bold">€ In</div>
+             <p className="text-[10px] text-[#a3a3a3] uppercase tracking-wider">Capital Entry</p>
+           </div>
+           <ArrowRight className="w-6 h-6 text-[#C5A059] hidden md:block" />
+           <ArrowDown className="w-6 h-6 text-[#C5A059] md:hidden" />
+
+           <div className="flex flex-col items-center gap-2">
+             <div className="w-12 h-12 rounded-full bg-[rgba(197,160,89,0.1)] flex items-center justify-center border border-[#C5A059] text-[#C5A059] font-bold"><Lock className="w-5 h-5"/></div>
+             <p className="text-[10px] text-[#a3a3a3] uppercase tracking-wider">Escrow</p>
+           </div>
+           <ArrowRight className="w-6 h-6 text-[#C5A059] hidden md:block" />
+           <ArrowDown className="w-6 h-6 text-[#C5A059] md:hidden" />
+
+           <div className="flex flex-col items-center gap-2">
+             <div className="w-12 h-12 rounded-full bg-[rgba(197,160,89,0.1)] flex items-center justify-center border border-[#C5A059] text-[#C5A059] font-bold"><Building2 className="w-5 h-5"/></div>
+             <p className="text-[10px] text-[#a3a3a3] uppercase tracking-wider">Value Creation</p>
+           </div>
+           <ArrowRight className="w-6 h-6 text-[#C5A059] hidden md:block" />
+           <ArrowDown className="w-6 h-6 text-[#C5A059] md:hidden" />
+
+           <div className="flex flex-col items-center gap-2">
+             <div className="w-12 h-12 rounded-full bg-[rgba(16,185,129,0.1)] flex items-center justify-center border border-[#10B981] text-[#10B981] font-bold">€ Out</div>
+             <p className="text-[10px] text-[#a3a3a3] uppercase tracking-wider">Capital Exit</p>
+           </div>
         </div>
       </Reveal>
 

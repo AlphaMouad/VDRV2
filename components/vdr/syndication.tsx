@@ -31,6 +31,7 @@ import {
   ArrowUp,
   Zap,
   Crown,
+  Star,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -83,7 +84,8 @@ export function Syndication({ macro, t, locale }: SyndicationProps) {
   const [ticket, setTicket] = useState(1_000_000)
   const clampedTicket = Math.min(sliderMax, Math.max(sliderMin, ticket))
 
-  const isSoleLP = clampedTicket >= lpCommitment * 0.9999
+  const isSoleLP = clampedTicket >= lpCommitment * 0.99
+  const isMajorPrincipal = clampedTicket >= 500000 && !isSoleLP
 
   // Presets: Min, €1M (institutional standard), 25%, Full Deal
   const presets = [
@@ -184,7 +186,14 @@ export function Syndication({ macro, t, locale }: SyndicationProps) {
 
       {/* ── Commitment Calculator ── */}
       <Reveal delay={0.1}>
-        <div className="glass-form p-6 mb-8 border border-[rgba(197,160,89,0.15)]">
+        <div
+          className={cn(
+            "glass-form p-6 mb-8 border transition-all duration-500",
+            isSoleLP
+              ? "border-[#C5A059] bg-[rgba(10,10,10,0.8)] shadow-[0_0_50px_rgba(197,160,89,0.15)]"
+              : "border-[rgba(197,160,89,0.15)]"
+          )}
+        >
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <Calculator className="w-4 h-4 text-[#C5A059]" />
@@ -192,14 +201,25 @@ export function Syndication({ macro, t, locale }: SyndicationProps) {
                 {sv.calculatorTitle}
               </h2>
             </div>
-            {isSoleLP && (
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#C5A059] bg-[rgba(197,160,89,0.1)]">
-                <Crown className="w-3 h-3 text-[#C5A059]" />
-                <span className="text-[9px] font-mono font-bold text-[#C5A059] tracking-widest">
-                  {sv.soleLpBadge}
-                </span>
-              </div>
-            )}
+
+            <div className="flex gap-2">
+              {isMajorPrincipal && (
+                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.05)] animate-in fade-in zoom-in duration-300">
+                  <Star className="w-3 h-3 text-[#C0C0C0]" />
+                  <span className="text-[9px] font-mono font-bold text-[#C0C0C0] tracking-widest uppercase">
+                    Major Principal
+                  </span>
+                </div>
+              )}
+              {isSoleLP && (
+                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#C5A059] bg-[rgba(197,160,89,0.1)] animate-in fade-in zoom-in duration-500">
+                  <Crown className="w-3 h-3 text-[#C5A059]" />
+                  <span className="text-[9px] font-mono font-bold text-[#C5A059] tracking-widest uppercase">
+                    Single Family Office
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
           <p className="text-xs text-[#a3a3a3] mb-6 leading-relaxed">{sv.calculatorDesc}</p>
 

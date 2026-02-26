@@ -152,6 +152,29 @@ export function MoicWaterfall({ macro, t, locale }: MoicWaterfallProps) {
         </div>
       </Reveal>
 
+      {/* Alignment Highlights (Neon Signs) */}
+      <Reveal delay={0.12}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="glass-form p-6 border-l-4 border-[#10B981] bg-[rgba(16,185,129,0.05)]">
+             <div className="flex items-center gap-3 mb-2">
+               <ShieldCheck className="w-6 h-6 text-[#10B981]" />
+               <h3 className="text-sm font-bold text-[#ffffff] uppercase tracking-wider">Tier 1 Priority</h3>
+             </div>
+             <p className="text-xl font-mono font-bold text-[#10B981] mb-1">100% Capital Return</p>
+             <p className="text-xs text-[#a3a3a3]">Before any GP Profit Participation</p>
+          </div>
+
+          <div className="glass-form p-6 border-l-4 border-[#C5A059] bg-[rgba(197,160,89,0.05)]">
+             <div className="flex items-center gap-3 mb-2">
+               <AlertTriangle className="w-6 h-6 text-[#C5A059]" />
+               <h3 className="text-sm font-bold text-[#ffffff] uppercase tracking-wider">Downside Protection</h3>
+             </div>
+             <p className="text-xl font-mono font-bold text-[#C5A059] mb-1">90/10 Loss Provision</p>
+             <p className="text-xs text-[#a3a3a3]">GP absorbs first 10% of losses pari-passu</p>
+          </div>
+        </div>
+      </Reveal>
+
       {/* Tier Explanation Cards */}
       <Reveal delay={0.15}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">

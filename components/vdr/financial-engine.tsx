@@ -118,6 +118,7 @@ function generateChartData(
       vefaInflow: Math.round(monthlyVEFA[m]),
       cumulativeOutflow: -Math.round(cumulativeOutflow),
       netBalance: Math.round(netPosition),
+      traditionalBalance: -Math.round(cumulativeOutflow),
     })
   }
 
@@ -316,6 +317,7 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
                       cumulativeOutflow: t.engine.istisnaOutflow,
                       vefaInflow: t.engine.vefaRetailPayments,
                       netBalance: t.engine.netSpvBalance,
+                      traditionalBalance: "Traditional Bank J-Curve",
                     }
                     return labels[value] || value
                   }}
@@ -331,6 +333,17 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
                   animationEasing="ease-out"
                 />
                 <Bar dataKey="vefaInflow" fill="#10B981" radius={[3, 3, 0, 0]} barSize={10} animationDuration={800} animationEasing="ease-out" />
+                <Line
+                  type="monotone"
+                  dataKey="traditionalBalance"
+                  stroke="#EF4444"
+                  strokeDasharray="5 5"
+                  strokeWidth={2}
+                  dot={false}
+                  name="Traditional Bank J-Curve"
+                  animationDuration={800}
+                  animationEasing="ease-out"
+                />
                 <Line
                   type="monotone"
                   dataKey="netBalance"
