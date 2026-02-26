@@ -20,6 +20,7 @@ import {
 } from "recharts"
 import { Shield, Building2, TrendingUp, Lock, Sun } from "lucide-react"
 import { Explain } from "./elite-explainer"
+import { EliteTooltip } from "./chart-tooltip"
 
 /**
  * The Fortress Strategy (Source Doc):
@@ -410,15 +411,9 @@ export function Fortress({ macro, t, locale }: FortressProps) {
                       axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
                     />
                     <Tooltip
-                      contentStyle={{
-                        background: "rgba(10,10,10,0.95)",
-                        border: "1px solid rgba(255,255,255,0.12)",
-                        borderRadius: 8,
-                        color: "#fff",
-                        fontFamily: "var(--font-jetbrains)",
-                        fontSize: 11,
-                      }}
-                      formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`]}
+                      content={<EliteTooltip />}
+                      cursor={{ fill: 'rgba(197, 160, 89, 0.05)' }}
+                      formatter={(value: number) => [`€${Math.round(value).toLocaleString()}`, ""]}
                     />
                     <Bar dataKey="value" radius={[4, 4, 0, 0]} barSize={60} animationDuration={800} animationEasing="ease-out">
                       {yieldBreakdownData.map((entry, index) => (
@@ -472,21 +467,34 @@ export function Fortress({ macro, t, locale }: FortressProps) {
                       orientation="right"
                     />
                     <Tooltip
-                      contentStyle={{
-                        background: "rgba(10,10,10,0.95)",
-                        border: "1px solid rgba(255,255,255,0.12)",
-                        borderRadius: 8,
-                        color: "#fff",
-                        fontFamily: "var(--font-jetbrains)",
-                        fontSize: 11,
-                      }}
+                      content={<EliteTooltip />}
                       formatter={(value: number, name: string) => {
                         if (name === "noi") return [`€${value.toLocaleString()}`, fv.noiLegend]
                         return [`${value}%`, fv.yieldLegend]
                       }}
                     />
-                    <Line yAxisId="noi" type="monotone" dataKey="noi" stroke="#10B981" strokeWidth={2} dot={{ r: 3, fill: "#10B981" }} animationDuration={800} animationEasing="ease-out" />
-                    <Line yAxisId="yield" type="monotone" dataKey="yield" stroke="#C5A059" strokeWidth={2} dot={{ r: 3, fill: "#C5A059" }} animationDuration={800} animationEasing="ease-out" />
+                    <Line
+                      yAxisId="noi"
+                      type="monotone"
+                      dataKey="noi"
+                      stroke="#10B981"
+                      strokeWidth={2}
+                      dot={{ r: 3, fill: "#10B981" }}
+                      activeDot={{ r: 6, fill: '#10B981', stroke: '#000', strokeWidth: 2 }}
+                      animationDuration={800}
+                      animationEasing="ease-out"
+                    />
+                    <Line
+                      yAxisId="yield"
+                      type="monotone"
+                      dataKey="yield"
+                      stroke="#C5A059"
+                      strokeWidth={2}
+                      dot={{ r: 3, fill: "#C5A059" }}
+                      activeDot={{ r: 6, fill: '#C5A059', stroke: '#000', strokeWidth: 2 }}
+                      animationDuration={800}
+                      animationEasing="ease-out"
+                    />
                   </LineChart>
                 </ResponsiveContainer>
               </div>

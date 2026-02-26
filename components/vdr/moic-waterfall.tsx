@@ -16,6 +16,7 @@ import {
 } from "recharts"
 import { Sparkles, AlertTriangle, ShieldCheck } from "lucide-react"
 import { Explain } from "./elite-explainer"
+import { EliteTooltip } from "./chart-tooltip"
 import type { Dictionary } from "@/lib/i18n/types"
 import type { Locale } from "@/lib/i18n"
 
@@ -309,14 +310,8 @@ export function MoicWaterfall({ macro, t, locale }: MoicWaterfallProps) {
                   axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
                 />
                 <Tooltip
-                  contentStyle={{
-                    background: "rgba(10,10,10,0.95)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    borderRadius: 8,
-                    color: "#fff",
-                    fontFamily: "var(--font-jetbrains)",
-                    fontSize: 11,
-                  }}
+                  content={<EliteTooltip />}
+                  cursor={{ fill: 'rgba(197, 160, 89, 0.05)' }}
                   formatter={(value: number, name: string) => [
                     `€${Math.round(value).toLocaleString()}`,
                     name === "lp" ? w.lpShareLabel : w.gpShareLabel,
