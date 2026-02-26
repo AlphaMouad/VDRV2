@@ -32,6 +32,7 @@ export default function VDRApp() {
   const [account, setAccount] = useState<VDRAccount | null>(null)
   const [activeView, setActiveView] = useState<ViewId>("dashboard")
   const [macro, setMacro] = useState<MacroState>(defaultMacro)
+  const [userTicket, setUserTicket] = useState(0)
 
   // ── Global Calculations for Sticky Footer ──
   const { totalGDV } = calcTotals(macro)
@@ -93,7 +94,7 @@ export default function VDRApp() {
         <main className="lg:ml-64 min-h-screen pb-20">
           {/* Top Bar with Capital Stack Progress */}
           <header className="sticky top-0 z-30 bg-[rgba(0,0,0,0.8)] backdrop-blur-xl">
-            <CapitalStackProgress t={t} />
+            <CapitalStackProgress t={t} userTicket={userTicket} />
             <div className="border-b border-[rgba(255,255,255,0.06)]">
               <div className="flex items-center justify-between px-4 lg:px-8 py-4">
                 <div className="ml-12 lg:ml-0">
@@ -149,7 +150,7 @@ export default function VDRApp() {
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
                 {activeView === "dashboard" && <ExecutiveDashboard macro={macro} t={t} locale={locale} account={account} />}
-                {activeView === "syndication" && <Syndication macro={macro} t={t} locale={locale} />}
+                {activeView === "syndication" && <Syndication macro={macro} t={t} locale={locale} onTicketChange={setUserTicket} />}
                 {activeView === "financial-engine" && <FinancialEngine macro={macro} t={t} locale={locale} />}
                 {activeView === "moic-waterfall" && <MoicWaterfall macro={macro} t={t} locale={locale} />}
                 {activeView === "sensitivity" && <SensitivityMatrix macro={macro} t={t} locale={locale} />}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Reveal } from "./reveal"
 import { VideoExplainer } from "./video-explainer"
 import { AnimatedValue } from "./animated-value"
@@ -39,6 +39,7 @@ interface SyndicationProps {
   macro: MacroState
   t: Dictionary
   locale: Locale
+  onTicketChange?: (ticket: number) => void
 }
 
 const SCENARIO_ORDER = ["bull", "base", "bear", "catastrophic"] as const
@@ -70,7 +71,7 @@ function fmtShort(v: number) {
   return fmt(v)
 }
 
-export function Syndication({ macro, t, locale }: SyndicationProps) {
+export function Syndication({ macro, t, locale, onTicketChange }: SyndicationProps) {
   const sv = t.syndicationView
   const { totalGDC, lpCommitment } = calcTotals(macro)
   const gpCommitment = totalGDC * 0.1
@@ -83,6 +84,10 @@ export function Syndication({ macro, t, locale }: SyndicationProps) {
   // Commitment state — default to €1M (institutional entry)
   const [ticket, setTicket] = useState(1_000_000)
   const clampedTicket = Math.min(sliderMax, Math.max(sliderMin, ticket))
+
+  useEffect(() => {
+    onTicketChange?.(clampedTicket)
+  }, [clampedTicket, onTicketChange])
 
   const isSoleLP = clampedTicket >= lpCommitment * 0.99
   const isMajorPrincipal = clampedTicket >= 500000 && !isSoleLP
