@@ -442,5 +442,10 @@ export interface Dictionary {
     doc4Name: string
     doc4Desc: string
   }
+  footer: {
+    next: string
+    finalize: string
+    softCircleTicker: string[]
+  }
   glossary: Record<string, GlossaryEntry>
 }

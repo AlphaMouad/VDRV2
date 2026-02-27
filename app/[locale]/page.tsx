@@ -14,6 +14,7 @@ import { Fortress } from "@/components/vdr/fortress"
 import { Repatriation } from "@/components/vdr/repatriation"
 import { Syndication } from "@/components/vdr/syndication"
 import { StatsRibbon } from "@/components/vdr/stats-ribbon"
+import { StickyActionFooter } from "@/components/vdr/sticky-action-footer"
 import { GlossaryProvider } from "@/lib/i18n/glossary-context"
 import { getDict, type Locale } from "@/lib/i18n"
 import { AnimatePresence, motion } from "framer-motion"
@@ -65,6 +66,7 @@ export default function VDRApp() {
           onNavigate={setActiveView}
           onLogout={() => setAccount(null)}
           t={t}
+          account={account}
         />
 
         <main className="lg:ml-64 min-h-screen">
@@ -84,15 +86,6 @@ export default function VDRApp() {
                 </h1>
               </div>
               <div className="flex items-center gap-4 lg:gap-6">
-                {/* Language Switcher */}
-                <button
-                  onClick={switchLocale}
-                  className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-[#a3a3a3] hover:text-[#C5A059] transition-colors font-mono border border-[rgba(255,255,255,0.1)] rounded px-2 py-1.5 hover:border-[rgba(197,160,89,0.3)]"
-                >
-                  <Globe className="w-3 h-3" />
-                  {locale === "en" ? "FR" : "EN"}
-                </button>
-
                 <div className="hidden md:flex flex-col items-end gap-0.5">
                   <span className="text-[10px] tracking-[0.15em] text-[#C5A059] font-medium">
                     {account.fullName}
@@ -135,7 +128,7 @@ export default function VDRApp() {
           </div>
 
           {/* Footer */}
-          <footer className="border-t border-[rgba(255,255,255,0.06)] px-4 lg:px-8 py-4 flex items-center justify-between">
+          <footer className="border-t border-[rgba(255,255,255,0.06)] px-4 lg:px-8 py-4 flex items-center justify-between pb-24">
             <p className="text-[9px] text-[#a3a3a3] tracking-wider">
               {t.common.footer.location}
             </p>
@@ -144,6 +137,14 @@ export default function VDRApp() {
             </p>
           </footer>
         </main>
+
+        {/* Sticky Action Footer (UHNWI only) */}
+        <StickyActionFooter
+          activeView={activeView}
+          onNavigate={setActiveView}
+          account={account}
+          t={t}
+        />
       </div>
     </GlossaryProvider>
   )

@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { Dictionary } from "@/lib/i18n/types"
+import type { VDRAccount } from "@/lib/accounts"
 
 export type ViewId =
   | "dashboard"
@@ -32,9 +33,10 @@ interface SidebarNavProps {
   onNavigate: (view: ViewId) => void
   onLogout: () => void
   t: Dictionary
+  account: VDRAccount
 }
 
-const navItemsDef: { id: ViewId; navKey: keyof Dictionary["nav"]; icon: React.ElementType; tab: string }[] = [
+export const navItemsDef: { id: ViewId; navKey: keyof Dictionary["nav"]; icon: React.ElementType; tab: string }[] = [
   { id: "dashboard", navKey: "dashboard", icon: LayoutDashboard, tab: "1" },
   { id: "syndication", navKey: "syndication", icon: Users2, tab: "2" },
   { id: "financial-engine", navKey: "financialEngine", icon: TrendingUp, tab: "3" },
@@ -45,7 +47,7 @@ const navItemsDef: { id: ViewId; navKey: keyof Dictionary["nav"]; icon: React.El
   { id: "macro", navKey: "macro", icon: SlidersHorizontal, tab: "8" },
 ]
 
-export function SidebarNav({ activeView, onNavigate, onLogout, t }: SidebarNavProps) {
+export function SidebarNav({ activeView, onNavigate, onLogout, t, account }: SidebarNavProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleNav = (view: ViewId) => {
@@ -53,28 +55,33 @@ export function SidebarNav({ activeView, onNavigate, onLogout, t }: SidebarNavPr
     setMobileOpen(false)
   }
 
-  const currentIndex = navItemsDef.findIndex((item) => item.id === activeView)
-  const progressPct = Math.round(((currentIndex + 1) / navItemsDef.length) * 100)
+  // Filter navigation items: only show 'macro' to mouad@gmail.com
+  const visibleNavItems = navItemsDef.filter(
+    (item) => item.id !== "macro" || account.email === "mouad@gmail.com"
+  )
+
+  const currentIndex = visibleNavItems.findIndex((item) => item.id === activeView)
+  const progressPct = Math.round(((currentIndex + 1) / visibleNavItems.length) * 100)
 
   return (
     <>
       {/* Mobile Hamburger */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 w-11 h-11 rounded-lg glass-form flex items-center justify-center border border-[rgba(197,160,89,0.3)]"
+        className="lg:hidden fixed top-4 left-4 z-50 w-12 h-12 rounded-xl glass-form flex items-center justify-center border border-[rgba(197,160,89,0.3)] shadow-lg active:scale-95 transition-transform"
         aria-label="Toggle navigation"
       >
         {mobileOpen ? (
-          <X className="w-5 h-5 text-[#C5A059]" />
+          <X className="w-6 h-6 text-[#C5A059]" />
         ) : (
-          <Menu className="w-5 h-5 text-[#C5A059]" />
+          <Menu className="w-6 h-6 text-[#C5A059]" />
         )}
       </button>
 
       {/* Mobile Overlay */}
       {mobileOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/60 z-30 backdrop-blur-sm"
+          className="lg:hidden fixed inset-0 bg-black/80 z-30 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setMobileOpen(false)}
         />
       )}
@@ -120,7 +127,7 @@ export function SidebarNav({ activeView, onNavigate, onLogout, t }: SidebarNavPr
 
         {/* Navigation */}
         <nav className="flex-1 py-4 px-3 flex flex-col gap-1 overflow-y-auto">
-          {navItemsDef.map((item) => {
+          {visibleNavItems.map((item) => {
             const Icon = item.icon
             const isActive = activeView === item.id
             return (

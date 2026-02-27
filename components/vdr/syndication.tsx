@@ -225,27 +225,32 @@ export function Syndication({ macro, t, locale }: SyndicationProps) {
           </div>
 
           {/* Ticket Slider */}
-          <div className="mb-7">
-            <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-2">{sv.yourCommitment}</p>
-            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-4">
-              <span className="font-mono text-4xl sm:text-5xl font-bold gold-text-gradient leading-none">
+          <div className="mb-8">
+            <p className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3] mb-3">{sv.yourCommitment}</p>
+            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-6">
+              <span className="font-mono text-5xl sm:text-6xl font-bold gold-text-gradient leading-none tracking-tight">
                 {fmt(clampedTicket)}
               </span>
-              <span className="font-mono text-xs text-[#a3a3a3] leading-none">
+              <span className="font-mono text-xs sm:text-sm text-[#a3a3a3] leading-none opacity-80">
                 {(slice.ownershipPct * 100).toFixed(2)}%&nbsp;
                 {locale === "fr" ? "participation LP" : "LP ownership"}
               </span>
             </div>
-            <input
-              type="range"
-              min={sliderMin}
-              max={sliderMax}
-              step={Math.max(10000, Math.round(sliderMax / 200 / 10000) * 10000)}
-              value={clampedTicket}
-              onChange={(e) => setTicket(Number(e.target.value))}
-              className="w-full"
-            />
-            <div className="flex justify-between text-[9px] font-mono text-[#a3a3a3] mt-1">
+
+            <div className="relative py-2">
+              <input
+                type="range"
+                min={sliderMin}
+                max={sliderMax}
+                step={Math.max(10000, Math.round(sliderMax / 200 / 10000) * 10000)}
+                value={clampedTicket}
+                onChange={(e) => setTicket(Number(e.target.value))}
+                className="w-full h-8 cursor-pointer touch-none"
+                style={{ zIndex: 10 }}
+              />
+            </div>
+
+            <div className="flex justify-between text-[10px] font-mono text-[#a3a3a3] mt-2 opacity-60">
               <span>{fmt(sliderMin)} (min)</span>
               <span>{fmt(sliderMax)} (full deal)</span>
             </div>
