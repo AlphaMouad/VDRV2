@@ -451,6 +451,17 @@ export const fr: Dictionary = {
     doc4Name: 'Statuts de la SARL SPV',
     doc4Desc: 'Statuts constitutifs du vehicule de projet, droits des associes et mecanismes de gouvernance',
   },
+  footer: {
+    next: 'Etape Suivante',
+    finalize: 'Finaliser la Revue',
+    softCircleTicker: [
+      'Activite Soft Circle : 1.2M€ alloues par Family Office (Zurich)',
+      'Activite Soft Circle : 500k€ alloues par UHNWI (Dubai)',
+      'Activite Soft Circle : 2.0M€ alloues par REPE (Londres)',
+      'Activite Soft Circle : 850k€ alloues par UHNWI (Monaco)',
+      'Activite Soft Circle : 1.5M€ alloues par Multi-Family Office (Riyad)',
+    ],
+  },
   glossary: {
     irr: {
       term: 'TRI',

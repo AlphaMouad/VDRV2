@@ -34,7 +34,7 @@ interface SidebarNavProps {
   t: Dictionary
 }
 
-const navItemsDef: { id: ViewId; navKey: keyof Dictionary["nav"]; icon: React.ElementType; tab: string }[] = [
+export const navItemsDef: { id: ViewId; navKey: keyof Dictionary["nav"]; icon: React.ElementType; tab: string }[] = [
   { id: "dashboard", navKey: "dashboard", icon: LayoutDashboard, tab: "1" },
   { id: "syndication", navKey: "syndication", icon: Users2, tab: "2" },
   { id: "financial-engine", navKey: "financialEngine", icon: TrendingUp, tab: "3" },

@@ -503,5 +503,16 @@ export const en: Dictionary = {
     doc4Desc:
       'Land title registry confirming freehold ownership free of encumbrance',
   },
+  footer: {
+    next: 'Next Step',
+    finalize: 'Finalize Review',
+    softCircleTicker: [
+      'Soft Circle Activity: €1.2M allocated by Family Office (Zurich)',
+      'Soft Circle Activity: €500k allocated by UHNWI (Dubai)',
+      'Soft Circle Activity: €2.0M allocated by REPE (London)',
+      'Soft Circle Activity: €850k allocated by UHNWI (Monaco)',
+      'Soft Circle Activity: €1.5M allocated by Multi-Family Office (Riyadh)',
+    ],
+  },
   glossary: glossaryData,
 }

@@ -14,6 +14,7 @@ import { Fortress } from "@/components/vdr/fortress"
 import { Repatriation } from "@/components/vdr/repatriation"
 import { Syndication } from "@/components/vdr/syndication"
 import { StatsRibbon } from "@/components/vdr/stats-ribbon"
+import { StickyActionFooter } from "@/components/vdr/sticky-action-footer"
 import { GlossaryProvider } from "@/lib/i18n/glossary-context"
 import { getDict, type Locale } from "@/lib/i18n"
 import { AnimatePresence, motion } from "framer-motion"
@@ -135,7 +136,7 @@ export default function VDRApp() {
           </div>
 
           {/* Footer */}
-          <footer className="border-t border-[rgba(255,255,255,0.06)] px-4 lg:px-8 py-4 flex items-center justify-between">
+          <footer className="border-t border-[rgba(255,255,255,0.06)] px-4 lg:px-8 py-4 flex items-center justify-between pb-24">
             <p className="text-[9px] text-[#a3a3a3] tracking-wider">
               {t.common.footer.location}
             </p>
@@ -144,6 +145,14 @@ export default function VDRApp() {
             </p>
           </footer>
         </main>
+
+        {/* Sticky Action Footer (UHNWI only) */}
+        <StickyActionFooter
+          activeView={activeView}
+          onNavigate={setActiveView}
+          account={account}
+          t={t}
+        />
       </div>
     </GlossaryProvider>
   )
