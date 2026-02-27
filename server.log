@@ -17,3 +17,5 @@ https://nextjs.org/telemetry
 ○ Compiling /[locale] ...
  GET /en 200 in 12.2s (compile: 10.9s, proxy.ts: 100ms, generate-params: 947ms, render: 1195ms)
  GET /en 200 in 253ms (compile: 65ms, proxy.ts: 8ms, generate-params: 54ms, render: 180ms)
+ GET /en 200 in 4.3s (compile: 1127ms, proxy.ts: 264ms, generate-params: 273ms, render: 2.9s)
+ GET /en 200 in 374ms (compile: 64ms, proxy.ts: 10ms, generate-params: 49ms, render: 299ms)

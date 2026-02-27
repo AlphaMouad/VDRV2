@@ -489,7 +489,7 @@ export function Syndication({ macro, t, locale }: SyndicationProps) {
                         <p className="text-[9px] text-[#a3a3a3]">{sv.thIrr}</p>
                         <p className="font-mono text-sm font-semibold" style={{ color }}>
                           {isCatastrophic
-                            ? `${s.annualYield.toFixed(1)}% Ijarah`
+                            ? `${s.annualYield.toFixed(1)}%`
                             : s.irr > -50
                             ? `${s.irr.toFixed(1)}%`
                             : "—"}
@@ -497,13 +497,9 @@ export function Syndication({ macro, t, locale }: SyndicationProps) {
                       </div>
                       <div className="text-right">
                         <p className="text-[9px] text-[#a3a3a3]">{sv.thNetProfit}</p>
-                        {isCatastrophic && Math.abs(s.netProfit) < 1000 ? (
-                          <p className="font-mono text-sm font-semibold text-[#a3a3a3]">Preserved</p>
-                        ) : (
-                          <p className={cn("font-mono text-sm font-semibold", s.netProfit >= 0 ? "text-[#10B981]" : "text-[#EF4444]")}>
-                            {s.netProfit >= 0 ? "+" : ""}{fmtShort(s.netProfit)}
-                          </p>
-                        )}
+                        <p className={cn("font-mono text-sm font-semibold", s.netProfit >= 0 ? "text-[#10B981]" : "text-[#EF4444]")}>
+                          {s.netProfit >= 0 ? "+" : ""}{fmtShort(s.netProfit)}
+                        </p>
                       </div>
                     </div>
 
@@ -569,19 +565,15 @@ export function Syndication({ macro, t, locale }: SyndicationProps) {
                       <td className="py-2.5 pr-3 text-right font-mono" style={{ color }}>{s.moic.toFixed(2)}x</td>
                       <td className="py-2.5 pr-3 text-right font-mono" style={{ color }}>
                         {s.id === "catastrophic"
-                          ? `${s.annualYield.toFixed(1)}% Ijarah`
+                          ? `${s.annualYield.toFixed(1)}%`
                           : s.irr > -50
                           ? `${s.irr.toFixed(1)}%`
                           : "—"}
                       </td>
                       <td className="py-2.5 text-right font-mono font-semibold">
-                        {s.id === "catastrophic" && Math.abs(s.netProfit) < 1000 ? (
-                          <span className="text-[#a3a3a3]">Preserved</span>
-                        ) : (
-                          <span className={s.netProfit >= 0 ? "text-[#10B981]" : "text-[#EF4444]"}>
-                            {s.netProfit >= 0 ? "+" : ""}{fmt(s.netProfit)}
-                          </span>
-                        )}
+                        <span className={s.netProfit >= 0 ? "text-[#10B981]" : "text-[#EF4444]"}>
+                          {s.netProfit >= 0 ? "+" : ""}{fmt(s.netProfit)}
+                        </span>
                       </td>
                     </tr>
                   )
