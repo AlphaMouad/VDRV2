@@ -61,20 +61,20 @@ export function SidebarNav({ activeView, onNavigate, onLogout, t }: SidebarNavPr
       {/* Mobile Hamburger */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 w-11 h-11 rounded-lg glass-form flex items-center justify-center border border-[rgba(197,160,89,0.3)]"
+        className="lg:hidden fixed top-4 left-4 z-50 w-12 h-12 rounded-xl glass-form flex items-center justify-center border border-[rgba(197,160,89,0.3)] shadow-lg active:scale-95 transition-transform"
         aria-label="Toggle navigation"
       >
         {mobileOpen ? (
-          <X className="w-5 h-5 text-[#C5A059]" />
+          <X className="w-6 h-6 text-[#C5A059]" />
         ) : (
-          <Menu className="w-5 h-5 text-[#C5A059]" />
+          <Menu className="w-6 h-6 text-[#C5A059]" />
         )}
       </button>
 
       {/* Mobile Overlay */}
       {mobileOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/60 z-30 backdrop-blur-sm"
+          className="lg:hidden fixed inset-0 bg-black/80 z-30 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setMobileOpen(false)}
         />
       )}

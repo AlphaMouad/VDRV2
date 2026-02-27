@@ -178,10 +178,10 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
           ═══════════════════════════════════════════════════════ */}
       <Reveal delay={0.05}>
         <div
-          className="p-5 sm:p-6 mb-6 sm:mb-8 rounded-xl"
+          className="glass-form p-4 sm:p-6 mb-6 sm:mb-8 rounded-xl"
           style={{
             border: "1px solid rgba(197,160,89,0.22)",
-            background: "rgba(255,255,255,0.015)",
+            background: "rgba(10,10,12,0.6)",
           }}
         >
           <div className="flex items-center gap-2 mb-4 sm:mb-5">
@@ -191,20 +191,20 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {sortedAvatarCards.map((card) => {
               const isMatch = card.type === account.avatarType
               return isMatch ? (
                 /* ── YOUR PROFILE — gold glow treatment ── */
                 <div
                   key={card.type}
-                  className="relative overflow-hidden rounded-xl p-4 sm:p-5"
+                  className="relative overflow-hidden rounded-xl p-5 sm:p-6"
                   style={{
                     background:
-                      "linear-gradient(135deg, rgba(197,160,89,0.11) 0%, rgba(8,8,8,0.97) 100%)",
-                    border: "2px solid rgba(197,160,89,0.62)",
+                      "linear-gradient(135deg, rgba(197,160,89,0.15) 0%, rgba(8,8,8,0.95) 100%)",
+                    border: "2px solid rgba(197,160,89,0.6)",
                     boxShadow:
-                      "0 0 42px rgba(197,160,89,0.17), 0 0 0 1px rgba(197,160,89,0.08) inset",
+                      "0 0 40px rgba(197,160,89,0.15), inset 0 0 20px rgba(197,160,89,0.05)",
                   }}
                 >
                   {/* Gold shimmer top edge */}
@@ -212,44 +212,44 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
                     className="absolute top-0 left-0 right-0 h-px"
                     style={{
                       background:
-                        "linear-gradient(90deg, transparent 0%, rgba(197,160,89,0.75) 50%, transparent 100%)",
+                        "linear-gradient(90deg, transparent 0%, rgba(197,160,89,0.8) 50%, transparent 100%)",
                     }}
                   />
 
                   {/* YOUR PROFILE badge */}
                   <div
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-3 sm:mb-4 w-fit"
+                    className="flex items-center gap-1.5 px-3 py-1 rounded-full mb-4 w-fit"
                     style={{
-                      background: "rgba(197,160,89,0.16)",
-                      border: "1px solid rgba(197,160,89,0.45)",
+                      background: "rgba(197,160,89,0.2)",
+                      border: "1px solid rgba(197,160,89,0.5)",
                     }}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse" />
-                    <span className="text-[8px] font-mono font-bold text-[#C5A059] tracking-[0.22em] uppercase">
+                    <span className="text-[9px] font-mono font-bold text-[#C5A059] tracking-[0.2em] uppercase">
                       {sv.yourProfileBadge}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-3 mb-3">
                     <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                      className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
                       style={{
                         background: card.iconBg,
-                        border: "1px solid rgba(197,160,89,0.25)",
+                        border: "1px solid rgba(197,160,89,0.3)",
                       }}
                     >
                       <card.Icon className="w-5 h-5" style={{ color: card.accentColor }} />
                     </div>
                     <div>
-                      <p className="text-[9px] tracking-[0.18em] uppercase text-[#a3a3a3]">
+                      <p className="text-[9px] tracking-[0.18em] uppercase text-[#a3a3a3] mb-0.5">
                         {card.name}
                       </p>
-                      <h3 className="gold-text-gradient font-[var(--font-playfair)] text-[15px] sm:text-base font-semibold leading-tight">
+                      <h3 className="gold-text-gradient font-[var(--font-playfair)] text-lg font-semibold leading-tight">
                         {card.title}
                       </h3>
                     </div>
                   </div>
-                  <p className="text-[11px] sm:text-xs text-[#c0c0c0] leading-relaxed">
+                  <p className="text-xs text-[#d4d4d4] leading-relaxed opacity-90">
                     {card.desc}
                   </p>
                 </div>
@@ -257,21 +257,22 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
                 /* ── OTHER PROFILES — dimmed ── */
                 <div
                   key={card.type}
-                  className="glass-form rounded-xl p-4 sm:p-5 transition-opacity duration-300 hover:opacity-90"
+                  className="glass-form rounded-xl p-5 transition-all duration-300 hover:opacity-90 hover:border-[#C5A059]/30"
                   style={{
                     border: "1px solid rgba(255,255,255,0.05)",
-                    opacity: 0.55,
+                    opacity: 0.6,
+                    background: "rgba(255,255,255,0.02)"
                   }}
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
                       style={{ background: card.iconBg }}
                     >
                       <card.Icon className="w-4 h-4" style={{ color: card.accentColor }} />
                     </div>
                     <div>
-                      <p className="text-[9px] tracking-[0.18em] uppercase text-[#a3a3a3]">
+                      <p className="text-[9px] tracking-[0.18em] uppercase text-[#a3a3a3] mb-0.5">
                         {card.name}
                       </p>
                       <h3 className="text-sm font-semibold text-[#e0e0e0] font-[var(--font-playfair)]">
@@ -279,7 +280,7 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
                       </h3>
                     </div>
                   </div>
-                  <p className="text-[11px] text-[#a3a3a3] leading-relaxed">{card.desc}</p>
+                  <p className="text-[10px] text-[#a3a3a3] leading-relaxed">{card.desc}</p>
                 </div>
               )
             })}
@@ -288,9 +289,9 @@ export function ExecutiveDashboard({ macro, t, locale, account }: ExecutiveDashb
       </Reveal>
 
       {/* ═══════════════════════════════════════════════════════
-          HERO METRICS — 2-col on mobile
+          HERO METRICS — Optimized Grid
           ═══════════════════════════════════════════════════════ */}
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
         {heroMetrics.map((metric, i) => (
           <Reveal key={metric.label} delay={0.1 + 0.07 * i}>
             <div className="glass-form glass-card-hover p-4 sm:p-6 h-full">

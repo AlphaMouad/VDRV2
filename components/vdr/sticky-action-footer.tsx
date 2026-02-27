@@ -34,11 +34,11 @@ export function StickyActionFooter({ activeView, onNavigate, account, t }: Stick
   const isLast = currentIndex === navItemsDef.length - 1
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 lg:ml-64 border-t border-[rgba(197,160,89,0.3)] bg-[#0a0a0a] backdrop-blur-xl">
+    <div className="fixed bottom-0 left-0 right-0 z-50 lg:ml-64 border-t border-[rgba(197,160,89,0.2)] bg-[#050505]/80 backdrop-blur-xl supports-[backdrop-filter]:bg-[#050505]/60">
       {/* Golden progress line at the very top */}
-      <div className="absolute top-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent w-full opacity-50" />
+      <div className="absolute top-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent w-full opacity-60 shadow-[0_0_10px_#C5A059]" />
 
-      <div className="flex flex-col sm:flex-row items-center justify-between px-4 py-3 sm:px-6 sm:py-4 gap-3 sm:gap-0">
+      <div className="flex flex-col sm:flex-row items-center justify-between px-4 py-3 sm:px-6 sm:py-4 gap-3 sm:gap-4 max-w-7xl mx-auto w-full">
 
         {/* LEFT: Soft Circle Ticker (FOMO) */}
         <div className="flex items-center gap-3 w-full sm:w-auto overflow-hidden">
