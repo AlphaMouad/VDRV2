@@ -20,18 +20,23 @@ export function StickyActionFooter({ activeView, onNavigate, account, t }: Stick
   // ONLY render for UHNWI accounts
   if (account.avatarType !== "UHNWI") return null
 
-  // Soft Circle Ticker Rotation
+  // Soft Circle Ticker Rotation - Slower, more exclusive feel
   useEffect(() => {
     const interval = setInterval(() => {
       setTickerIndex((prev) => (prev + 1) % t.footer.softCircleTicker.length)
-    }, 5000)
+    }, 8000)
     return () => clearInterval(interval)
   }, [t.footer.softCircleTicker.length])
 
   // Determine "Next" destination
-  const currentIndex = navItemsDef.findIndex((item) => item.id === activeView)
-  const nextItem = navItemsDef[currentIndex + 1]
-  const isLast = currentIndex === navItemsDef.length - 1
+  // Filter navigation items: only allow 'macro' for mouad@gmail.com
+  const visibleNavItems = navItemsDef.filter(
+    (item) => item.id !== "macro" || account.email === "mouad@gmail.com"
+  )
+
+  const currentIndex = visibleNavItems.findIndex((item) => item.id === activeView)
+  const nextItem = visibleNavItems[currentIndex + 1]
+  const isLast = currentIndex === visibleNavItems.length - 1
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 lg:ml-64 border-t border-[rgba(197,160,89,0.2)] bg-[#050505]/80 backdrop-blur-xl supports-[backdrop-filter]:bg-[#050505]/60">

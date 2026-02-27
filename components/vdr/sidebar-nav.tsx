@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { Dictionary } from "@/lib/i18n/types"
+import type { VDRAccount } from "@/lib/accounts"
 
 export type ViewId =
   | "dashboard"
@@ -32,6 +33,7 @@ interface SidebarNavProps {
   onNavigate: (view: ViewId) => void
   onLogout: () => void
   t: Dictionary
+  account: VDRAccount
 }
 
 export const navItemsDef: { id: ViewId; navKey: keyof Dictionary["nav"]; icon: React.ElementType; tab: string }[] = [
@@ -45,7 +47,7 @@ export const navItemsDef: { id: ViewId; navKey: keyof Dictionary["nav"]; icon: R
   { id: "macro", navKey: "macro", icon: SlidersHorizontal, tab: "8" },
 ]
 
-export function SidebarNav({ activeView, onNavigate, onLogout, t }: SidebarNavProps) {
+export function SidebarNav({ activeView, onNavigate, onLogout, t, account }: SidebarNavProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleNav = (view: ViewId) => {
@@ -53,8 +55,13 @@ export function SidebarNav({ activeView, onNavigate, onLogout, t }: SidebarNavPr
     setMobileOpen(false)
   }
 
-  const currentIndex = navItemsDef.findIndex((item) => item.id === activeView)
-  const progressPct = Math.round(((currentIndex + 1) / navItemsDef.length) * 100)
+  // Filter navigation items: only show 'macro' to mouad@gmail.com
+  const visibleNavItems = navItemsDef.filter(
+    (item) => item.id !== "macro" || account.email === "mouad@gmail.com"
+  )
+
+  const currentIndex = visibleNavItems.findIndex((item) => item.id === activeView)
+  const progressPct = Math.round(((currentIndex + 1) / visibleNavItems.length) * 100)
 
   return (
     <>
@@ -120,7 +127,7 @@ export function SidebarNav({ activeView, onNavigate, onLogout, t }: SidebarNavPr
 
         {/* Navigation */}
         <nav className="flex-1 py-4 px-3 flex flex-col gap-1 overflow-y-auto">
-          {navItemsDef.map((item) => {
+          {visibleNavItems.map((item) => {
             const Icon = item.icon
             const isActive = activeView === item.id
             return (

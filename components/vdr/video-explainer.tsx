@@ -65,38 +65,29 @@ export function VideoExplainer({
       )}
 
       {hasVideo ? (
-        <div
-          className="glass-form p-1"
-          style={{ borderColor: "rgba(197,160,89,0.3)" }}
-        >
-          <div className="bunny-player-wrapper">
-            <iframe
-              src={`https://iframe.mediadelivery.net/embed/${libraryId}/${resolvedVideoId}?autoplay=false&loop=false&muted=false&preload=true&responsive=true`}
-              loading="lazy"
-              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
-              allowFullScreen
-              title={title}
-            />
-          </div>
+        <div className="bunny-player-wrapper rounded-2xl overflow-hidden border border-[#C5A059]/20 shadow-2xl relative w-full aspect-video">
+          <iframe
+            src={`https://iframe.mediadelivery.net/embed/${libraryId}/${resolvedVideoId}?autoplay=false&loop=false&muted=false&preload=true&responsive=true`}
+            loading="lazy"
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+            title={title}
+            className="absolute top-0 left-0 w-full h-full border-0"
+          />
         </div>
       ) : (
         /* Elegant placeholder when no Bunny video is configured */
-        <div
-          className="glass-form p-1"
-          style={{ borderColor: "rgba(197,160,89,0.15)" }}
-        >
-          <div className="bunny-player-wrapper flex items-center justify-center bg-[rgba(197,160,89,0.03)]">
-            <div className="flex flex-col items-center gap-3 text-center px-6 absolute inset-0 justify-center">
-              <div className="w-14 h-14 rounded-full border border-[rgba(197,160,89,0.3)] flex items-center justify-center">
-                <Play className="w-6 h-6 text-[#C5A059] ml-0.5" />
-              </div>
-              <p className="text-[10px] tracking-[0.2em] uppercase text-[#a3a3a3]">
-                Video Briefing
-              </p>
-              <p className="text-[11px] text-[#a3a3a3] max-w-xs leading-relaxed">
-                Configure your Bunny Stream library ID and video ID to display the investor briefing here.
-              </p>
+        <div className="bunny-player-wrapper flex items-center justify-center bg-[#0a0a0a] rounded-2xl overflow-hidden border border-[#C5A059]/10 shadow-2xl relative w-full aspect-video">
+          <div className="flex flex-col items-center gap-4 text-center px-6 absolute inset-0 justify-center">
+            <div className="w-16 h-16 rounded-full border border-[#C5A059]/30 bg-[#C5A059]/5 flex items-center justify-center backdrop-blur-sm">
+              <Play className="w-6 h-6 text-[#C5A059] ml-1 opacity-80" />
             </div>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-[#C5A059] font-medium">
+              Video Briefing
+            </p>
+            <p className="text-xs text-[#a3a3a3] max-w-xs leading-relaxed opacity-60">
+              Configure your Bunny Stream library ID and video ID to display the investor briefing here.
+            </p>
           </div>
         </div>
       )}
