@@ -238,13 +238,12 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.7 }}
-                  src="https://amg-building.com/wp-content/uploads/2025/04/Logo.svg"
-                  className="logo-white h-12 mb-6"
+                  src="/logo.svg"
+                  className="logo-white h-10 w-auto mb-6"
                   alt="AMG Building"
-                  crossOrigin="anonymous"
                 />
 
-                <div className="elite-divider mb-6" />
+                <div className="w-16 h-[1px] bg-gradient-to-r from-[#C5A059] to-transparent mb-8" />
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -252,17 +251,37 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   transition={{ delay: 0.45, duration: 0.7 }}
                 >
                   <h1 className="font-[var(--font-playfair)] text-5xl text-white leading-tight tracking-tight mb-2">
-                    Ambassadeur<br />
-                    <span className="gold-text-gradient">6&amp;7</span>
+                    Ambassadeur <span className="gold-text-gradient">6&amp;7</span>
                   </h1>
-                  <p className="text-[10px] tracking-[0.45em] uppercase text-[#a3a3a3] mb-4">
+                  <p className="text-[10px] tracking-[0.35em] uppercase text-[#a3a3a3] mb-8">
                     Palmeraie · Marrakech · Maroc
                   </p>
-                  <p className="font-[var(--font-playfair)] text-[13px] italic text-[#C5A059] opacity-75 tracking-wide">
+
+                  <p className="font-[var(--font-playfair)] text-[15px] italic text-[#C5A059] opacity-90 tracking-wide mb-3">
                     {locale === "fr"
-                      ? "« Là où la structure rencontre la souveraineté »"
-                      : '"Where Structure Meets Sovereignty"'}
+                      ? "\"Un modèle d'investissement exclusif et souverain, spécifiquement conçu pour l'élite du private equity et les family offices.\""
+                      : "\"An exclusive and sovereign investment model, specifically engineered for private equity elite and family offices.\""}
                   </p>
+
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-[2px] h-3 bg-[#C5A059]" />
+                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#C5A059] font-bold">
+                      {locale === "fr" ? "PROPOSITION DE VALEUR" : "VALUE PROPOSITION"}
+                    </p>
+                  </div>
+
+                  <ul className="space-y-3 mb-10">
+                    {[
+                      locale === "fr" ? "Recyclage VEFA avec levier artificiel et zéro dette bancaire" : "VEFA recycling with artificial leverage and zero bank debt",
+                      locale === "fr" ? "Liquidité du Capital Arrimée à l'Euro (TPI) atténuant le risque de change" : "Euro-Pegged Capital Liquidity (TPI) mitigating FX risk",
+                      locale === "fr" ? "Avantage fiscal attractif via structure OPCI & IS réduit" : "Compelling tax advantage via OPCI structure & reduced CIT"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#C5A059] mt-1.5 shrink-0 opacity-80" />
+                        <span className="text-[13px] text-[#d4d4d4] leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </motion.div>
               </div>
 
@@ -273,12 +292,6 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                 transition={{ delay: 0.65, duration: 0.7 }}
                 className="relative z-10"
               >
-                <p className="text-[8.5px] tracking-[0.35em] uppercase text-[#a3a3a3] mb-5 opacity-70">
-                  {locale === "fr"
-                    ? "Paramètres Institutionnels Clés"
-                    : "Key Institutional Parameters"}
-                </p>
-
                 <div className="space-y-1">
                   {leftStats.map((stat, i) => (
                     <motion.div
@@ -353,10 +366,9 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
               {/* Mobile: compact logo */}
               <div className="lg:hidden flex flex-col items-center mb-8">
                 <img
-                  src="https://amg-building.com/wp-content/uploads/2025/04/Logo.svg"
-                  className="logo-white h-9 mb-3"
+                  src="/logo.svg"
+                  className="logo-white h-9 w-auto mb-3"
                   alt="AMG Building"
-                  crossOrigin="anonymous"
                 />
                 <p className="text-[9px] tracking-[0.3em] uppercase text-[#a3a3a3]">
                   {t.login.title}
