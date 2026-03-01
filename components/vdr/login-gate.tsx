@@ -308,13 +308,13 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
               />
 
               {/* Top: Logo + title */}
-              <div className="relative z-10">
+              <div className="relative z-10 flex flex-col justify-start">
                 <motion.img
                   initial={{ opacity: 0, filter: "blur(4px)", y: -10 }}
                   animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                   transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
                   src="/logo.svg"
-                  className="logo-white h-14 mb-8"
+                  className="logo-white h-8 mb-6 object-contain self-start"
                   alt="AMG Building"
                 />
 
@@ -322,7 +322,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   initial={{ opacity: 0, scaleX: 0 }}
                   animate={{ opacity: 1, scaleX: 1 }}
                   transition={{ delay: 0.6, duration: 1, ease: "easeOut" }}
-                  className="w-24 h-[1px] bg-gradient-to-r from-[#C5A059] to-transparent mb-8 origin-left"
+                  className="w-16 h-[1px] bg-gradient-to-r from-[#C5A059] to-transparent mb-6 origin-left"
                 />
 
                 <motion.div
@@ -330,53 +330,66 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
                 >
-                  <h1 className="font-[var(--font-playfair)] text-[3.5rem] text-white leading-[1.1] tracking-tight mb-3">
-                    Ambassadeur<br />
-                    <span className="gold-text-gradient font-medium">6&amp;7</span>
+                  <h1 className="font-[var(--font-playfair)] text-[2.5rem] lg:text-[2.75rem] text-white leading-[1.1] tracking-tight mb-2">
+                    Ambassadeur <span className="gold-text-gradient font-medium">6&amp;7</span>
                   </h1>
-                  <p className="text-[11px] tracking-[0.5em] uppercase text-[#a3a3a3] mb-6 font-medium">
+                  <p className="text-[10px] tracking-[0.4em] uppercase text-[#a3a3a3] mb-5 font-medium">
                     Palmeraie · Marrakech · Maroc
                   </p>
-                  <p className="font-[var(--font-playfair)] text-[15px] italic text-[#C5A059] opacity-80 tracking-wider">
+                  <p className="font-[var(--font-playfair)] text-[14px] italic text-[#C5A059] opacity-90 tracking-wide max-w-md leading-relaxed">
                     {locale === "fr"
-                      ? "« Là où la structure rencontre la souveraineté »"
-                      : '"Where Structure Meets Sovereignty"'}
+                      ? "« Un modèle d’investissement exclusif et souverain, conçu spécifiquement pour une élite de capital-investissement et de family offices. »"
+                      : '"An exclusive and sovereign investment model, specifically engineered for private equity elite and family offices."'}
                   </p>
                 </motion.div>
               </div>
 
-              {/* Middle: Investment stats */}
+              {/* Middle: Investment stats & Value Proposition */}
               <motion.div
                 initial={{ opacity: 0, filter: "blur(4px)" }}
                 animate={{ opacity: 1, filter: "blur(0px)" }}
                 transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-                className="relative z-10"
+                className="relative z-10 max-w-md w-full"
               >
-                <p className="text-[9px] tracking-[0.4em] uppercase text-[#C5A059] mb-6 opacity-80 font-medium">
-                  {locale === "fr"
-                    ? "Paramètres Institutionnels Clés"
-                    : "Key Institutional Parameters"}
-                </p>
+                <div className="mb-8">
+                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#C5A059] mb-4 opacity-90 font-semibold border-l-2 border-[#C5A059] pl-3">
+                    {locale === "fr"
+                      ? "Proposition de Valeur"
+                      : "Value Proposition"}
+                  </p>
+                  <ul className="space-y-3">
+                    {[
+                      locale === "fr" ? "Recyclage VEFA avec levier artificiel sans dette bancaire" : "VEFA recycling with artificial leverage and zero bank debt",
+                      locale === "fr" ? "Couverture Euro-Pegged (TPI) atténuant le risque de change" : "Euro-Pegged Capital Liquidity (TPI) mitigating FX risk",
+                      locale === "fr" ? "Avantage fiscal attractif via structure OPCI & IS réduit" : "Compelling tax advantage via OPCI structure & reduced CIT",
+                    ].map((feat, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 rounded-sm bg-[rgba(197,160,89,0.5)] mt-1.5 shrink-0" />
+                        <span className="text-[#d4d4d4] text-[12px] leading-relaxed font-light tracking-wide">{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1">
                   {leftStats.map((stat, i) => (
                     <motion.div
                       key={stat.label}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 1.1 + i * 0.15, duration: 0.6, ease: "easeOut" }}
-                      className="flex items-center justify-between py-4 border-b border-[rgba(255,255,255,0.06)] group"
+                      className="flex items-center justify-between py-3 border-b border-[rgba(255,255,255,0.08)] group hover:border-[rgba(197,160,89,0.3)] transition-colors duration-300"
                     >
                       <div>
-                        <p className="text-[11px] tracking-[0.15em] uppercase text-[#a3a3a3] group-hover:text-white transition-colors duration-300">
+                        <p className="text-[10px] tracking-[0.1em] uppercase text-[#a3a3a3] group-hover:text-white transition-colors duration-300">
                           {stat.label}
                         </p>
-                        <p className="text-[10px] text-[#a3a3a3] opacity-50 mt-1 tracking-wide">
+                        <p className="text-[9px] text-[#a3a3a3] opacity-60 mt-0.5 tracking-wider">
                           {stat.sub}
                         </p>
                       </div>
                       <span
-                        className="font-[var(--font-jetbrains)] text-2xl font-bold tracking-tight group-hover:scale-105 transition-transform duration-300 origin-right"
+                        className="font-[var(--font-jetbrains)] text-xl font-medium tracking-tight group-hover:scale-105 transition-transform duration-300 origin-right"
                         style={{ color: stat.color }}
                       >
                         {stat.value}
@@ -433,27 +446,27 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
               </button>
 
               {/* Mobile: compact logo */}
-              <div className="lg:hidden flex flex-col items-center mb-10">
+              <div className="lg:hidden flex flex-col items-center mb-8">
                 <motion.img
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.8 }}
                   src="/logo.svg"
-                  className="logo-white h-10 mb-4"
+                  className="logo-white h-7 mb-3"
                   alt="AMG Building"
                 />
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.7, duration: 0.8 }}
-                  className="text-[10px] tracking-[0.4em] uppercase text-[#a3a3a3] font-medium"
+                  className="text-[9px] tracking-[0.3em] uppercase text-[#a3a3a3] font-medium text-center max-w-[200px]"
                 >
                   {t.login.title}
                 </motion.p>
               </div>
 
               {/* Form wrapper */}
-              <div className="w-full max-w-[440px] xl:max-w-[480px] glass-form p-8 xl:p-12 relative overflow-hidden group">
+              <div className="w-full max-w-[380px] xl:max-w-[420px] glass-form p-8 xl:p-10 relative overflow-hidden group">
 
                 {/* Subtle top border glow */}
                 <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(197,160,89,0.4)] to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
