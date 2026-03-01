@@ -1,26 +1,34 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  ShieldCheck, Lock, Globe, Loader2,
-  Eye, EyeOff, CheckCircle2,
-  TrendingUp, Building2, Star, Users2,
-} from "lucide-react"
-import type { VDRAccount } from "@/lib/accounts"
-import { authenticateFromSheet } from "@/lib/auth"
-import type { Dictionary } from "@/lib/i18n/types"
-import type { Locale } from "@/lib/i18n"
+  ShieldCheck,
+  Lock,
+  Globe,
+  Loader2,
+  Eye,
+  EyeOff,
+  CheckCircle2,
+  TrendingUp,
+  Building2,
+  Star,
+  Users2,
+} from "lucide-react";
+import type { VDRAccount } from "@/lib/accounts";
+import { authenticateFromSheet } from "@/lib/auth";
+import type { Dictionary } from "@/lib/i18n/types";
+import type { Locale } from "@/lib/i18n";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type Phase = "login" | "welcome"
+type Phase = "login" | "welcome";
 
 interface LoginGateProps {
-  onLogin: (account: VDRAccount) => void
-  t: Dictionary
-  locale: Locale
-  onSwitchLocale: () => void
+  onLogin: (account: VDRAccount) => void;
+  t: Dictionary;
+  locale: Locale;
+  onSwitchLocale: () => void;
 }
 
 // ── Investor category metadata ─────────────────────────────────────────────────
@@ -30,14 +38,17 @@ function getCategoryInfo(type: VDRAccount["avatarType"], locale: Locale) {
   switch (type) {
     case "REPE":
       return {
-        label: locale === "fr" ? "Fonds Immobilier Institutionnel" : "Real Estate Private Equity",
+        label:
+          locale === "fr"
+            ? "Fonds Immobilier Institutionnel"
+            : "Real Estate Private Equity",
         badge: "REPE",
         icon: TrendingUp,
         color: "#10B981",
         border: "rgba(16,185,129,0.35)",
         bg: "rgba(16,185,129,0.07)",
         glow: "rgba(16,185,129,0.15)",
-      }
+      };
     case "FamilyOffice":
       return {
         label: locale === "fr" ? "Family Office" : "Family Office",
@@ -47,17 +58,18 @@ function getCategoryInfo(type: VDRAccount["avatarType"], locale: Locale) {
         border: "rgba(197,160,89,0.45)",
         bg: "rgba(197,160,89,0.08)",
         glow: "rgba(197,160,89,0.2)",
-      }
+      };
     case "UHNWI":
       return {
-        label: locale === "fr" ? "Ultra Haute Valeur Nette" : "Ultra High Net Worth",
+        label:
+          locale === "fr" ? "Ultra Haute Valeur Nette" : "Ultra High Net Worth",
         badge: "UHNWI",
         icon: Star,
         color: "#DFBD69",
         border: "rgba(223,189,105,0.45)",
         bg: "rgba(223,189,105,0.07)",
         glow: "rgba(223,189,105,0.18)",
-      }
+      };
     default:
       return {
         label: locale === "fr" ? "Investisseur Qualifié" : "Qualified Investor",
@@ -67,7 +79,7 @@ function getCategoryInfo(type: VDRAccount["avatarType"], locale: Locale) {
         border: "rgba(163,163,163,0.3)",
         bg: "rgba(163,163,163,0.05)",
         glow: "rgba(163,163,163,0.1)",
-      }
+      };
   }
 }
 
@@ -104,29 +116,45 @@ function GoldGeometry() {
 
         {/* Animated Diagonal lines */}
         <motion.line
-          x1="-10%" y1="110%" x2="110%" y2="-10%"
-          stroke="url(#lg1)" strokeWidth="1"
+          x1="-10%"
+          y1="110%"
+          x2="110%"
+          y2="-10%"
+          stroke="url(#lg1)"
+          strokeWidth="1"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 3, ease: "easeInOut" }}
         />
         <motion.line
-          x1="-10%" y1="90%"  x2="90%"  y2="-10%"
-          stroke="url(#lg2)" strokeWidth="1"
+          x1="-10%"
+          y1="90%"
+          x2="90%"
+          y2="-10%"
+          stroke="url(#lg2)"
+          strokeWidth="1"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 3.5, ease: "easeInOut", delay: 0.2 }}
         />
         <motion.line
-          x1="-10%" y1="70%"  x2="70%"  y2="-10%"
-          stroke="url(#lg1)" strokeWidth="0.6"
+          x1="-10%"
+          y1="70%"
+          x2="70%"
+          y2="-10%"
+          stroke="url(#lg1)"
+          strokeWidth="0.6"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 4, ease: "easeInOut", delay: 0.4 }}
         />
         <motion.line
-          x1="-10%" y1="130%" x2="130%" y2="-10%"
-          stroke="url(#lg2)" strokeWidth="0.6"
+          x1="-10%"
+          y1="130%"
+          x2="130%"
+          y2="-10%"
+          stroke="url(#lg2)"
+          strokeWidth="0.6"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 4.5, ease: "easeInOut", delay: 0.6 }}
@@ -134,29 +162,45 @@ function GoldGeometry() {
 
         {/* Animated Grid lines */}
         <motion.line
-          x1="33%" y1="0%"   x2="33%" y2="100%"
-          stroke="url(#lgV)" strokeWidth="1"
+          x1="33%"
+          y1="0%"
+          x2="33%"
+          y2="100%"
+          stroke="url(#lgV)"
+          strokeWidth="1"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 2.5, ease: "easeInOut", delay: 0.8 }}
         />
         <motion.line
-          x1="67%" y1="0%"   x2="67%" y2="100%"
-          stroke="url(#lgV)" strokeWidth="1"
+          x1="67%"
+          y1="0%"
+          x2="67%"
+          y2="100%"
+          stroke="url(#lgV)"
+          strokeWidth="1"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 2.5, ease: "easeInOut", delay: 1 }}
         />
         <motion.line
-          x1="0%"  y1="33%"  x2="100%" y2="33%"
-          stroke="rgba(197,160,89,0.05)" strokeWidth="1"
+          x1="0%"
+          y1="33%"
+          x2="100%"
+          y2="33%"
+          stroke="rgba(197,160,89,0.05)"
+          strokeWidth="1"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 2.5, ease: "easeInOut", delay: 1.2 }}
         />
         <motion.line
-          x1="0%"  y1="67%"  x2="100%" y2="67%"
-          stroke="rgba(197,160,89,0.05)" strokeWidth="1"
+          x1="0%"
+          y1="67%"
+          x2="100%"
+          y2="67%"
+          stroke="rgba(197,160,89,0.05)"
+          strokeWidth="1"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 2.5, ease: "easeInOut", delay: 1.4 }}
@@ -166,82 +210,104 @@ function GoldGeometry() {
       {/* Slow pulsing glows */}
       <motion.div
         className="absolute top-[20%] left-[15%] w-[800px] h-[800px] rounded-full mix-blend-screen"
-        style={{ background: "radial-gradient(circle, rgba(197,160,89,0.08) 0%, transparent 70%)" }}
+        style={{
+          background:
+            "radial-gradient(circle, rgba(197,160,89,0.08) 0%, transparent 70%)",
+        }}
         animate={{
           scale: [1, 1.05, 1],
-          opacity: [0.7, 1, 0.7]
+          opacity: [0.7, 1, 0.7],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full mix-blend-screen"
-        style={{ background: "radial-gradient(circle, rgba(223,189,105,0.06) 0%, transparent 70%)" }}
+        style={{
+          background:
+            "radial-gradient(circle, rgba(223,189,105,0.06) 0%, transparent 70%)",
+        }}
         animate={{
           scale: [1, 1.1, 1],
-          opacity: [0.6, 0.9, 0.6]
+          opacity: [0.6, 0.9, 0.6],
         }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2,
+        }}
       />
     </div>
-  )
+  );
 }
 
 // ── Main Component ────────────────────────────────────────────────────────────
 
-export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps) {
-  const [identifier, setIdentifier] = useState("")
-  const [password, setPassword]     = useState("")
-  const [showPw, setShowPw]         = useState(false)
-  const [agreed, setAgreed]         = useState(false)
-  const [error, setError]           = useState("")
-  const [loading, setLoading]       = useState(false)
-  const [phase, setPhase]           = useState<Phase>("login")
-  const [authAccount, setAuthAccount] = useState<VDRAccount | null>(null)
+export function LoginGate({
+  onLogin,
+  t,
+  locale,
+  onSwitchLocale,
+}: LoginGateProps) {
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPw, setShowPw] = useState(false);
+  const [agreed, setAgreed] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [phase, setPhase] = useState<Phase>("login");
+  const [authAccount, setAuthAccount] = useState<VDRAccount | null>(null);
 
   // ── Submit ────────────────────────────────────────────────────────────────
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!identifier.trim() || !password) { setError(t.login.errorRequired); return }
-    if (!agreed)                          { setError(t.login.errorNda);      return }
+    e.preventDefault();
+    if (!identifier.trim() || !password) {
+      setError(t.login.errorRequired);
+      return;
+    }
+    if (!agreed) {
+      setError(t.login.errorNda);
+      return;
+    }
 
-    setError("")
-    setLoading(true)
+    setError("");
+    setLoading(true);
 
     try {
-      const result = await authenticateFromSheet(identifier.trim(), password)
+      const result = await authenticateFromSheet(identifier.trim(), password);
       if (!result) {
-        setError(t.login.errorInvalid)
-        setLoading(false)
-        return
+        setError(t.login.errorInvalid);
+        setLoading(false);
+        return;
       }
 
       // avatarType comes directly from Google Sheet field[6]
       const account: VDRAccount = {
-        investorId:    result.investorId,
-        fullName:      result.fullName,
-        companyName:   result.companyName,
-        email:         result.email,
-        role:          "investor",
+        investorId: result.investorId,
+        fullName: result.fullName,
+        companyName: result.companyName,
+        email: result.email,
+        role: "investor",
         numberOfVillas: result.numberOfVillas,
-        avatarType:    result.avatarType,   // ← from sheet
-      }
+        avatarType: result.avatarType, // ← from sheet
+      };
 
-      setAuthAccount(account)
-      setPhase("welcome")
+      setAuthAccount(account);
+      setPhase("welcome");
     } catch {
-      setError(t.login.errorNetwork)
-      setLoading(false)
+      setError(t.login.errorNetwork);
+      setLoading(false);
     }
-  }
+  };
 
   // Auto-enter VDR after the personalized welcome screen
   useEffect(() => {
     if (phase === "welcome" && authAccount) {
-      const timer = setTimeout(() => onLogin(authAccount), 3000)
-      return () => clearTimeout(timer)
+      const timer = setTimeout(() => onLogin(authAccount), 3000);
+      return () => clearTimeout(timer);
     }
-  }, [phase, authAccount, onLogin])
+  }, [phase, authAccount, onLogin]);
 
   // ── LEFT PANEL KEY STATS (hardcoded project params) ──────────────────────
 
@@ -249,22 +315,31 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
     {
       label: locale === "fr" ? "TRI Cible Sans Levier" : "Target Unlevered IRR",
       value: "~15%",
-      sub:   locale === "fr" ? "Scénario de base · 36 mois" : "Base case · 36 months",
+      sub:
+        locale === "fr"
+          ? "Scénario de base · 36 mois"
+          : "Base case · 36 months",
       color: "#10B981",
     },
     {
       label: locale === "fr" ? "MOIC LP Cible" : "Target LP MOIC",
       value: "1.52×",
-      sub:   locale === "fr" ? "Net de tous impôts marocains" : "Net of all Moroccan taxes",
+      sub:
+        locale === "fr"
+          ? "Net de tous impôts marocains"
+          : "Net of all Moroccan taxes",
       color: "#C5A059",
     },
     {
       label: locale === "fr" ? "Engagement LP (90%)" : "LP Commitment (90%)",
       value: "€6.3M",
-      sub:   locale === "fr" ? "Appels échelonnés · Zéro levier" : "Staged calls · Zero leverage",
+      sub:
+        locale === "fr"
+          ? "Appels échelonnés · Zéro levier"
+          : "Staged calls · Zero leverage",
       color: "#ffffff",
     },
-  ]
+  ];
 
   // ── RENDER ────────────────────────────────────────────────────────────────
 
@@ -273,7 +348,6 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
       <div className="noise-overlay" />
 
       <AnimatePresence mode="wait">
-
         {/* ══════════════════════════════ LOGIN SCREEN ══════════════════════ */}
 
         {phase === "login" && (
@@ -285,7 +359,6 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
             exit={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
-
             {/* ── LEFT: Brand Manifesto Panel ───────────────────────────── */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -299,12 +372,18 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
               {/* Radial glow center */}
               <div
                 className="absolute top-1/3 left-1/4 w-[800px] h-[800px] rounded-full pointer-events-none mix-blend-screen"
-                style={{ background: "radial-gradient(circle, rgba(197,160,89,0.08) 0%, transparent 60%)" }}
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(197,160,89,0.08) 0%, transparent 60%)",
+                }}
               />
               {/* Corner glow */}
               <div
                 className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full pointer-events-none mix-blend-screen"
-                style={{ background: "radial-gradient(circle, rgba(197,160,89,0.06) 0%, transparent 60%)" }}
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(197,160,89,0.06) 0%, transparent 60%)",
+                }}
               />
 
               {/* Top: Logo + title */}
@@ -330,11 +409,17 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
                 >
-                  <h1 className="font-[var(--font-playfair)] text-[2.5rem] lg:text-[2.75rem] text-white leading-[1.1] tracking-tight mb-2">
-                    Ambassadeur <span className="gold-text-gradient font-medium">6&amp;7</span>
+                  <h1 className="font-[var(--font-playfair)] text-[2.5rem] lg:text-[2.75rem] text-white leading-[1.1] tracking-tight mb-2 uppercase">
+                    SECURE INVESTOR{" "}
+                    <span className="gold-text-gradient font-medium">
+                      VDR
+                    </span>
                   </h1>
-                  <p className="text-[10px] tracking-[0.4em] uppercase text-[#a3a3a3] mb-5 font-medium">
-                    Palmeraie · Marrakech · Maroc
+                  <p className="text-[10px] tracking-[0.4em] uppercase text-[#a3a3a3] mb-5 font-medium flex items-center gap-2">
+                    <Lock className="w-3 h-3 text-[#C5A059]" />
+                    {locale === "fr"
+                      ? "Accès Restreint"
+                      : "Restricted Access"}
                   </p>
                   <p className="font-[var(--font-playfair)] text-[14px] italic text-[#C5A059] opacity-90 tracking-wide max-w-md leading-relaxed">
                     {locale === "fr"
@@ -359,13 +444,21 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   </p>
                   <ul className="space-y-3">
                     {[
-                      locale === "fr" ? "Recyclage VEFA avec levier artificiel sans dette bancaire" : "VEFA recycling with artificial leverage and zero bank debt",
-                      locale === "fr" ? "Couverture Euro-Pegged (TPI) atténuant le risque de change" : "Euro-Pegged Capital Liquidity (TPI) mitigating FX risk",
-                      locale === "fr" ? "Avantage fiscal attractif via structure OPCI & IS réduit" : "Compelling tax advantage via OPCI structure & reduced CIT",
+                      locale === "fr"
+                        ? "Recyclage VEFA avec levier artificiel sans dette bancaire"
+                        : "VEFA recycling with artificial leverage and zero bank debt",
+                      locale === "fr"
+                        ? "Couverture Euro-Pegged (TPI) atténuant le risque de change"
+                        : "Euro-Pegged Capital Liquidity (TPI) mitigating FX risk",
+                      locale === "fr"
+                        ? "Avantage fiscal attractif via structure OPCI & IS réduit"
+                        : "Compelling tax advantage via OPCI structure & reduced CIT",
                     ].map((feat, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 rounded-sm bg-[rgba(197,160,89,0.5)] mt-1.5 shrink-0" />
-                        <span className="text-[#d4d4d4] text-[12px] leading-relaxed font-light tracking-wide">{feat}</span>
+                        <span className="text-[#d4d4d4] text-[12px] leading-relaxed font-light tracking-wide">
+                          {feat}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -377,7 +470,11 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                       key={stat.label}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 1.1 + i * 0.15, duration: 0.6, ease: "easeOut" }}
+                      transition={{
+                        delay: 1.1 + i * 0.15,
+                        duration: 0.6,
+                        ease: "easeOut",
+                      }}
                       className="flex items-center justify-between py-3 border-b border-[rgba(255,255,255,0.08)] group hover:border-[rgba(197,160,89,0.3)] transition-colors duration-300"
                     >
                       <div>
@@ -409,7 +506,9 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                 <div className="w-full h-[1px] bg-gradient-to-r from-[rgba(197,160,89,0.2)] to-transparent mb-5" />
                 <p className="text-[9px] tracking-[0.25em] uppercase text-[#a3a3a3] opacity-60 mb-2">
                   AMG Building · {new Date().getFullYear()} ·{" "}
-                  {locale === "fr" ? "Tous droits réservés" : "All Rights Reserved"}
+                  {locale === "fr"
+                    ? "Tous droits réservés"
+                    : "All Rights Reserved"}
                 </p>
                 <p className="text-[8.5px] text-[#a3a3a3] opacity-40 leading-relaxed max-w-[80%]">
                   {locale === "fr"
@@ -426,13 +525,19 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
               transition={{ duration: 1.2, ease: "easeOut" }}
               className="flex-1 flex flex-col items-center justify-center relative px-6 py-12 lg:px-12 xl:px-20 lg:py-0"
               style={{
-                background: "linear-gradient(160deg, rgba(8,8,8,0.98) 0%, rgba(0,0,0,1) 100%)",
+                background:
+                  "linear-gradient(160deg, rgba(8,8,8,0.98) 0%, rgba(0,0,0,1) 100%)",
                 borderLeft: "1px solid rgba(255,255,255,0.06)",
               }}
             >
               {/* Subtle ambient light on the form side */}
-              <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none mix-blend-screen opacity-20"
-                   style={{ background: "radial-gradient(circle at top right, rgba(197,160,89,0.1) 0%, transparent 60%)" }} />
+              <div
+                className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none mix-blend-screen opacity-20"
+                style={{
+                  background:
+                    "radial-gradient(circle at top right, rgba(197,160,89,0.1) 0%, transparent 60%)",
+                }}
+              />
 
               {/* Language switcher */}
               <button
@@ -467,7 +572,6 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
 
               {/* Form wrapper */}
               <div className="w-full max-w-[380px] xl:max-w-[420px] glass-form p-8 xl:p-10 relative overflow-hidden group">
-
                 {/* Subtle top border glow */}
                 <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(197,160,89,0.4)] to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-[#C5A059] blur-[20px] opacity-20 pointer-events-none group-hover:opacity-40 transition-opacity duration-500" />
@@ -496,15 +600,20 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
-
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-6 relative z-10"
+                >
                   {/* Identifier */}
                   <div className="relative group/input">
                     <input
                       type="text"
                       autoComplete="username"
                       value={identifier}
-                      onChange={(e) => { setIdentifier(e.target.value); setError("") }}
+                      onChange={(e) => {
+                        setIdentifier(e.target.value);
+                        setError("");
+                      }}
                       className="peer w-full bg-transparent border-b border-[rgba(255,255,255,0.2)] text-[#ffffff] pt-5 pb-2 px-1 text-sm focus:border-[#C5A059] focus:outline-none transition-colors duration-300 font-[var(--font-jetbrains)] placeholder-transparent"
                       placeholder={t.login.emailPlaceholder}
                       id="identifier"
@@ -524,7 +633,10 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                       type={showPw ? "text" : "password"}
                       autoComplete="current-password"
                       value={password}
-                      onChange={(e) => { setPassword(e.target.value); setError("") }}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        setError("");
+                      }}
                       className="peer w-full bg-transparent border-b border-[rgba(255,255,255,0.2)] text-[#ffffff] pt-5 pb-2 px-1 pr-8 text-sm focus:border-[#C5A059] focus:outline-none transition-colors duration-300 font-[var(--font-jetbrains)] placeholder-transparent"
                       placeholder={t.login.passwordPlaceholder}
                       id="password"
@@ -542,16 +654,21 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                       className="absolute right-1 top-1/2 text-[rgba(255,255,255,0.3)] hover:text-[#C5A059] transition-colors duration-200"
                       aria-label={showPw ? "Hide password" : "Show password"}
                     >
-                      {showPw
-                        ? <EyeOff className="w-4 h-4" />
-                        : <Eye    className="w-4 h-4" />}
+                      {showPw ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
                     </button>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#C5A059] to-transparent scale-x-0 peer-focus:scale-x-100 transition-transform duration-500 origin-left" />
                   </div>
 
                   {/* NDA checkbox */}
                   <label className="flex items-start gap-4 cursor-pointer p-4 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] hover:border-[rgba(197,160,89,0.3)] hover:bg-[rgba(197,160,89,0.02)] transition-all duration-300 group mt-2">
-                    <div className="relative mt-0.5 shrink-0" onClick={() => setAgreed(!agreed)}>
+                    <div
+                      className="relative mt-0.5 shrink-0"
+                      onClick={() => setAgreed(!agreed)}
+                    >
                       <div
                         className={`w-[18px] h-[18px] rounded-[4px] border transition-all duration-300 flex items-center justify-center ${
                           agreed
@@ -598,7 +715,9 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                         className="flex items-center gap-3 px-4 py-3 rounded-lg bg-[rgba(239,68,68,0.08)] border border-[rgba(239,68,68,0.2)] shadow-[0_4px_12px_rgba(239,68,68,0.1)]"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-[#EF4444] shrink-0 shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
-                        <p className="text-[#EF4444] text-[11px] leading-relaxed tracking-wide">{error}</p>
+                        <p className="text-[#EF4444] text-[11px] leading-relaxed tracking-wide">
+                          {error}
+                        </p>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -659,7 +778,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
           >
             {/* Background ambient glow matching avatar color */}
             {(() => {
-              const cat = getCategoryInfo(authAccount.avatarType, locale)
+              const cat = getCategoryInfo(authAccount.avatarType, locale);
               return (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -669,48 +788,72 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                 >
                   <div
                     className="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] rounded-full mix-blend-screen opacity-30"
-                    style={{ background: `radial-gradient(circle, ${cat.glow} 0%, transparent 60%)` }}
+                    style={{
+                      background: `radial-gradient(circle, ${cat.glow} 0%, transparent 60%)`,
+                    }}
                   />
                 </motion.div>
-              )
+              );
             })()}
 
             {(() => {
-              const cat    = getCategoryInfo(authAccount.avatarType, locale)
-              const CatIcon = cat.icon
+              const cat = getCategoryInfo(authAccount.avatarType, locale);
+              const CatIcon = cat.icon;
 
               return (
                 <div className="flex flex-col items-center text-center px-6 max-w-lg w-full z-10">
-
                   {/* Shield check circle */}
                   <motion.div
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.15, duration: 0.6, type: "spring", stiffness: 200, damping: 20 }}
+                    transition={{
+                      delay: 0.15,
+                      duration: 0.6,
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 20,
+                    }}
                     className="relative w-28 h-28 rounded-full flex items-center justify-center mb-8 bg-[#0a0a0a]"
                     style={{
                       border: "1px solid rgba(16,185,129,0.4)",
-                      boxShadow: "0 0 50px rgba(16,185,129,0.15), inset 0 0 20px rgba(16,185,129,0.1)",
+                      boxShadow:
+                        "0 0 50px rgba(16,185,129,0.15), inset 0 0 20px rgba(16,185,129,0.1)",
                     }}
                   >
                     <motion.div
                       initial={{ pathLength: 0 }}
                       animate={{ pathLength: 1 }}
-                      transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+                      transition={{
+                        duration: 0.8,
+                        delay: 0.5,
+                        ease: "easeOut",
+                      }}
                     >
-                      <CheckCircle2 className="w-14 h-14 text-[#10B981]" strokeWidth={1.5} />
+                      <CheckCircle2
+                        className="w-14 h-14 text-[#10B981]"
+                        strokeWidth={1.5}
+                      />
                     </motion.div>
 
                     {/* Multi-layered Pulsing rings */}
                     <motion.div
                       className="absolute inset-0 rounded-full border border-[rgba(16,185,129,0.4)]"
                       animate={{ scale: [1, 1.4, 1], opacity: [0.8, 0, 0.8] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeOut" }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                      }}
                     />
                     <motion.div
                       className="absolute inset-0 rounded-full border border-[rgba(16,185,129,0.2)]"
                       animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeOut", delay: 0.5 }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                        delay: 0.5,
+                      }}
                     />
                   </motion.div>
 
@@ -742,15 +885,33 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                       {authAccount.fullName}
                     </p>
                     <p className="text-[11px] tracking-[0.3em] uppercase text-[#a3a3a3] mb-10 font-medium">
-                      {authAccount.companyName}&nbsp;&mdash;&nbsp;<span className="text-[#C5A059]">{authAccount.investorId}</span>
+                      {authAccount.companyName}&nbsp;&mdash;&nbsp;
+                      <span className="text-[#C5A059]">
+                        {authAccount.investorId}
+                      </span>
                     </p>
                   </motion.div>
 
                   {/* Investor category badge */}
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: 10, filter: "blur(4px)" }}
-                    animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ delay: 0.9, duration: 0.6, type: "spring", stiffness: 150 }}
+                    initial={{
+                      opacity: 0,
+                      scale: 0.95,
+                      y: 10,
+                      filter: "blur(4px)",
+                    }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      y: 0,
+                      filter: "blur(0px)",
+                    }}
+                    transition={{
+                      delay: 0.9,
+                      duration: 0.6,
+                      type: "spring",
+                      stiffness: 150,
+                    }}
                     className="inline-flex items-center gap-4 px-7 py-5 rounded-2xl mb-12 relative overflow-hidden group"
                     style={{
                       border: `1px solid ${cat.border}`,
@@ -762,9 +923,15 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
 
                     <div
                       className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 relative z-10"
-                      style={{ background: `${cat.glow}`, border: `1px solid ${cat.border}` }}
+                      style={{
+                        background: `${cat.glow}`,
+                        border: `1px solid ${cat.border}`,
+                      }}
                     >
-                      <CatIcon className="w-5 h-5" style={{ color: cat.color }} />
+                      <CatIcon
+                        className="w-5 h-5"
+                        style={{ color: cat.color }}
+                      />
                     </div>
                     <div className="text-left relative z-10 pr-2">
                       <p className="text-[8.5px] tracking-[0.25em] uppercase text-[#a3a3a3] mb-1">
@@ -772,7 +939,10 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                           ? "Classification Investisseur"
                           : "Investor Classification"}
                       </p>
-                      <p className="text-[17px] font-semibold tracking-wide" style={{ color: cat.color }}>
+                      <p
+                        className="text-[17px] font-semibold tracking-wide"
+                        style={{ color: cat.color }}
+                      >
                         {cat.label}
                       </p>
                     </div>
@@ -800,8 +970,16 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                         <motion.div
                           key={i}
                           className="w-1.5 h-1.5 rounded-full bg-[#C5A059]"
-                          animate={{ opacity: [0.2, 1, 0.2], scale: [0.8, 1.2, 0.8] }}
-                          transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2, ease: "easeInOut" }}
+                          animate={{
+                            opacity: [0.2, 1, 0.2],
+                            scale: [0.8, 1.2, 0.8],
+                          }}
+                          transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            delay: i * 0.2,
+                            ease: "easeInOut",
+                          }}
                         />
                       ))}
                     </div>
@@ -812,12 +990,11 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                     </span>
                   </motion.div>
                 </div>
-              )
+              );
             })()}
           </motion.div>
         )}
-
       </AnimatePresence>
     </div>
-  )
+  );
 }
