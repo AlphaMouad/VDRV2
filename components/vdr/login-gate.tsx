@@ -238,50 +238,31 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.7 }}
-                  src="/logo.svg"
-                  className="logo-white h-7 w-auto mb-6"
+                  src="https://amg-building.com/wp-content/uploads/2025/04/Logo.svg"
+                  className="logo-white h-12 mb-6"
                   alt="AMG Building"
+                  crossOrigin="anonymous"
                 />
 
-                <div className="w-16 h-[1px] bg-gradient-to-r from-[#C5A059] to-transparent mb-8" />
+                <div className="elite-divider mb-6" />
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.45, duration: 0.7 }}
                 >
-                  <h1 className="font-[var(--font-playfair)] text-4xl text-white leading-tight tracking-tight mb-2">
-                    Ambassadeur <span className="gold-text-gradient">6&amp;7</span>
+                  <h1 className="font-[var(--font-playfair)] text-5xl text-white leading-tight tracking-tight mb-2">
+                    Ambassadeur<br />
+                    <span className="gold-text-gradient">6&amp;7</span>
                   </h1>
-                  <p className="text-[10px] tracking-[0.35em] uppercase text-[#a3a3a3] mb-8">
+                  <p className="text-[10px] tracking-[0.45em] uppercase text-[#a3a3a3] mb-4">
                     Palmeraie · Marrakech · Maroc
                   </p>
-
-                  <p className="font-[var(--font-playfair)] text-[15px] italic text-[#C5A059] opacity-90 tracking-wide mb-3">
+                  <p className="font-[var(--font-playfair)] text-[13px] italic text-[#C5A059] opacity-75 tracking-wide">
                     {locale === "fr"
-                      ? "\"Un modèle d'investissement exclusif et souverain, spécifiquement conçu pour l'élite du private equity et les family offices.\""
-                      : "\"An exclusive and sovereign investment model, specifically engineered for private equity elite and family offices.\""}
+                      ? "« Là où la structure rencontre la souveraineté »"
+                      : '"Where Structure Meets Sovereignty"'}
                   </p>
-
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-[2px] h-3 bg-[#C5A059]" />
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#C5A059] font-bold">
-                      {locale === "fr" ? "PROPOSITION DE VALEUR" : "VALUE PROPOSITION"}
-                    </p>
-                  </div>
-
-                  <ul className="space-y-3 mb-10">
-                    {[
-                      locale === "fr" ? "Recyclage VEFA avec levier artificiel et zéro dette bancaire" : "VEFA recycling with artificial leverage and zero bank debt",
-                      locale === "fr" ? "Liquidité du Capital Arrimée à l'Euro (TPI) atténuant le risque de change" : "Euro-Pegged Capital Liquidity (TPI) mitigating FX risk",
-                      locale === "fr" ? "Avantage fiscal attractif via structure OPCI & IS réduit" : "Compelling tax advantage via OPCI structure & reduced CIT"
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#C5A059] mt-1.5 shrink-0 opacity-80" />
-                        <span className="text-[13px] text-[#d4d4d4] leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </motion.div>
               </div>
 
@@ -292,6 +273,12 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                 transition={{ delay: 0.65, duration: 0.7 }}
                 className="relative z-10"
               >
+                <p className="text-[8.5px] tracking-[0.35em] uppercase text-[#a3a3a3] mb-5 opacity-70">
+                  {locale === "fr"
+                    ? "Paramètres Institutionnels Clés"
+                    : "Key Institutional Parameters"}
+                </p>
+
                 <div className="space-y-1">
                   {leftStats.map((stat, i) => (
                     <motion.div
@@ -366,9 +353,10 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
               {/* Mobile: compact logo */}
               <div className="lg:hidden flex flex-col items-center mb-8">
                 <img
-                  src="/logo.svg"
-                  className="logo-white h-9 w-auto mb-3"
+                  src="https://amg-building.com/wp-content/uploads/2025/04/Logo.svg"
+                  className="logo-white h-9 mb-3"
                   alt="AMG Building"
+                  crossOrigin="anonymous"
                 />
                 <p className="text-[9px] tracking-[0.3em] uppercase text-[#a3a3a3]">
                   {t.login.title}
@@ -384,18 +372,18 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                     <div className="w-8 h-8 rounded-lg bg-[rgba(197,160,89,0.1)] border border-[rgba(197,160,89,0.25)] flex items-center justify-center shrink-0">
                       <ShieldCheck className="w-4 h-4 text-[#C5A059]" />
                     </div>
-                    <span className="text-[9px] tracking-[0.3em] uppercase text-[#C5A059] font-bold">
-                      {locale === "fr" ? "SALLE DE DONNÉES VIRTUELLE" : "VIRTUAL DATA ROOM"}
+                    <span className="text-[9px] tracking-[0.3em] uppercase text-[#a3a3a3]">
+                      {t.login.portalLabel}
                     </span>
                   </div>
 
-                  <h2 className="font-[var(--font-playfair)] text-3xl text-white leading-tight mb-2">
-                    {locale === "fr" ? "Accès Sécurisé" : "Secure Access"}
+                  <h2 className="font-[var(--font-playfair)] text-2xl text-white leading-tight mb-2 uppercase">
+                    {locale === "fr" ? "SALLE DE DONNÉES VIRTUELLE" : t.login.title}
                   </h2>
-                  <p className="text-[11px] text-[#a3a3a3] leading-relaxed">
+                  <p className="text-[#a3a3a3] text-[13px] leading-[1.6]">
                     {locale === "fr"
-                      ? "Identifiez-vous avec votre email ou votre identifiant investisseur AMG."
-                      : "Authenticate with your email address or AMG investor ID."}
+                      ? "Accès Sécurisé"
+                      : "Secure Access"}
                   </p>
                 </div>
 
@@ -403,50 +391,51 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
                   {/* Identifier */}
-                  <div>
-                    <label className="text-[9px] tracking-[0.22em] uppercase text-[#a3a3a3] block mb-1.5">
-                      {t.login.emailLabel}
-                    </label>
-                    <input
-                      type="text"
-                      autoComplete="username"
-                      value={identifier}
-                      onChange={(e) => { setIdentifier(e.target.value); setError("") }}
-                      className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl text-white py-3.5 px-4 text-sm focus:border-[#C5A059] focus:bg-[#C5A059]/5 focus:ring-1 focus:ring-[#C5A059]/50 focus:outline-none transition-all duration-300 font-[var(--font-jetbrains)] placeholder-white/20 shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
-                      placeholder={t.login.emailPlaceholder}
-                    />
+                  <div className="relative group mt-2">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        autoComplete="username"
+                        required
+                        value={identifier}
+                        onChange={(e) => { setIdentifier(e.target.value); setError("") }}
+                        className="peer w-full bg-transparent border-b border-[rgba(255,255,255,0.2)] py-3 pl-0 pr-4 text-white placeholder-transparent focus:outline-none focus:border-[#C5A059] transition-all font-[var(--font-jetbrains)] text-sm"
+                        placeholder={t.login.emailPlaceholder}
+                      />
+                      <label className="absolute left-0 -top-3.5 text-[10px] text-[rgba(197,160,89,0.7)] uppercase tracking-widest transition-all peer-placeholder-shown:text-xs peer-placeholder-shown:text-[rgba(255,255,255,0.4)] peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:text-[rgba(197,160,89,0.7)] pointer-events-none">
+                        {t.login.emailLabel}
+                      </label>
+                    </div>
                   </div>
 
                   {/* Password */}
-                  <div>
-                    <label className="text-[9px] tracking-[0.22em] uppercase text-[#a3a3a3] block mb-1.5">
-                      {t.login.passwordLabel}
-                    </label>
+                  <div className="relative group mt-6">
                     <div className="relative">
                       <input
                         type={showPw ? "text" : "password"}
                         autoComplete="current-password"
+                        required
                         value={password}
                         onChange={(e) => { setPassword(e.target.value); setError("") }}
-                        className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl text-white py-3.5 px-4 pr-11 text-sm focus:border-[#C5A059] focus:bg-[#C5A059]/5 focus:ring-1 focus:ring-[#C5A059]/50 focus:outline-none transition-all duration-300 font-[var(--font-jetbrains)] placeholder-white/20 shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+                        className="peer w-full bg-transparent border-b border-[rgba(255,255,255,0.2)] py-3 pl-0 pr-10 text-white placeholder-transparent focus:outline-none focus:border-[#C5A059] transition-all font-[var(--font-jetbrains)] text-sm"
                         placeholder={t.login.passwordPlaceholder}
                       />
+                      <label className="absolute left-0 -top-3.5 text-[10px] text-[rgba(197,160,89,0.7)] uppercase tracking-widest transition-all peer-placeholder-shown:text-xs peer-placeholder-shown:text-[rgba(255,255,255,0.4)] peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:text-[rgba(197,160,89,0.7)] pointer-events-none">
+                        {t.login.passwordLabel}
+                      </label>
                       <button
                         type="button"
                         onClick={() => setShowPw(!showPw)}
-                        tabIndex={-1}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#444] hover:text-[#C5A059] transition-colors duration-150"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.2)] hover:text-[#C5A059] peer-focus:text-[rgba(197,160,89,0.5)] transition-colors"
                         aria-label={showPw ? "Hide password" : "Show password"}
                       >
-                        {showPw
-                          ? <EyeOff className="w-4 h-4" />
-                          : <Eye    className="w-4 h-4" />}
+                        {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
                   </div>
 
                   {/* NDA checkbox */}
-                  <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover:border-[rgba(197,160,89,0.3)] transition-colors duration-300 group mt-1 shadow-[0_4px_24px_rgba(0,0,0,0.2)]">
+                  <label className="flex items-start gap-3 cursor-pointer p-3.5 rounded-xl border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(197,160,89,0.2)] transition-colors duration-200 group mt-4">
                     {/* Custom checkbox */}
                     <div className="relative mt-0.5 shrink-0" onClick={() => setAgreed(!agreed)}>
                       <div
@@ -482,7 +471,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                         animate={{ opacity: 1, y: 0, height: "auto" }}
                         exit={{   opacity: 0, y: -6, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.3)] backdrop-blur-md"
+                        className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-[rgba(239,68,68,0.07)] border border-[rgba(239,68,68,0.2)]"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-[#EF4444] shrink-0" />
                         <p className="text-[#EF4444] text-[11px] leading-relaxed">{error}</p>
@@ -493,29 +482,30 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="btn-gold w-full mt-2 py-3.5 rounded-xl font-bold tracking-wide shadow-[0_0_20px_rgba(197,160,89,0.2)] hover:shadow-[0_0_30px_rgba(197,160,89,0.4)] transition-all duration-300"
                     disabled={loading}
+                    className="w-full mt-4 bg-white hover:bg-[#fffbeb] text-black font-semibold h-12 flex items-center justify-center gap-2 uppercase tracking-[0.15em] text-[11px] transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-sm"
                   >
-                    <span className="flex items-center justify-center gap-2">
-                      {loading ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          {t.login.submitting}
-                        </>
-                      ) : (
-                        <>
-                          <Lock className="w-4 h-4" />
-                          {t.login.submitButton}
-                        </>
-                      )}
-                    </span>
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-[14px] h-[14px] animate-spin text-black" />
+                        <span className="text-black">{t.login.submitting}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Lock className="w-[14px] h-[14px] mb-[1px] text-black" />
+                        <span className="text-black">{t.login.submitButton}</span>
+                      </>
+                    )}
                   </button>
                 </form>
 
                 {/* Confidential notice */}
-                <p className="mt-8 text-[8px] text-[#a3a3a3] opacity-40 tracking-wide leading-relaxed text-center">
-                  {t.login.confidentialNotice}
-                </p>
+                <div className="mt-8 flex gap-2.5 p-3 rounded-lg border border-[#2a2a2a] bg-[#0c0c0c]">
+                  <ShieldCheck className="w-4 h-4 shrink-0 text-[#C5A059] mt-[1px]" />
+                  <p className="text-[9px] text-[#606060] leading-[1.6] uppercase tracking-wider font-[var(--font-jetbrains)]">
+                    {t.login.confidentialNotice}
+                  </p>
+                </div>
               </div>
             </motion.div>
           </motion.div>
