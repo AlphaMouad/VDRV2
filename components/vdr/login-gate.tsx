@@ -291,7 +291,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="hidden lg:flex lg:w-[55%] relative flex-col justify-between p-16 overflow-hidden"
+              className="hidden lg:flex lg:w-[50%] relative flex-col justify-between p-12 xl:p-20 overflow-hidden"
             >
               {/* Animated geometry */}
               <GoldGeometry />
@@ -313,10 +313,9 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   initial={{ opacity: 0, filter: "blur(4px)", y: -10 }}
                   animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                   transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-                  src="https://amg-building.com/wp-content/uploads/2025/04/Logo.svg"
+                  src="/logo.svg"
                   className="logo-white h-14 mb-8"
                   alt="AMG Building"
-                  crossOrigin="anonymous"
                 />
 
                 <motion.div
@@ -412,7 +411,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
               initial={{ opacity: 0, x: 50, filter: "blur(10px)" }}
               animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="flex-1 flex flex-col items-center justify-center relative px-6 py-12 lg:py-0"
+              className="flex-1 flex flex-col items-center justify-center relative px-6 py-12 lg:px-12 xl:px-20 lg:py-0"
               style={{
                 background: "linear-gradient(160deg, rgba(8,8,8,0.98) 0%, rgba(0,0,0,1) 100%)",
                 borderLeft: "1px solid rgba(255,255,255,0.06)",
@@ -439,10 +438,9 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.8 }}
-                  src="https://amg-building.com/wp-content/uploads/2025/04/Logo.svg"
+                  src="/logo.svg"
                   className="logo-white h-10 mb-4"
                   alt="AMG Building"
-                  crossOrigin="anonymous"
                 />
                 <motion.p
                   initial={{ opacity: 0 }}
@@ -455,7 +453,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
               </div>
 
               {/* Form wrapper */}
-              <div className="w-full max-w-[400px] glass-form p-8 relative overflow-hidden group">
+              <div className="w-full max-w-[440px] xl:max-w-[480px] glass-form p-8 xl:p-12 relative overflow-hidden group">
 
                 {/* Subtle top border glow */}
                 <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(197,160,89,0.4)] to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
