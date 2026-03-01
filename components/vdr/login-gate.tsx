@@ -239,7 +239,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.7 }}
                   src="/logo.svg"
-                  className="logo-white h-10 w-auto mb-6"
+                  className="logo-white h-7 w-auto mb-6"
                   alt="AMG Building"
                 />
 
@@ -250,7 +250,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.45, duration: 0.7 }}
                 >
-                  <h1 className="font-[var(--font-playfair)] text-5xl text-white leading-tight tracking-tight mb-2">
+                  <h1 className="font-[var(--font-playfair)] text-4xl text-white leading-tight tracking-tight mb-2">
                     Ambassadeur <span className="gold-text-gradient">6&amp;7</span>
                   </h1>
                   <p className="text-[10px] tracking-[0.35em] uppercase text-[#a3a3a3] mb-8">
@@ -384,12 +384,12 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                     <div className="w-8 h-8 rounded-lg bg-[rgba(197,160,89,0.1)] border border-[rgba(197,160,89,0.25)] flex items-center justify-center shrink-0">
                       <ShieldCheck className="w-4 h-4 text-[#C5A059]" />
                     </div>
-                    <span className="text-[9px] tracking-[0.3em] uppercase text-[#a3a3a3]">
-                      {t.login.portalLabel}
+                    <span className="text-[9px] tracking-[0.3em] uppercase text-[#C5A059] font-bold">
+                      {locale === "fr" ? "SALLE DE DONNÉES VIRTUELLE" : "VIRTUAL DATA ROOM"}
                     </span>
                   </div>
 
-                  <h2 className="font-[var(--font-playfair)] text-2xl text-white leading-tight mb-2">
+                  <h2 className="font-[var(--font-playfair)] text-3xl text-white leading-tight mb-2">
                     {locale === "fr" ? "Accès Sécurisé" : "Secure Access"}
                   </h2>
                   <p className="text-[11px] text-[#a3a3a3] leading-relaxed">
@@ -412,7 +412,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                       autoComplete="username"
                       value={identifier}
                       onChange={(e) => { setIdentifier(e.target.value); setError("") }}
-                      className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.1)] rounded-lg text-[#ffffff] py-3 px-4 text-sm focus:border-[#C5A059] focus:bg-[rgba(197,160,89,0.03)] focus:outline-none transition-all duration-250 font-[var(--font-jetbrains)] placeholder-[#2a2a2a]"
+                      className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl text-white py-3.5 px-4 text-sm focus:border-[#C5A059] focus:bg-[#C5A059]/5 focus:ring-1 focus:ring-[#C5A059]/50 focus:outline-none transition-all duration-300 font-[var(--font-jetbrains)] placeholder-white/20 shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
                       placeholder={t.login.emailPlaceholder}
                     />
                   </div>
@@ -428,7 +428,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                         autoComplete="current-password"
                         value={password}
                         onChange={(e) => { setPassword(e.target.value); setError("") }}
-                        className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.1)] rounded-lg text-[#ffffff] py-3 px-4 pr-11 text-sm focus:border-[#C5A059] focus:bg-[rgba(197,160,89,0.03)] focus:outline-none transition-all duration-250 font-[var(--font-jetbrains)] placeholder-[#2a2a2a]"
+                        className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl text-white py-3.5 px-4 pr-11 text-sm focus:border-[#C5A059] focus:bg-[#C5A059]/5 focus:ring-1 focus:ring-[#C5A059]/50 focus:outline-none transition-all duration-300 font-[var(--font-jetbrains)] placeholder-white/20 shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
                         placeholder={t.login.passwordPlaceholder}
                       />
                       <button
@@ -446,7 +446,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   </div>
 
                   {/* NDA checkbox */}
-                  <label className="flex items-start gap-3 cursor-pointer p-3.5 rounded-xl border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(197,160,89,0.2)] transition-colors duration-200 group mt-1">
+                  <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover:border-[rgba(197,160,89,0.3)] transition-colors duration-300 group mt-1 shadow-[0_4px_24px_rgba(0,0,0,0.2)]">
                     {/* Custom checkbox */}
                     <div className="relative mt-0.5 shrink-0" onClick={() => setAgreed(!agreed)}>
                       <div
@@ -482,7 +482,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                         animate={{ opacity: 1, y: 0, height: "auto" }}
                         exit={{   opacity: 0, y: -6, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-[rgba(239,68,68,0.07)] border border-[rgba(239,68,68,0.2)]"
+                        className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.3)] backdrop-blur-md"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-[#EF4444] shrink-0" />
                         <p className="text-[#EF4444] text-[11px] leading-relaxed">{error}</p>
@@ -493,7 +493,7 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="btn-gold w-full mt-2"
+                    className="btn-gold w-full mt-2 py-3.5 rounded-xl font-bold tracking-wide shadow-[0_0_20px_rgba(197,160,89,0.2)] hover:shadow-[0_0_30px_rgba(197,160,89,0.4)] transition-all duration-300"
                     disabled={loading}
                   >
                     <span className="flex items-center justify-center gap-2">
