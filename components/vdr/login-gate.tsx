@@ -370,9 +370,9 @@ export function LoginGate({
                   transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
                 >
                   <h1 className="font-[var(--font-playfair)] text-[2.75rem] lg:text-[3.25rem] text-white leading-[1.05] tracking-tight mb-3 uppercase" style={{ textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>
-                    SECURE INVESTOR{" "}
+                    AMBASSADEUR{" "}
                     <span className="gold-text-gradient font-medium drop-shadow-[0_0_10px_rgba(197,160,89,0.3)]">
-                      VDR
+                      6&7
                     </span>
                   </h1>
                   <div className="flex items-center gap-3 mb-6">
@@ -385,48 +385,22 @@ export function LoginGate({
                       </span>
                     </div>
                   </div>
-                  <p className="font-[var(--font-playfair)] text-[14px] italic text-[#C5A059] opacity-90 tracking-wide max-w-md leading-relaxed">
-                    {locale === "fr"
-                      ? "« Un modèle d’investissement exclusif et souverain, conçu spécifiquement pour une élite de capital-investissement et de family offices. »"
-                      : '"An exclusive and sovereign investment model, specifically engineered for private equity elite and family offices."'}
+                  <p className="font-[var(--font-playfair)] text-[14px] italic text-[#C5A059] opacity-90 tracking-wide max-w-md leading-relaxed mb-4">
+                    « L'immobilier d'exception ne se contente pas de traverser le temps, il le redéfinit. »
+                  </p>
+                  <p className="font-[var(--font-playfair)] text-[12px] text-[#a3a3a3] opacity-80 tracking-wide max-w-md leading-relaxed">
+                    Un modèle d'investissement exclusif et souverain, conçu spécifiquement pour une élite de capital-investissement et de family offices.
                   </p>
                 </motion.div>
               </div>
 
-              {/* Middle: Investment stats & Value Proposition */}
+              {/* Middle: Investment stats */}
               <motion.div
                 initial={{ opacity: 0, filter: "blur(4px)" }}
                 animate={{ opacity: 1, filter: "blur(0px)" }}
                 transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
                 className="relative z-10 max-w-md w-full"
               >
-                <div className="mb-8">
-                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#C5A059] mb-4 opacity-90 font-semibold border-l-2 border-[#C5A059] pl-3">
-                    {locale === "fr"
-                      ? "Proposition de Valeur"
-                      : "Value Proposition"}
-                  </p>
-                  <ul className="space-y-3">
-                    {[
-                      locale === "fr"
-                        ? "Recyclage VEFA avec levier artificiel sans dette bancaire"
-                        : "VEFA recycling with artificial leverage and zero bank debt",
-                      locale === "fr"
-                        ? "Couverture Euro-Pegged (TPI) atténuant le risque de change"
-                        : "Euro-Pegged Capital Liquidity (TPI) mitigating FX risk",
-                      locale === "fr"
-                        ? "Avantage fiscal attractif via structure OPCI & IS réduit"
-                        : "Compelling tax advantage via OPCI structure & reduced CIT",
-                    ].map((feat, idx) => (
-                      <li key={idx} className="flex items-start gap-3 p-3 rounded-lg border border-[rgba(255,255,255,0.03)] bg-[rgba(255,255,255,0.01)] hover:bg-[rgba(197,160,89,0.02)] hover:border-[rgba(197,160,89,0.15)] transition-all duration-300">
-                        <div className="w-1.5 h-1.5 rounded-sm bg-[rgba(197,160,89,0.5)] mt-1.5 shrink-0" />
-                        <span className="text-[#d4d4d4] text-[12px] leading-relaxed font-light tracking-wide">
-                          {feat}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
 
                 <div className="space-y-1">
                   {leftStats.map((stat, i) => (
@@ -487,14 +461,24 @@ export function LoginGate({
               initial={{ opacity: 0, x: 50, filter: "blur(10px)" }}
               animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="flex-1 flex flex-col items-center justify-center relative px-6 py-12 lg:px-12 xl:px-20 lg:py-0"
+              className="flex-1 flex flex-col items-center justify-center relative px-6 py-12 lg:px-12 xl:px-20 lg:py-0 overflow-hidden"
               style={{
-                background:
-                  "radial-gradient(circle at 70% 30%, rgba(15,15,15,1) 0%, rgba(0,0,0,1) 100%)",
                 borderLeft: "1px solid rgba(255,255,255,0.06)",
                 boxShadow: "-10px 0 30px rgba(0,0,0,0.5)"
               }}
             >
+              {/* Video Background */}
+              <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+                <iframe
+                  src="https://player.mediadelivery.net/embed/555558/390af435-4a2d-48da-9c6f-fc34ad55482f?autoplay=true&loop=true&muted=true&preload=true&controls=0&playsinline=true"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  className="w-full h-full scale-[1.15] opacity-90 object-cover"
+                  style={{ border: 'none' }}
+                ></iframe>
+                {/* Premium Dark Overlay */}
+                <div className="absolute inset-0 bg-black/60 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
+              </div>
               {/* Subtle ambient light on the form side */}
               <div
                 className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none mix-blend-screen opacity-20"
@@ -535,8 +519,19 @@ export function LoginGate({
                 </motion.p>
               </div>
 
+
+              {/* Added SECURE INVESTOR VDR inside right panel, above form */}
+              <div className="relative z-10 w-full max-w-[380px] xl:max-w-[440px] flex flex-col items-center mb-6 text-center">
+                 <h2 className="font-[var(--font-playfair)] text-2xl lg:text-3xl text-white tracking-tight uppercase mb-1" style={{ textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>
+                    SECURE INVESTOR{" "}
+                    <span className="gold-text-gradient font-medium drop-shadow-[0_0_10px_rgba(197,160,89,0.3)]">
+                      VDR
+                    </span>
+                 </h2>
+              </div>
+
               {/* Form wrapper */}
-              <div className="w-full max-w-[380px] xl:max-w-[440px] relative overflow-hidden group rounded-2xl p-8 xl:p-12"
+              <div className="w-full max-w-[380px] xl:max-w-[440px] relative overflow-hidden group rounded-2xl p-8 xl:p-12 z-10"
                  style={{
                    background: "linear-gradient(145deg, rgba(20,20,20,0.8) 0%, rgba(5,5,5,0.9) 100%)",
                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(197,160,89,0.03)",
