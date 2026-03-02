@@ -88,6 +88,15 @@ function getCategoryInfo(type: VDRAccount["avatarType"], locale: Locale) {
 function GoldGeometry() {
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+      {/* Dynamic Grid Background */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(to right, #C5A059 1px, transparent 1px),
+                            linear-gradient(to bottom, #C5A059 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }}
+      />
       <motion.svg
         className="absolute inset-0 w-full h-full"
         xmlns="http://www.w3.org/2000/svg"
@@ -99,124 +108,72 @@ function GoldGeometry() {
         <defs>
           <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#C5A059" stopOpacity="0" />
-            <stop offset="50%" stopColor="#C5A059" stopOpacity="0.15" />
+            <stop offset="50%" stopColor="#C5A059" stopOpacity="0.3" />
             <stop offset="100%" stopColor="#C5A059" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#DFBD69" stopOpacity="0" />
-            <stop offset="50%" stopColor="#DFBD69" stopOpacity="0.08" />
+            <stop offset="50%" stopColor="#DFBD69" stopOpacity="0.15" />
             <stop offset="100%" stopColor="#DFBD69" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="lgV" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#C5A059" stopOpacity="0" />
-            <stop offset="50%" stopColor="#C5A059" stopOpacity="0.06" />
+            <stop offset="50%" stopColor="#C5A059" stopOpacity="0.1" />
             <stop offset="100%" stopColor="#C5A059" stopOpacity="0" />
           </linearGradient>
         </defs>
 
         {/* Animated Diagonal lines */}
         <motion.line
-          x1="-10%"
-          y1="110%"
-          x2="110%"
-          y2="-10%"
-          stroke="url(#lg1)"
-          strokeWidth="1"
+          x1="-10%" y1="110%" x2="110%" y2="-10%"
+          stroke="url(#lg1)" strokeWidth="1.5"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 3, ease: "easeInOut" }}
         />
         <motion.line
-          x1="-10%"
-          y1="90%"
-          x2="90%"
-          y2="-10%"
-          stroke="url(#lg2)"
-          strokeWidth="1"
+          x1="-10%" y1="90%" x2="90%" y2="-10%"
+          stroke="url(#lg2)" strokeWidth="1"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 3.5, ease: "easeInOut", delay: 0.2 }}
         />
         <motion.line
-          x1="-10%"
-          y1="70%"
-          x2="70%"
-          y2="-10%"
-          stroke="url(#lg1)"
-          strokeWidth="0.6"
+          x1="-10%" y1="70%" x2="70%" y2="-10%"
+          stroke="url(#lg1)" strokeWidth="0.8"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 4, ease: "easeInOut", delay: 0.4 }}
         />
-        <motion.line
-          x1="-10%"
-          y1="130%"
-          x2="130%"
-          y2="-10%"
-          stroke="url(#lg2)"
-          strokeWidth="0.6"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 4.5, ease: "easeInOut", delay: 0.6 }}
+
+        {/* Radar/Sonar Circle Sweep Effect */}
+        <motion.circle
+          cx="30%" cy="50%" r="20%"
+          stroke="url(#lg1)" strokeWidth="0.5" fill="none"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1.5, opacity: 0 }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.circle
+          cx="30%" cy="50%" r="20%"
+          stroke="url(#lg2)" strokeWidth="0.5" fill="none"
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1.2, opacity: 0 }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 2 }}
         />
 
-        {/* Animated Grid lines */}
-        <motion.line
-          x1="33%"
-          y1="0%"
-          x2="33%"
-          y2="100%"
-          stroke="url(#lgV)"
-          strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 2.5, ease: "easeInOut", delay: 0.8 }}
-        />
-        <motion.line
-          x1="67%"
-          y1="0%"
-          x2="67%"
-          y2="100%"
-          stroke="url(#lgV)"
-          strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 2.5, ease: "easeInOut", delay: 1 }}
-        />
-        <motion.line
-          x1="0%"
-          y1="33%"
-          x2="100%"
-          y2="33%"
-          stroke="rgba(197,160,89,0.05)"
-          strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 2.5, ease: "easeInOut", delay: 1.2 }}
-        />
-        <motion.line
-          x1="0%"
-          y1="67%"
-          x2="100%"
-          y2="67%"
-          stroke="rgba(197,160,89,0.05)"
-          strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 2.5, ease: "easeInOut", delay: 1.4 }}
-        />
       </motion.svg>
 
-      {/* Slow pulsing glows */}
+      {/* Slow pulsing glows with richer colors */}
       <motion.div
         className="absolute top-[20%] left-[15%] w-[800px] h-[800px] rounded-full mix-blend-screen"
         style={{
           background:
-            "radial-gradient(circle, rgba(197,160,89,0.08) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(197,160,89,0.12) 0%, rgba(197,160,89,0.02) 40%, transparent 70%)",
         }}
         animate={{
-          scale: [1, 1.05, 1],
-          opacity: [0.7, 1, 0.7],
+          scale: [1, 1.1, 1],
+          opacity: [0.6, 1, 0.6],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -224,11 +181,11 @@ function GoldGeometry() {
         className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full mix-blend-screen"
         style={{
           background:
-            "radial-gradient(circle, rgba(223,189,105,0.06) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(223,189,105,0.08) 0%, rgba(223,189,105,0.01) 50%, transparent 70%)",
         }}
         animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.6, 0.9, 0.6],
+          scale: [1, 1.2, 1],
+          opacity: [0.5, 0.9, 0.5],
         }}
         transition={{
           duration: 10,
@@ -365,6 +322,9 @@ export function LoginGate({
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
               className="hidden lg:flex lg:w-[50%] relative flex-col justify-between p-12 xl:p-20 overflow-hidden"
+              style={{
+                background: "radial-gradient(circle at 30% 50%, rgba(20,20,20,1) 0%, rgba(2,4,6,1) 100%)"
+              }}
             >
               {/* Animated geometry */}
               <GoldGeometry />
@@ -409,18 +369,22 @@ export function LoginGate({
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
                 >
-                  <h1 className="font-[var(--font-playfair)] text-[2.5rem] lg:text-[2.75rem] text-white leading-[1.1] tracking-tight mb-2 uppercase">
+                  <h1 className="font-[var(--font-playfair)] text-[2.75rem] lg:text-[3.25rem] text-white leading-[1.05] tracking-tight mb-3 uppercase" style={{ textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>
                     SECURE INVESTOR{" "}
-                    <span className="gold-text-gradient font-medium">
+                    <span className="gold-text-gradient font-medium drop-shadow-[0_0_10px_rgba(197,160,89,0.3)]">
                       VDR
                     </span>
                   </h1>
-                  <p className="text-[10px] tracking-[0.4em] uppercase text-[#a3a3a3] mb-5 font-medium flex items-center gap-2">
-                    <Lock className="w-3 h-3 text-[#C5A059]" />
-                    {locale === "fr"
-                      ? "Accès Restreint"
-                      : "Restricted Access"}
-                  </p>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(197,160,89,0.2)] bg-[rgba(197,160,89,0.05)] backdrop-blur-sm">
+                      <Lock className="w-3 h-3 text-[#C5A059]" />
+                      <span className="text-[9px] tracking-[0.4em] uppercase text-[#C5A059] font-medium">
+                        {locale === "fr"
+                          ? "Accès Restreint"
+                          : "Restricted Access"}
+                      </span>
+                    </div>
+                  </div>
                   <p className="font-[var(--font-playfair)] text-[14px] italic text-[#C5A059] opacity-90 tracking-wide max-w-md leading-relaxed">
                     {locale === "fr"
                       ? "« Un modèle d’investissement exclusif et souverain, conçu spécifiquement pour une élite de capital-investissement et de family offices. »"
@@ -454,7 +418,7 @@ export function LoginGate({
                         ? "Avantage fiscal attractif via structure OPCI & IS réduit"
                         : "Compelling tax advantage via OPCI structure & reduced CIT",
                     ].map((feat, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
+                      <li key={idx} className="flex items-start gap-3 p-3 rounded-lg border border-[rgba(255,255,255,0.03)] bg-[rgba(255,255,255,0.01)] hover:bg-[rgba(197,160,89,0.02)] hover:border-[rgba(197,160,89,0.15)] transition-all duration-300">
                         <div className="w-1.5 h-1.5 rounded-sm bg-[rgba(197,160,89,0.5)] mt-1.5 shrink-0" />
                         <span className="text-[#d4d4d4] text-[12px] leading-relaxed font-light tracking-wide">
                           {feat}
@@ -475,7 +439,7 @@ export function LoginGate({
                         duration: 0.6,
                         ease: "easeOut",
                       }}
-                      className="flex items-center justify-between py-3 border-b border-[rgba(255,255,255,0.08)] group hover:border-[rgba(197,160,89,0.3)] transition-colors duration-300"
+                      className="flex items-center justify-between py-4 px-4 rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(0,0,0,0.2)] group hover:bg-[rgba(197,160,89,0.03)] hover:border-[rgba(197,160,89,0.2)] hover:shadow-[0_4px_20px_rgba(197,160,89,0.05)] transition-all duration-400 mb-2"
                     >
                       <div>
                         <p className="text-[10px] tracking-[0.1em] uppercase text-[#a3a3a3] group-hover:text-white transition-colors duration-300">
@@ -526,8 +490,9 @@ export function LoginGate({
               className="flex-1 flex flex-col items-center justify-center relative px-6 py-12 lg:px-12 xl:px-20 lg:py-0"
               style={{
                 background:
-                  "linear-gradient(160deg, rgba(8,8,8,0.98) 0%, rgba(0,0,0,1) 100%)",
+                  "radial-gradient(circle at 70% 30%, rgba(15,15,15,1) 0%, rgba(0,0,0,1) 100%)",
                 borderLeft: "1px solid rgba(255,255,255,0.06)",
+                boxShadow: "-10px 0 30px rgba(0,0,0,0.5)"
               }}
             >
               {/* Subtle ambient light on the form side */}
@@ -571,7 +536,13 @@ export function LoginGate({
               </div>
 
               {/* Form wrapper */}
-              <div className="w-full max-w-[380px] xl:max-w-[420px] glass-form p-8 xl:p-10 relative overflow-hidden group">
+              <div className="w-full max-w-[380px] xl:max-w-[440px] relative overflow-hidden group rounded-2xl p-8 xl:p-12"
+                 style={{
+                   background: "linear-gradient(145deg, rgba(20,20,20,0.8) 0%, rgba(5,5,5,0.9) 100%)",
+                   boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(197,160,89,0.03)",
+                   border: "1px solid rgba(255,255,255,0.08)",
+                   backdropFilter: "blur(20px)"
+                 }}>
                 {/* Subtle top border glow */}
                 <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(197,160,89,0.4)] to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-[#C5A059] blur-[20px] opacity-20 pointer-events-none group-hover:opacity-40 transition-opacity duration-500" />
@@ -614,7 +585,7 @@ export function LoginGate({
                         setIdentifier(e.target.value);
                         setError("");
                       }}
-                      className="peer w-full bg-transparent border-b border-[rgba(255,255,255,0.2)] text-[#ffffff] pt-5 pb-2 px-1 text-sm focus:border-[#C5A059] focus:outline-none transition-colors duration-300 font-[var(--font-jetbrains)] placeholder-transparent"
+                      className="peer w-full bg-[rgba(0,0,0,0.2)] border-b border-[rgba(255,255,255,0.1)] rounded-t-lg text-[#ffffff] pt-6 pb-2 px-3 text-sm focus:border-[#C5A059] focus:bg-[rgba(197,160,89,0.02)] focus:outline-none transition-all duration-300 font-[var(--font-jetbrains)] placeholder-transparent shadow-[inset_0_1px_4px_rgba(0,0,0,0.2)]"
                       placeholder={t.login.emailPlaceholder}
                       id="identifier"
                     />
@@ -637,7 +608,7 @@ export function LoginGate({
                         setPassword(e.target.value);
                         setError("");
                       }}
-                      className="peer w-full bg-transparent border-b border-[rgba(255,255,255,0.2)] text-[#ffffff] pt-5 pb-2 px-1 pr-8 text-sm focus:border-[#C5A059] focus:outline-none transition-colors duration-300 font-[var(--font-jetbrains)] placeholder-transparent"
+                      className="peer w-full bg-[rgba(0,0,0,0.2)] border-b border-[rgba(255,255,255,0.1)] rounded-t-lg text-[#ffffff] pt-6 pb-2 px-3 pr-10 text-sm focus:border-[#C5A059] focus:bg-[rgba(197,160,89,0.02)] focus:outline-none transition-all duration-300 font-[var(--font-jetbrains)] placeholder-transparent shadow-[inset_0_1px_4px_rgba(0,0,0,0.2)]"
                       placeholder={t.login.passwordPlaceholder}
                       id="password"
                     />
@@ -651,7 +622,7 @@ export function LoginGate({
                       type="button"
                       onClick={() => setShowPw(!showPw)}
                       tabIndex={-1}
-                      className="absolute right-1 top-1/2 text-[rgba(255,255,255,0.3)] hover:text-[#C5A059] transition-colors duration-200"
+                      className="absolute right-3 top-5 text-[rgba(255,255,255,0.3)] hover:text-[#C5A059] transition-colors duration-200"
                       aria-label={showPw ? "Hide password" : "Show password"}
                     >
                       {showPw ? (
@@ -724,11 +695,17 @@ export function LoginGate({
 
                   {/* Submit */}
                   <button
-                    type="submit"
-                    className="btn-gold w-full mt-4 h-12 flex items-center justify-center tracking-[0.2em] shadow-[0_0_20px_rgba(197,160,89,0.15)] hover:shadow-[0_0_30px_rgba(197,160,89,0.3)] transition-all duration-300"
-                    disabled={loading}
-                  >
-                    <AnimatePresence mode="wait">
+                      type="submit"
+                      className="relative w-full mt-6 h-12 flex items-center justify-center tracking-[0.25em] text-[10px] font-bold uppercase overflow-hidden rounded-lg group transition-all duration-500"
+                      style={{
+                        background: "linear-gradient(135deg, #DFBD69 0%, #C5A059 50%, #927339 100%)",
+                        color: "#000",
+                        boxShadow: "0 10px 20px -5px rgba(197,160,89,0.4), inset 0 1px 0 rgba(255,255,255,0.4)"
+                      }}
+                      disabled={loading}
+                    >
+                      <div className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.4)] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-[1.5s] ease-in-out pointer-events-none" />
+                      <AnimatePresence mode="wait">
                       {loading ? (
                         <motion.span
                           key="loading"
