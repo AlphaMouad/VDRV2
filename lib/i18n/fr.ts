@@ -451,6 +451,17 @@ export const fr: Dictionary = {
     doc4Name: 'Statuts de la SARL SPV',
     doc4Desc: 'Statuts constitutifs du vehicule de projet, droits des associes et mecanismes de gouvernance',
   },
+  stickyFooter: {
+    recentActivity: 'Activite Recente',
+    cta: 'Securiser l\'Allocation',
+    ticker: [
+      'Family Office (UK) a reserve une allocation de 2,5M€',
+      'Fonds REPE (CH) a execute une souscription de 5,0M€',
+      'UHNWI (GCC) s\'est engage a hauteur de 1,2M€',
+      'Soft Circle : 4,2M€ engages ces dernieres 48h',
+      'Nouvel Acces Due Diligence Accorde : Multi-Family Office (US)',
+    ],
+  },
   glossary: {
     irr: {
       term: 'TRI',

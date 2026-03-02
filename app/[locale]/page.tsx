@@ -14,6 +14,7 @@ import { Fortress } from "@/components/vdr/fortress"
 import { Repatriation } from "@/components/vdr/repatriation"
 import { Syndication } from "@/components/vdr/syndication"
 import { StatsRibbon } from "@/components/vdr/stats-ribbon"
+import { StickyActionFooter } from "@/components/vdr/sticky-action-footer"
 import { GlossaryProvider } from "@/lib/i18n/glossary-context"
 import { getDict, type Locale } from "@/lib/i18n"
 import { AnimatePresence, motion } from "framer-motion"
@@ -26,6 +27,7 @@ export default function VDRApp() {
   const t = getDict(locale)
 
   const [account, setAccount] = useState<VDRAccount | null>(null)
+
   const [activeView, setActiveView] = useState<ViewId>("dashboard")
   const [macro, setMacro] = useState<MacroState>(defaultMacro)
 
@@ -113,7 +115,7 @@ export default function VDRApp() {
           <StatsRibbon macro={macro} t={t} />
 
           {/* View Content */}
-          <div className="p-4 lg:p-8">
+          <div className="p-4 lg:p-8 pb-24">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeView}
@@ -143,6 +145,13 @@ export default function VDRApp() {
               €{(macro.totalVillas * macro.gdcPerVilla).toLocaleString()} {t.common.footer.syndication}
             </p>
           </footer>
+
+          <StickyActionFooter
+            t={t}
+            locale={locale}
+            onNavigate={setActiveView}
+            activeView={activeView}
+          />
         </main>
       </div>
     </GlossaryProvider>
