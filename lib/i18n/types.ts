@@ -442,5 +442,10 @@ export interface Dictionary {
     doc4Name: string
     doc4Desc: string
   }
+  stickyFooter: {
+    recentActivity: string
+    cta: string
+    ticker: string[]
+  }
   glossary: Record<string, GlossaryEntry>
 }

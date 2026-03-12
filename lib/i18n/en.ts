@@ -503,5 +503,16 @@ export const en: Dictionary = {
     doc4Desc:
       'Land title registry confirming freehold ownership free of encumbrance',
   },
+  stickyFooter: {
+    recentActivity: 'Recent Activity',
+    cta: 'Secure Allocation',
+    ticker: [
+      'Family Office (UK) soft circled €2.5M allocation',
+      'REPE Fund (CH) executed subscription for €5.0M',
+      'UHNWI (GCC) committed €1.2M to LP pool',
+      'Soft Circle: €4.2M committed in last 48h',
+      'New Due Diligence Access Granted: Multi-Family Office (US)',
+    ],
+  },
   glossary: glossaryData,
 }
