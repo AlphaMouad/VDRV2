@@ -2,7 +2,7 @@
 
 import { Reveal } from "./reveal"
 import { VideoExplainer } from "./video-explainer"
-import { Settings2, Globe, Calendar, Percent, Building2, Banknote, Lock, Users2 } from "lucide-react"
+import { Settings2, Globe, Calendar, Percent, Building2, Banknote, Lock, Users2, Download } from "lucide-react"
 import type { Dictionary } from "@/lib/i18n/types"
 import type { Locale } from "@/lib/i18n"
 
@@ -123,6 +123,40 @@ export function MacroAssumptions({ macro, onChange, t, locale }: MacroAssumption
   const grossMargin = ((macro.avgVillaGDV - macro.gdcPerVilla) / macro.gdcPerVilla * 100).toFixed(0)
   const vefaTotal = macro.vefaReservation + macro.vefaFoundation + macro.vefaShell + macro.vefaFitOut + macro.vefaHandover
 
+  const downloadCSV = () => {
+    const headers = ["Parameter", "Value"]
+    const rows = [
+      ["Project Duration (Months)", macro.projectMonths],
+      ["Total Villas", macro.totalVillas],
+      ["Avg Villa GDV", macro.avgVillaGDV],
+      ["GDC per Villa", macro.gdcPerVilla],
+      ["VEFA Reservation (%)", macro.vefaReservation],
+      ["VEFA Foundation (%)", macro.vefaFoundation],
+      ["VEFA Shell (%)", macro.vefaShell],
+      ["VEFA Fit-Out (%)", macro.vefaFitOut],
+      ["VEFA Handover (%)", macro.vefaHandover],
+      ["TPI Rate (%)", macro.tpiRate],
+      ["OpEx Ratio (%)", macro.opexRatio],
+      ["FX USD/MAD", macro.fxUsdMad],
+      ["FX GBP/MAD", macro.fxGbpMad],
+      ["FX EUR/MAD", macro.fxEurMad],
+      ["Min Ticket Size", macro.minTicketSize],
+      ["Max Ticket Size", macro.maxTicketSize],
+    ]
+
+    const csvContent = "data:text/csv;charset=utf-8,"
+      + headers.join(",") + "\n"
+      + rows.map(e => e.join(",")).join("\n")
+
+    const encodedUri = encodeURI(csvContent)
+    const link = document.createElement("a")
+    link.setAttribute("href", encodedUri)
+    link.setAttribute("download", "ambassadeur_live_model.csv")
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <div>
       <VideoExplainer
@@ -130,6 +164,17 @@ export function MacroAssumptions({ macro, onChange, t, locale }: MacroAssumption
         subtitle={t.macroView.videoSubtitle}
         locale={locale}
       />
+
+      {/* Analyst Trojan Horse */}
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={downloadCSV}
+          className="flex items-center gap-2 px-4 py-2 bg-[#C5A059] text-black rounded-lg font-bold text-xs uppercase tracking-wider hover:bg-[#DFBD69] transition-all"
+        >
+          <Download className="w-4 h-4" />
+          Download Live Model (.CSV)
+        </button>
+      </div>
 
       {/* Summary Metrics */}
       <Reveal delay={0.1}>

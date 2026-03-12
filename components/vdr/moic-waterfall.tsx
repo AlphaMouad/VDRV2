@@ -16,6 +16,7 @@ import {
 } from "recharts"
 import { Sparkles, AlertTriangle, ShieldCheck } from "lucide-react"
 import { Explain } from "./elite-explainer"
+import { EliteTooltip } from "./chart-tooltip"
 import type { Dictionary } from "@/lib/i18n/types"
 import type { Locale } from "@/lib/i18n"
 
@@ -149,6 +150,29 @@ export function MoicWaterfall({ macro, t, locale }: MoicWaterfallProps) {
             <Sparkles className="w-3 h-3" />
             <Explain k="musharakah">{w.halalBadge}</Explain>
           </span>
+        </div>
+      </Reveal>
+
+      {/* Alignment Highlights (Neon Signs) */}
+      <Reveal delay={0.12}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="glass-form p-6 border-l-4 border-[#10B981] bg-[rgba(16,185,129,0.05)]">
+             <div className="flex items-center gap-3 mb-2">
+               <ShieldCheck className="w-6 h-6 text-[#10B981]" />
+               <h3 className="text-sm font-bold text-[#ffffff] uppercase tracking-wider">{w.tier1Priority}</h3>
+             </div>
+             <p className="text-xl font-mono font-bold text-[#10B981] mb-1">{w.capitalReturn}</p>
+             <p className="text-xs text-[#a3a3a3]">{w.beforeGpProfit}</p>
+          </div>
+
+          <div className="glass-form p-6 border-l-4 border-[#C5A059] bg-[rgba(197,160,89,0.05)]">
+             <div className="flex items-center gap-3 mb-2">
+               <AlertTriangle className="w-6 h-6 text-[#C5A059]" />
+               <h3 className="text-sm font-bold text-[#ffffff] uppercase tracking-wider">{w.downsideProtection}</h3>
+             </div>
+             <p className="text-xl font-mono font-bold text-[#C5A059] mb-1">{w.lossProvision9010}</p>
+             <p className="text-xs text-[#a3a3a3]">{w.gpAbsorbs}</p>
+          </div>
         </div>
       </Reveal>
 
@@ -286,14 +310,8 @@ export function MoicWaterfall({ macro, t, locale }: MoicWaterfallProps) {
                   axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
                 />
                 <Tooltip
-                  contentStyle={{
-                    background: "rgba(10,10,10,0.95)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    borderRadius: 8,
-                    color: "#fff",
-                    fontFamily: "var(--font-jetbrains)",
-                    fontSize: 11,
-                  }}
+                  content={<EliteTooltip />}
+                  cursor={{ fill: 'rgba(197, 160, 89, 0.05)' }}
                   formatter={(value: number, name: string) => [
                     `€${Math.round(value).toLocaleString()}`,
                     name === "lp" ? w.lpShareLabel : w.gpShareLabel,

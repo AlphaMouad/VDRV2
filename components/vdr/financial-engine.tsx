@@ -21,6 +21,7 @@ import {
 } from "recharts"
 import { ToggleLeft, ToggleRight, Zap, ArrowDown } from "lucide-react"
 import { Explain } from "./elite-explainer"
+import { EliteTooltip } from "./chart-tooltip"
 
 /**
  * Source-accurate capital call schedule:
@@ -118,6 +119,7 @@ function generateChartData(
       vefaInflow: Math.round(monthlyVEFA[m]),
       cumulativeOutflow: -Math.round(cumulativeOutflow),
       netBalance: Math.round(netPosition),
+      traditionalBalance: -Math.round(cumulativeOutflow),
     })
   }
 
@@ -290,14 +292,8 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
                   axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
                 />
                 <Tooltip
-                  contentStyle={{
-                    background: "rgba(10,10,10,0.95)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    borderRadius: 8,
-                    color: "#fff",
-                    fontFamily: "var(--font-jetbrains)",
-                    fontSize: 11,
-                  }}
+                  content={<EliteTooltip />}
+                  cursor={{ stroke: 'rgba(255,255,255,0.2)', strokeWidth: 1, strokeDasharray: '4 4' }}
                   formatter={(value: number, name: string) => {
                     const labels: Record<string, string> = {
                       outflow: t.engine.monthlyOutflow,
@@ -316,6 +312,7 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
                       cumulativeOutflow: t.engine.istisnaOutflow,
                       vefaInflow: t.engine.vefaRetailPayments,
                       netBalance: t.engine.netSpvBalance,
+                      traditionalBalance: "Traditional Bank J-Curve",
                     }
                     return labels[value] || value
                   }}
@@ -333,10 +330,23 @@ export function FinancialEngine({ macro, t, locale }: FinancialEngineProps) {
                 <Bar dataKey="vefaInflow" fill="#10B981" radius={[3, 3, 0, 0]} barSize={10} animationDuration={800} animationEasing="ease-out" />
                 <Line
                   type="monotone"
+                  dataKey="traditionalBalance"
+                  stroke="#EF4444"
+                  strokeDasharray="5 5"
+                  strokeWidth={2}
+                  dot={false}
+                  activeDot={{ r: 4, fill: '#EF4444', stroke: '#000', strokeWidth: 1 }}
+                  name="Traditional Bank J-Curve"
+                  animationDuration={800}
+                  animationEasing="ease-out"
+                />
+                <Line
+                  type="monotone"
                   dataKey="netBalance"
                   stroke="#C5A059"
                   strokeWidth={2.5}
                   dot={false}
+                  activeDot={{ r: 6, fill: '#C5A059', stroke: '#000', strokeWidth: 2 }}
                   animationDuration={800}
                   animationEasing="ease-out"
                 />

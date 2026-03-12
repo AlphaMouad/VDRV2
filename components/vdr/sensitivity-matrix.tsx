@@ -92,8 +92,16 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
   const [customPriceAdj, setCustomPriceAdj] = useState(0)
   const [showCustom, setShowCustom] = useState(false)
 
+  const handleDoomsday = () => {
+    // "Doomsday Auto-Solver": animate/set sliders to break-even
+    // Simulating a crash where MOIC hits ~1.0x
+    setCustomSellThrough(42) // Sales drop significantly
+    setCustomPriceAdj(-18)   // Price drops 18%
+    setShowCustom(true)
+  }
+
   const scenarioNames: Record<string, string> = {
-    bull: sv.bullName, base: sv.baseName, bear: sv.bearName, catastrophic: sv.catastrophicName,
+    bull: sv.bullName, base: sv.baseName, bear: sv.bearName, catastrophic: "Legacy Asset Pivot",
   }
   const scenarioDescs: Record<string, string> = {
     bull: sv.bullDesc, base: sv.baseDesc, bear: sv.bearDesc, catastrophic: sv.catastrophicDesc,
@@ -499,16 +507,25 @@ export function SensitivityMatrix({ macro, t, locale }: SensitivityMatrixProps) 
                 {sv.customTitle}
               </h3>
             </div>
-            <button
-              onClick={() => setShowCustom(!showCustom)}
-              className={`text-xs font-semibold px-4 py-2 rounded-lg transition-all duration-300 ${
-                showCustom
-                  ? "bg-[rgba(139,92,246,0.15)] text-[#8B5CF6] border border-[#8B5CF6]"
-                  : "text-[#a3a3a3] border border-[rgba(255,255,255,0.12)] hover:text-[#ffffff]"
-              }`}
-            >
-              {showCustom ? sv.hideStressTest : sv.openStressTest}
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleDoomsday}
+                className="text-xs font-bold px-4 py-2 rounded-lg bg-[rgba(239,68,68,0.15)] text-[#EF4444] border border-[#EF4444] hover:bg-[rgba(239,68,68,0.25)] transition-all uppercase tracking-wider"
+              >
+                <AlertTriangle className="w-3 h-3 inline mr-2" />
+                {sv.stressTest}
+              </button>
+              <button
+                onClick={() => setShowCustom(!showCustom)}
+                className={`text-xs font-semibold px-4 py-2 rounded-lg transition-all duration-300 ${
+                  showCustom
+                    ? "bg-[rgba(139,92,246,0.15)] text-[#8B5CF6] border border-[#8B5CF6]"
+                    : "text-[#a3a3a3] border border-[rgba(255,255,255,0.12)] hover:text-[#ffffff]"
+                }`}
+              >
+                {showCustom ? sv.hideStressTest : sv.openStressTest}
+              </button>
+            </div>
           </div>
 
           {showCustom && (

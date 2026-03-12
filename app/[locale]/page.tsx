@@ -18,6 +18,10 @@ import { GlossaryProvider } from "@/lib/i18n/glossary-context"
 import { getDict, type Locale } from "@/lib/i18n"
 import { AnimatePresence, motion } from "framer-motion"
 import { Globe } from "lucide-react"
+import { CapitalStackProgress } from "@/components/vdr/capital-stack-progress"
+import { StickyActionFooter } from "@/components/vdr/sticky-action-footer"
+import { calcTotals, calcWaterfall, calcIrrApprox } from "@/lib/calculations"
+import { useEffect } from "react"
 
 export default function VDRApp() {
   const params = useParams<{ locale: string }>()
@@ -28,6 +32,26 @@ export default function VDRApp() {
   const [account, setAccount] = useState<VDRAccount | null>(null)
   const [activeView, setActiveView] = useState<ViewId>("dashboard")
   const [macro, setMacro] = useState<MacroState>(defaultMacro)
+  const [userTicket, setUserTicket] = useState(0)
+
+  // ── Global Calculations for Sticky Footer ──
+  const { totalGDV } = calcTotals(macro)
+  const waterfall = calcWaterfall(totalGDV, macro)
+  const years = macro.projectMonths / 12
+  const currentIrr = calcIrrApprox(waterfall.lpMOIC, years)
+  const currentMoic = waterfall.lpMOIC
+  const currentLpProfit = Math.max(0, waterfall.totalLP - (macro.totalVillas * macro.gdcPerVilla * 0.9))
+
+  // ── Mock Telemetry ──
+  useEffect(() => {
+    const startTime = Date.now()
+    const timer = setInterval(() => {
+      // In production, send to PostHog/Mixpanel
+      console.log(`[Telemetry] User active on view: ${activeView} for ${(Date.now() - startTime) / 1000}s`)
+      console.log(`[Telemetry] Macro State snapshot:`, macro)
+    }, 15000)
+    return () => clearInterval(timer)
+  }, [activeView, macro])
 
   const switchLocale = () => {
     const target = locale === "en" ? "fr" : "en"
@@ -67,43 +91,46 @@ export default function VDRApp() {
           t={t}
         />
 
-        <main className="lg:ml-64 min-h-screen">
-          {/* Top Bar */}
-          <header className="sticky top-0 z-30 border-b border-[rgba(255,255,255,0.06)] bg-[rgba(0,0,0,0.8)] backdrop-blur-xl">
-            <div className="flex items-center justify-between px-4 lg:px-8 py-4">
-              <div className="ml-12 lg:ml-0">
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#a3a3a3]">
-                  {t.common.vdrTitle}
-                </p>
-                <h1 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mt-1">
-                  {t.viewTitles[
-                    activeView === "financial-engine" ? "financialEngine"
-                    : activeView === "moic-waterfall" ? "moicWaterfall"
-                    : activeView as keyof typeof t.viewTitles
-                  ]}
-                </h1>
-              </div>
-              <div className="flex items-center gap-4 lg:gap-6">
-                {/* Language Switcher */}
-                <button
-                  onClick={switchLocale}
-                  className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-[#a3a3a3] hover:text-[#C5A059] transition-colors font-mono border border-[rgba(255,255,255,0.1)] rounded px-2 py-1.5 hover:border-[rgba(197,160,89,0.3)]"
-                >
-                  <Globe className="w-3 h-3" />
-                  {locale === "en" ? "FR" : "EN"}
-                </button>
-
-                <div className="hidden md:flex flex-col items-end gap-0.5">
-                  <span className="text-[10px] tracking-[0.15em] text-[#C5A059] font-medium">
-                    {account.fullName}
-                  </span>
-                  <span className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3]">
-                    {account.companyName} &mdash; {account.investorId}
-                  </span>
+        <main className="lg:ml-64 min-h-screen pb-20">
+          {/* Top Bar with Capital Stack Progress */}
+          <header className="sticky top-0 z-30 bg-[rgba(0,0,0,0.8)] backdrop-blur-xl">
+            <CapitalStackProgress t={t} userTicket={userTicket} />
+            <div className="border-b border-[rgba(255,255,255,0.06)]">
+              <div className="flex items-center justify-between px-4 lg:px-8 py-4">
+                <div className="ml-12 lg:ml-0">
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#a3a3a3]">
+                    {t.common.vdrTitle}
+                  </p>
+                  <h1 className="font-[var(--font-playfair)] text-xl text-[#ffffff] mt-1">
+                    {t.viewTitles[
+                      activeView === "financial-engine" ? "financialEngine"
+                      : activeView === "moic-waterfall" ? "moicWaterfall"
+                      : activeView as keyof typeof t.viewTitles
+                    ]}
+                  </h1>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-                  <span className="text-[10px] text-[#10B981]">{t.common.secure}</span>
+                <div className="flex items-center gap-4 lg:gap-6">
+                  {/* Language Switcher */}
+                  <button
+                    onClick={switchLocale}
+                    className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-[#a3a3a3] hover:text-[#C5A059] transition-colors font-mono border border-[rgba(255,255,255,0.1)] rounded px-2 py-1.5 hover:border-[rgba(197,160,89,0.3)]"
+                  >
+                    <Globe className="w-3 h-3" />
+                    {locale === "en" ? "FR" : "EN"}
+                  </button>
+
+                  <div className="hidden md:flex flex-col items-end gap-0.5">
+                    <span className="text-[10px] tracking-[0.15em] text-[#C5A059] font-medium">
+                      {account.fullName}
+                    </span>
+                    <span className="text-[9px] tracking-[0.2em] uppercase text-[#a3a3a3]">
+                      {account.companyName} &mdash; {account.investorId}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+                    <span className="text-[10px] text-[#10B981]">{t.common.secure}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -123,7 +150,7 @@ export default function VDRApp() {
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
                 {activeView === "dashboard" && <ExecutiveDashboard macro={macro} t={t} locale={locale} account={account} />}
-                {activeView === "syndication" && <Syndication macro={macro} t={t} locale={locale} />}
+                {activeView === "syndication" && <Syndication macro={macro} t={t} locale={locale} onTicketChange={setUserTicket} />}
                 {activeView === "financial-engine" && <FinancialEngine macro={macro} t={t} locale={locale} />}
                 {activeView === "moic-waterfall" && <MoicWaterfall macro={macro} t={t} locale={locale} />}
                 {activeView === "sensitivity" && <SensitivityMatrix macro={macro} t={t} locale={locale} />}
@@ -143,6 +170,14 @@ export default function VDRApp() {
               €{(macro.totalVillas * macro.gdcPerVilla).toLocaleString()} {t.common.footer.syndication}
             </p>
           </footer>
+
+          {/* Sticky Action Footer */}
+          <StickyActionFooter
+            irr={currentIrr}
+            moic={currentMoic}
+            lpProfit={currentLpProfit}
+            t={t}
+          />
         </main>
       </div>
     </GlossaryProvider>
