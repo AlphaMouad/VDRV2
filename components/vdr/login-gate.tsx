@@ -377,13 +377,13 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                     </span>
                   </div>
 
-                  <h2 className="font-[var(--font-playfair)] text-2xl text-white leading-tight mb-2">
-                    {locale === "fr" ? "Accès Sécurisé" : "Secure Access"}
+                  <h2 className="font-[var(--font-playfair)] text-2xl text-white leading-tight mb-2 uppercase">
+                    {locale === "fr" ? "SALLE DE DONNÉES VIRTUELLE" : t.login.title}
                   </h2>
-                  <p className="text-[11px] text-[#a3a3a3] leading-relaxed">
+                  <p className="text-[#a3a3a3] text-[13px] leading-[1.6]">
                     {locale === "fr"
-                      ? "Identifiez-vous avec votre email ou votre identifiant investisseur AMG."
-                      : "Authenticate with your email address or AMG investor ID."}
+                      ? "Accès Sécurisé"
+                      : "Secure Access"}
                   </p>
                 </div>
 
@@ -391,50 +391,51 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
                   {/* Identifier */}
-                  <div>
-                    <label className="text-[9px] tracking-[0.22em] uppercase text-[#a3a3a3] block mb-1.5">
-                      {t.login.emailLabel}
-                    </label>
-                    <input
-                      type="text"
-                      autoComplete="username"
-                      value={identifier}
-                      onChange={(e) => { setIdentifier(e.target.value); setError("") }}
-                      className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.1)] rounded-lg text-[#ffffff] py-3 px-4 text-sm focus:border-[#C5A059] focus:bg-[rgba(197,160,89,0.03)] focus:outline-none transition-all duration-250 font-[var(--font-jetbrains)] placeholder-[#2a2a2a]"
-                      placeholder={t.login.emailPlaceholder}
-                    />
+                  <div className="relative group mt-2">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        autoComplete="username"
+                        required
+                        value={identifier}
+                        onChange={(e) => { setIdentifier(e.target.value); setError("") }}
+                        className="peer w-full bg-transparent border-b border-[rgba(255,255,255,0.2)] py-3 pl-0 pr-4 text-white placeholder-transparent focus:outline-none focus:border-[#C5A059] transition-all font-[var(--font-jetbrains)] text-sm"
+                        placeholder={t.login.emailPlaceholder}
+                      />
+                      <label className="absolute left-0 -top-3.5 text-[10px] text-[rgba(197,160,89,0.7)] uppercase tracking-widest transition-all peer-placeholder-shown:text-xs peer-placeholder-shown:text-[rgba(255,255,255,0.4)] peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:text-[rgba(197,160,89,0.7)] pointer-events-none">
+                        {t.login.emailLabel}
+                      </label>
+                    </div>
                   </div>
 
                   {/* Password */}
-                  <div>
-                    <label className="text-[9px] tracking-[0.22em] uppercase text-[#a3a3a3] block mb-1.5">
-                      {t.login.passwordLabel}
-                    </label>
+                  <div className="relative group mt-6">
                     <div className="relative">
                       <input
                         type={showPw ? "text" : "password"}
                         autoComplete="current-password"
+                        required
                         value={password}
                         onChange={(e) => { setPassword(e.target.value); setError("") }}
-                        className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.1)] rounded-lg text-[#ffffff] py-3 px-4 pr-11 text-sm focus:border-[#C5A059] focus:bg-[rgba(197,160,89,0.03)] focus:outline-none transition-all duration-250 font-[var(--font-jetbrains)] placeholder-[#2a2a2a]"
+                        className="peer w-full bg-transparent border-b border-[rgba(255,255,255,0.2)] py-3 pl-0 pr-10 text-white placeholder-transparent focus:outline-none focus:border-[#C5A059] transition-all font-[var(--font-jetbrains)] text-sm"
                         placeholder={t.login.passwordPlaceholder}
                       />
+                      <label className="absolute left-0 -top-3.5 text-[10px] text-[rgba(197,160,89,0.7)] uppercase tracking-widest transition-all peer-placeholder-shown:text-xs peer-placeholder-shown:text-[rgba(255,255,255,0.4)] peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:text-[rgba(197,160,89,0.7)] pointer-events-none">
+                        {t.login.passwordLabel}
+                      </label>
                       <button
                         type="button"
                         onClick={() => setShowPw(!showPw)}
-                        tabIndex={-1}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#444] hover:text-[#C5A059] transition-colors duration-150"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 text-[rgba(255,255,255,0.2)] hover:text-[#C5A059] peer-focus:text-[rgba(197,160,89,0.5)] transition-colors"
                         aria-label={showPw ? "Hide password" : "Show password"}
                       >
-                        {showPw
-                          ? <EyeOff className="w-4 h-4" />
-                          : <Eye    className="w-4 h-4" />}
+                        {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
                   </div>
 
                   {/* NDA checkbox */}
-                  <label className="flex items-start gap-3 cursor-pointer p-3.5 rounded-xl border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(197,160,89,0.2)] transition-colors duration-200 group mt-1">
+                  <label className="flex items-start gap-3 cursor-pointer p-3.5 rounded-xl border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.02)] hover:border-[rgba(197,160,89,0.2)] transition-colors duration-200 group mt-4">
                     {/* Custom checkbox */}
                     <div className="relative mt-0.5 shrink-0" onClick={() => setAgreed(!agreed)}>
                       <div
@@ -481,29 +482,30 @@ export function LoginGate({ onLogin, t, locale, onSwitchLocale }: LoginGateProps
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="btn-gold w-full mt-2"
                     disabled={loading}
+                    className="w-full mt-4 bg-white hover:bg-[#fffbeb] text-black font-semibold h-12 flex items-center justify-center gap-2 uppercase tracking-[0.15em] text-[11px] transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-sm"
                   >
-                    <span className="flex items-center justify-center gap-2">
-                      {loading ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          {t.login.submitting}
-                        </>
-                      ) : (
-                        <>
-                          <Lock className="w-4 h-4" />
-                          {t.login.submitButton}
-                        </>
-                      )}
-                    </span>
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-[14px] h-[14px] animate-spin text-black" />
+                        <span className="text-black">{t.login.submitting}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Lock className="w-[14px] h-[14px] mb-[1px] text-black" />
+                        <span className="text-black">{t.login.submitButton}</span>
+                      </>
+                    )}
                   </button>
                 </form>
 
                 {/* Confidential notice */}
-                <p className="mt-8 text-[8px] text-[#a3a3a3] opacity-40 tracking-wide leading-relaxed text-center">
-                  {t.login.confidentialNotice}
-                </p>
+                <div className="mt-8 flex gap-2.5 p-3 rounded-lg border border-[#2a2a2a] bg-[#0c0c0c]">
+                  <ShieldCheck className="w-4 h-4 shrink-0 text-[#C5A059] mt-[1px]" />
+                  <p className="text-[9px] text-[#606060] leading-[1.6] uppercase tracking-wider font-[var(--font-jetbrains)]">
+                    {t.login.confidentialNotice}
+                  </p>
+                </div>
               </div>
             </motion.div>
           </motion.div>
